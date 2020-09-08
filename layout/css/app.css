@@ -20,11 +20,7 @@ body {
     box-sizing: border-box;
 }
 
-.wrap-content {
-    position: relative;
-    top: 0;
-    height: 100vh;
-}
+
 
 .sidebar,
 .main-panel {
@@ -98,10 +94,12 @@ body {
 
 .sidebar .nav li{
     padding-right: 55px;
+
 }
 
 .sidebar .nav li a {
     color: var(--main-color);
+    cursor: pointer !important;
 }
 
 .sidebar .nav li a:hover {
@@ -167,8 +165,8 @@ body {
 }
 
 .navbar-area .header-profile-img {
-    border: 1px solid #3f64b580;
-    box-shadow: 0px 0px 6px var(--main-color);
+    box-shadow: 0px 0px 6px #717272e3;
+
 }
 
 .navbar-area .add-url,
@@ -249,6 +247,9 @@ body {
     }
 }
 
+.close-search-add-form {
+    cursor: pointer;
+}
 /* End navbar */
 
 .main-panel {

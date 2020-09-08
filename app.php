@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<div class="wrap-content ">
+
     <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <div class="hide-sidebar">
@@ -69,7 +69,7 @@
                 <div class=" row ml-auto ml-sm-0 mr-sm-auto pr-4 pr-sm-0">
                     <div class="nav-item mx-auto order-1 order-sm-0">
                         <a class="nav-link p-0 pl-3 add-url-icon" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z"/>
                                 <line x1="12" y1="5" x2="12" y2="19" />
                                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -78,7 +78,7 @@
                     </div>
                     <div class="nav-item mx-auto order-0 order-sm-1">
                         <a class="nav-link p-0 pl-2 search-url-icon" href="#">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z"/>
                                 <circle cx="10" cy="10" r="7" />
                                 <line x1="21" y1="21" x2="15" y2="15" />
@@ -89,7 +89,7 @@
 
                 <div class="nav-item dropdown profile-dropdown">
                     <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-img" width="40" height="40" src="https://via.placeholder.com/150" alt="">
+                        <img class="rounded-circle header-profile-img" width="40" height="40" src="https://upay.upayments.com/assets/global/img/user.png" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="profile.php">عباس</a>
@@ -105,11 +105,13 @@
                         <input type="text" class="" placeholder="حفظ رابط (URL) ...">
                         <button class="btn btn-primary ml-1" type="submit">حفظ</button>
                         <button class="close-search-add-form btn btn-outline-secondary ml-3">إلغاء</button>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="close-search-add-form icon icon-tabler icon-tabler-x" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z"/>
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" class="close-search-add-form" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z"/>
+                                <line x1="18" y1="6" x2="6" y2="18" />
+                                <line x1="6" y1="6" x2="18" y2="18" />
+                            </svg>
+
                 </form>
 
                 <form class="search-url nav-item ml-auto" action="">
@@ -136,7 +138,6 @@
 
         </footer>
     </div>
-</div>
 
 </body>
 <!-- font awesome -->

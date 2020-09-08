@@ -4,6 +4,7 @@
 
 :root {
     --main-color: #3f64b5;
+    --darker-main-color: #1e3056;
 }
 
 body {
@@ -84,6 +85,11 @@ span{
 
 
 /* Start navbar */
+.navbar-area {
+    position: relative;
+    z-index: 4;
+
+}
 .navbar-area .logo {
     width: 110px;
 }
@@ -126,7 +132,7 @@ span{
 
 @media only screen and (max-width: 992px) {
     .navbar-area .navbar-collapse {
-        background-color: #FFFFFF;
+        background-color: var(--main-color);
         box-shadow: 0px 0px 6px #bcbdbecc;
     }
 }
@@ -141,22 +147,8 @@ span{
 }
 
 .navbar-area .navbar-nav a:hover {
-    color: #a2befbf0;
+    color: #47f870;
 }
-
-@media only screen and (max-width: 992px) {
-    .navbar-area .navbar-nav .nav-link {
-
-        color: var(--main-color);
-
-    }
-    .navbar-area .navbar-nav a:hover {
-        color: #072567;
-    }
-
-
-}
-
 
 
 .navbar-area .navbar-nav .btn {
@@ -166,7 +158,7 @@ span{
     font-weight: 400;
 }
 
-.navbar-area .navbar-nav .btn:nth-of-type(1) {
+.navbar-area .navbar-nav .login-btn {
     color: var(--main-color);
     display: inline-block;
     background-color: #ffffff;
@@ -174,28 +166,14 @@ span{
     transition: all 0.3s ease-out;
 }
 
-.navbar-area .navbar-nav .btn:nth-of-type(1):hover {
+.navbar-area .navbar-nav .login-btn:hover {
     color: #ffffff;
     background-color: var(--main-color);
     border-color: #ffffff;
 
 }
 
-@media only screen and (max-width: 992px) {
-    .navbar-area .navbar-nav .btn {
-        color: #ffffff;
-        background-color:  var(--main-color);
-        border-color:  var(--main-color);
-    }
-    .navbar-area .navbar-nav .btn:hover {
-        color: var(--main-color);
-        background-color: #ffffff;
-        border-color: var(--main-color);
 
-    }
-
-
-}
 /* End navbar */
 
 /* Start hero */
@@ -379,3 +357,54 @@ span{
     transform: scale(1.4);
 }
 /* End footer */
+
+/* ============== Register Login CSS ============== */
+
+.login-register {
+    background-color: #f7f9fc;
+    padding: 100px 0px;
+}
+
+.login-register .container{
+    box-shadow: 0px 0px 6px #bcbdbecc;
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.login-register .container img{
+    width: 200px;
+}
+
+.login-register .container p{
+    color: var(--darker-main-color);
+}
+
+.login-register .container .sign input{
+    color: var(--darker-main-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px #bcbdbecc;
+    height: 50px;
+}
+
+.login-register .container .sign input::placeholder{
+    color: #aaaaaa;
+}
+
+.login-register .container .sign .btn{
+    color: #ffffff;
+    background-color: var(--main-color);
+    transition: all 0.3s ease-out;
+}
+
+.login-register .container .sign .btn:hover {
+    background-color: #3f64b5e8;
+}
+
+.login-register .container a {
+    color: #0060B9;
+}
+
+.login-register .container a:hover {
+    text-decoration: underline !important;
+}

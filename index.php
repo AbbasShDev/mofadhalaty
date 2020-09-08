@@ -1,4 +1,6 @@
 <?php
+include_once 'includes/templates/main-header.php';
+
 $nameError = $emailError = $messageError = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -56,31 +58,9 @@ if (!$nameError && !$emailError && !$messageError){
 
 }
 ?>
+    <!-- Start header -->
+    <section class="header">
 
-<!doctype html>
-<html lang="ar" dir="rtl">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- main CSS -->
-    <link rel="stylesheet" href="layout/css/main.css">
-    <!-- font awesome -->
-    <script src="https://kit.fontawesome.com/6652aa2ce8.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-    <!-- bootstrap-select CSS -->
-<!--    <link rel="stylesheet"-->
-<!--          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">-->
-    <title></title>
-</head>
-<body>
-
-<!-- Start header -->
-<section class="header">
-    <div class="header-area"></div>
         <div class="navbar-area">
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
@@ -94,20 +74,21 @@ if (!$nameError && !$emailError && !$messageError){
                     <div class="collapse navbar-collapse py-3" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item mx-auto">
-                                <a class="nav-link font-head" href="#">ماهو مفضلتي؟</a>
+                                <a class="nav-link font-head" href="index.php">ماهو مفضلتي؟</a>
                             </li>
                             <li class="nav-item pr-lg-4 mx-auto">
-                                <a class="nav-link font-head " href="#">تواصل معنا</a>
+                                <a class="nav-link font-head " href="index.php">تواصل معنا</a>
                             </li>
                             <li class="nav-item  mx-auto">
-                                <button class="nav-link btn font-head " href="#">دخول</button>
-                                <button class="nav-link btn btn-success font-head " href="#">تسجيل</button>
+                                <a href="login.php"><button class="nav-link btn font-head login-btn">دخول</button></a>
+                                <a href="register.php"><button class="nav-link btn btn-success font-head ">تسجيل</button></a>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div> <!-- container -->
         </div> <!-- navbar area -->
+    <div class="header-area"></div>
 
         <div class="hero">
         <div class="container-fluid">
@@ -118,8 +99,8 @@ if (!$nameError && !$emailError && !$messageError){
                 <div class="col-10 col-lg-4 mx-auto">
                     <div class="intro text-center order-0 order-lg-1">
                         <h4 class="text-center font-head">إجمع كل ما تفضل من محتوى في مكان واحد</h4>
-                        <button class="btn btn-success mt-4 font-head" href="#">تسجيل</button>
-                        <button class="btn btn-primary mt-4 font-head" href="#">دخول</button>
+                        <a href="register.php"><button class="btn btn-success mt-4 font-head" href="#">تسجيل</button></a>
+                        <a href="login.php"><button class="btn btn-primary mt-4 font-head" href="#">دخول</button></a>
                     </div>
                 </div>
 
@@ -130,13 +111,13 @@ if (!$nameError && !$emailError && !$messageError){
 <!-- End header -->
 
 <!-- Start about -->
-<div id="about" class="section about container text-center col-12 ">
+<div id="about-us" class="section about container text-center col-12 ">
     <div class="container-fluid">
         <div class="row">
             <div class="col-10 col-lg-6 mx-auto px-0">
                 <div class="about-us text-center order-0 order-lg-1">
                     <h1 class="font-head">ماهو <span>مفضلتي</span></h1>
-                    <p class="pt-5 col-12 col-lg-10 mx-auto px-0">هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. كما يمكن انشاء القوائم الخاصة بك واضافة المحتوى فيها.</p>
+                    <p class="pt-5 col-12 col-lg-10 mx-auto px-0">هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. اضاف اي محتوى من الانترنت وتمتع به في اي وقت، في مكان واحد.</p>
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-0">
@@ -177,26 +158,4 @@ if (!$nameError && !$emailError && !$messageError){
 <!-- End contact -->
 
 
-<!-- Start Footer  -->
-<div class="footer">
-    <div>
-        <a href="https://twitter.com/AbbasShDev" target="_blank"><i class="mr-2 p-1 fab fa-twitter"></i></a>
-        <a href="https://github.com/AbbasShDev" target="_blank"><i class="mr-2 p-1 fab fa-github "></i></a>
-        <a href="https://www.linkedin.com/in/abbas-alshaqaq-7b58221a5/" target="_blank"><i class="mr-2 p-1 fab fa-linkedin"></i></a>  2020 AbbasShDev ©
-    </div>
-</div>
-<!-- End Footer  -->
-
-
-<!-- jQuery js -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-<!-- Popper.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<!-- Bootstrap js -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
-<!-- bootstrap-select JavaScript -->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>-->
-<!-- main js -->
-<script src="layout/js/main.js"></script>
-</body>
-</html>
+<?php include_once 'includes/templates/main-footer.php'; ?>
