@@ -1,0 +1,38 @@
+$('document').ready(function () {
+
+    'use strict'
+
+    //toggler sidebar class
+    $('.sidebar-toggler').on('click', function () {
+        $('.sidebar').addClass('active');
+    })
+
+    $('.sidebar-wrapper .fa-chevron-right').on('click', function () {
+        $('.sidebar').removeClass('active');
+    })
+
+    //adding form
+    showHideForm('.add-url-icon', '.add-url', '.close-search-add-form');
+
+    //searching form
+    showHideForm('.search-url-icon', '.search-url', '.close-search-add-form');
+
+
+    //show and hide form function
+    function showHideForm(showForm, form, closeForm) {
+
+        //showing form
+        $(showForm).on('click', function (e) {
+            e.preventDefault()
+            $('.navbar-area .row, .navbar-area .profile-dropdown').fadeOut(10);
+            $(form).fadeIn();
+        })
+
+        //hiding  form
+        $(closeForm).on('click', function (e) {
+            e.preventDefault()
+            $(form).fadeOut(5);
+            $('.navbar-area .row, .navbar-area .profile-dropdown').fadeIn();
+        })
+    }
+})
