@@ -35,4 +35,17 @@ $('document').ready(function () {
             $('.navbar-area .row, .navbar-area .profile-dropdown').fadeIn();
         })
     }
+
+    //showing notification message
+    $('.notify-message').each(function () {
+
+        $(this).animate({
+                left:'10px'
+            },1000,
+            function () {
+                $(this).delay(2000).fadeOut();
+            })
+
+
+    })
 })

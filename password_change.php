@@ -1,56 +1,58 @@
 <?php
 session_start();
-$pageTitle = 'تسجيل الدخول';
+$pageTitle = 'تغير كلمة المرور';
+require_once 'includes/config/database.php';
+require_once 'includes/config/app.php';
+require_once 'includes/templates/main-header.php';
 
 if (isset($_SESSION['user_name'])){
     header('location:app.php');
     die();
 }
 
-require_once 'includes/config/database.php';
-require_once 'includes/config/app.php';
-require_once 'includes/templates/main-header.php';
+if (!isset($_GET['token']) || !$_GET['token']){
+    die('رابط تغير كلمة المرور غير صالح');
+}
+
+$nowDate = date('Y-m-d H-i-s');
+
+$stat = $mysqli->prepare("SELECT * FROM password_reset WHERE token=? AND expiry_at >'$nowDate'");
+$stat->bind_param('s', $token);
+$token = $_GET['token'];
+
+$stat->execute();
+
+$result = $stat->get_result();
+
+if (!$result->num_rows){
+    die('رابط تغير كلمة المرور غير صالح');
+}
 
 $errors     = [];
-$email      = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $email          = mysqli_real_escape_string($mysqli, $_POST['email']);
     $pass           = mysqli_real_escape_string($mysqli, $_POST['pass']);
+    $passConform    = mysqli_real_escape_string($mysqli, $_POST['pass_conform']);
 
-    if (empty($email)){array_push($errors, 'يجب ادخال بريد الكتروني');}
     if (empty($pass)){array_push($errors, 'يجب ادخال كلمة سر');}
+    if (empty($passConform)){array_push($errors, 'يجب ادخال تأكيد كلمة السر');}
     if (strlen($pass) < 6 ){array_push($errors, 'يجب أن يكون طول كلمة السر على الأقل 6 حروفٍ/حرفًا');}
+    if ($passConform != $pass){array_push($errors, 'حقل التأكيد غير مُطابق للحقل كلمة السر');}
 
     if (!count($errors)){
 
-        $query = "SELECT * FROM users WHERE user_email = '$email'";
-
-        $userExist = $mysqli->query($query);
-
-        if (!$userExist->num_rows){
-            array_push($errors, 'البيانات المدخلة غير متطابقة مع البيانات المسجلة لدينا');
-        }else{
-
-            $user_found = $userExist->fetch_assoc();
-
-            if (password_verify($pass, $user_found['user_password'])){
+        $user_id = $result->fetch_assoc()['user_id'];
+        $pass_hash = password_hash($pass, PASSWORD_DEFAULT);
 
 
-                $_SESSION['user_name']  = $user_found['user_name'];
-                $_SESSION['user_id']    = $user_found['user_id'];
-                $_SESSION['notify_message'] = "مرحبا $user_found[user_name] ، نتمنا لك وقتاً ممتعاً";
+        if ($mysqli->query("UPDATE users SET user_password='$pass_hash' WHERE user_id=$user_id")){
 
-                header('location:app.php');
-                die();
+            $mysqli->query("DELETE FROM password_reset WHERE user_id='$user_id'");
 
-
-
-            }else{
-                array_push($errors, 'البيانات المدخلة غير متطابقة مع البيانات المسجلة لدينا');
-            }
-
+            $_SESSION['notify_message'] = 'تم تغير كلمة المرور بنجاح';
+            header('location: login.php');
+            die();
         }
 
     }
@@ -59,16 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 ?>
-
-<!-- ==== notification message ==== -->
-<?php if (isset($_SESSION['notify_message'])) {?>
-    <div class="notify-message">
-        <?php echo $_SESSION['notify_message'];?>
-    </div>
-<?php }
-    unset($_SESSION['notify_message']);
-?>
-<!-- ==== notification message ==== -->
     <!-- Start header -->
     <div class="navbar-area" style="background-color: #3f64b5">
         <div class="container">
@@ -103,16 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <?php include 'includes/config/errorsMessages.php'?>
         <div class="container col-10 col-lg-4 login-page">
             <img class="mx-auto d-block my-3" src="layout/images/logo.png" alt="">
-            <p class="text-center font-head ">تسجيل دخول</p>
+            <p class="text-center font-head ">تغير كيمة المرور</p>
 
-            <form class="sign" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-                <div class="input-container"><input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required="required"  value="<?php echo $email?>" ></div>
-                <div class="input-container"><input type="password" name="pass" class="form-control mb-3" autocomplete="new-password" placeholder="كلمة المرور" required="required"></div>
-                <input type="submit" class="btn btn-block" name="login" value="دخول">
+            <form class="sign" action="" method="post">
+                <div class="input-container"><input type="password" name="pass" class="form-control mb-3" autocomplete="new-password" placeholder="كلمة المرور الجديدة" required="required"></div>
+                <div class="input-container"><input type="password" name="pass_conform" class="form-control mb-3" autocomplete="new-password" placeholder="تأكيد كلمة المرور" required="required"></div>
+                <input type="submit" class="btn btn-block" name="submit" value="تغير كلمة المرور">
 
             </form>
-
-            <p class="pt-3"><a class="font-head" href="password_reset.php">هل نسيت كلمة المرور؟</a></p>
 
         </div>
     </div>

@@ -36,6 +36,22 @@ span{
     display: inline-block;
 }
 
+/* notification message */
+.notify-message {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #28a745;
+    color: #FFFFFF;
+    font-size: 18px;
+    width: 400px;
+    text-align: center;
+    position: fixed;
+    top: 61px;
+    left: -400px;
+    z-index: 9999;
+}
+/* notification message */
+
 .header {
     position: relative;
 }

@@ -1,5 +1,21 @@
 <?php
+session_start();
+$pageTitle = '';
+
+
+/* ==== notification message ==== */
+if (isset($_SESSION['notify_message'])) {?>
+    <div class="notify-message">
+        <?php echo $_SESSION['notify_message'];?>
+    </div>
+<?php }
+    unset($_SESSION['notify_message']);
+/* ==== notification message ==== */
+
+
+require_once 'includes/config/app.php';
 include_once 'includes/templates/main-header.php';
+
 
 $nameError = $emailError = $messageError = '';
 
@@ -57,7 +73,10 @@ if (!$nameError && !$emailError && !$messageError){
 }
 
 }
+
+if (!isset($_SESSION['user_name'])) {
 ?>
+
     <!-- Start header -->
     <section class="header">
 
@@ -158,4 +177,12 @@ if (!$nameError && !$emailError && !$messageError){
 <!-- End contact -->
 
 
-<?php include_once 'includes/templates/main-footer.php'; ?>
+<?php
+} else {
+    header('location:app.php');
+    die();
+}
+    include_once 'includes/templates/main-footer.php';
+
+
+?>

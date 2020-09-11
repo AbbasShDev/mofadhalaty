@@ -1,4 +1,11 @@
+<?php
+session_start();
+require_once 'includes/config/database.php';
 
+
+
+if (isset($_SESSION['user_name'])){
+?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -13,7 +20,14 @@
 </head>
 
 <body>
-
+<!--    notification message -->
+<?php if (isset($_SESSION['notify_message'])) {?>
+    <div class="notify-message">
+        <?php echo $_SESSION['notify_message'];?>
+    </div>
+<?php }
+    unset($_SESSION['notify_message']); ?>
+<!--    notification message -->
     <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <div class="hide-sidebar">
@@ -92,7 +106,7 @@
                         <img class="rounded-circle header-profile-img" width="40" height="40" src="https://upay.upayments.com/assets/global/img/user.png" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="profile.php">عباس</a>
+                        <a class="dropdown-item" href="profile.php"><?php echo $_SESSION['user_name'] ?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="profile.php">ملفي</a>
                         <a class="dropdown-item" href="#">الإعدادات</a>
@@ -152,3 +166,6 @@
 <script src="layout/js/app.js" type="text/javascript"></script>
 
 </html>
+<?php }else{
+    echo 'You can not access this page';
+} ?>

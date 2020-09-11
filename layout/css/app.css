@@ -20,7 +20,21 @@ body {
     box-sizing: border-box;
 }
 
-
+/* notification message */
+.notify-message {
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #28a745;
+    color: #FFFFFF;
+    font-size: 18px;
+    width: 300px;
+    text-align: center;
+    position: fixed;
+    top: 61px;
+    left: -300px;
+    z-index: 9999;
+}
+/* notification message */
 
 .sidebar,
 .main-panel {
