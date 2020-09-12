@@ -106,12 +106,10 @@ if (isset($_SESSION['user_name'])){
                         <img class="rounded-circle header-profile-img" width="40" height="40" src="https://upay.upayments.com/assets/global/img/user.png" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="profile.php"><?php echo $_SESSION['user_name'] ?></a>
+                        <a class="dropdown-item" href="app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="profile.php">ملفي</a>
-                        <a class="dropdown-item" href="#">الإعدادات</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="logout.php">تسجيل الخروج</a>
+                        <a class="dropdown-item" href="profile.php?do=edit_profile"><i class="fas fa-cog fa-fw"></i> حسابي</a>
+                        <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                     </div>
                 </div>
                     <form class="add-url nav-item ml-auto" action="">

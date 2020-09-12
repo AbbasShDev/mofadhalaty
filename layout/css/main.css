@@ -189,6 +189,29 @@ span{
 
 }
 
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.navbar-area .dropdown-menu {
+    border: none;
+    box-shadow: 0px 0px 6px #bcbdbecc;
+}
+
+.navbar-area .dropdown-menu a{
+    font-size: 14px;
+}
+
+.navbar-area .dropdown-menu a i{
+    font-size: 13px;
+}
+
+.navbar-area .header-profile-img {
+    box-shadow: 0px 0px 6px #717272e3;
+
+}
+
+
 
 /* End navbar */
 
@@ -424,3 +447,103 @@ span{
 .login-register .container a:hover {
     text-decoration: underline !important;
 }
+
+
+/* ===== profile page ===== */
+
+.profile .profile-left p {
+    color: var(--darker-main-color);
+}
+
+.profile .profile-left hr {
+    margin-top: 30px;
+    border-top: 1px dashed rgba(0,0,0,.1) !important;
+}
+
+.profile .profile-left .left-nav li {
+    list-style: none;
+}
+
+.profile .profile-left .left-nav li a,
+.profile .profile-right h4,
+.profile .profile-right form label {
+    color: var(--darker-main-color);
+}
+
+.profile .profile-left .left-nav li a {
+    transition: all .3s ease-in-out;
+    width: fit-content;
+}
+
+@media only screen and (max-width: 991px) {
+
+    .profile .profile-left .left-nav li a {
+        text-align: center !important;
+    }
+
+}
+
+.profile .profile-left .left-nav li a:hover {
+    background: #1e305624;
+    border-radius: 5px;
+}
+
+.profile .profile-left .left-nav li a.active {
+    background: #1e305624;
+    border-radius: 5px;
+    width: fit-content;
+}
+
+.profile .profile-right form input {
+    color: var(--darker-main-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px #bcbdbecc;
+    height: 50px;
+}
+
+.profile .profile-right form .btn{
+    color: #ffffff;
+    background-color: var(--main-color);
+    transition: all 0.3s ease-out;
+}
+
+.profile .profile-right form .btn:hover {
+    background-color: #3f64b5e8;
+}
+
+.profile .profile-right form  .custom-file {
+    color: var(--darker-main-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px #bcbdbecc;
+    height: 50px;
+}
+
+.profile .profile-right form  .custom-file span {
+    display: inline-block;
+    line-height: 1.5;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    z-index: 1;
+}
+.profile .profile-right form  .custom-file .fa-upload {
+    position: absolute;
+    left: 10px;
+    top: 15px;
+    z-index: 1;
+}
+
+.profile .profile-right form .custom-file input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    cursor: pointer;
+}
+.profile .profile-right form .custom-file input[type="file"]#file-upload-button {
+    cursor: pointer;
+}
+/* ===== profile page ===== */
