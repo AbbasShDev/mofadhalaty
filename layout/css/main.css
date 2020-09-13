@@ -424,6 +424,7 @@ span{
     border-radius: 10px;
     box-shadow: 0px 0px 6px #bcbdbecc;
     height: 50px;
+    border: none;
 }
 
 .login-register .container .sign input::placeholder{
@@ -533,7 +534,7 @@ span{
     z-index: 1;
 }
 
-.profile .profile-right form .custom-file input[type="file"] {
+.profile .profile-right form .custom-file input[type="file"]{
     opacity: 0;
     position: absolute;
     left: 0;
@@ -543,7 +544,19 @@ span{
     z-index: 2;
     cursor: pointer;
 }
-.profile .profile-right form .custom-file input[type="file"]#file-upload-button {
-    cursor: pointer;
+
+.profile-right .loader-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    background-color: #FFFFFF;
+}
+
+.profile-right .loader-bg .spinner-grow{
+    margin-top: 100px;
+    background-color: var(--main-color);
 }
 /* ===== profile page ===== */

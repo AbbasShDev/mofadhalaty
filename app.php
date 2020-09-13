@@ -103,12 +103,19 @@ if (isset($_SESSION['user_name'])){
 
                 <div class="nav-item dropdown profile-dropdown">
                     <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="rounded-circle header-profile-img" width="40" height="40" src="https://upay.upayments.com/assets/global/img/user.png" alt="">
+                        <img class="rounded-circle header-profile-img" style="height: 40px !important; width: 40px !important;" src="
+                        <?php if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
+                            echo $_SESSION['avatar'];
+                        }else{
+                            echo 'uploads/avatars/default.png';
+                        }
+                        ?>"
+                        alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="profile.php?do=edit_profile"><i class="fas fa-cog fa-fw"></i> حسابي</a>
+                        <a class="dropdown-item" href="profile.php"><i class="fas fa-cog fa-fw"></i> حسابي</a>
                         <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                     </div>
                 </div>

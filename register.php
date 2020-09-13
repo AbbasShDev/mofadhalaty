@@ -97,10 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <p class="text-center font-head ">تسجيل حساب جديد</p>
 
         <form class="sign" action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
-            <div class="input-container"><input type="text" name="username" class="form-control mb-3" placeholder="اسم العرض (عربي او انجليزي)" required="required" value="<?php echo $username?>" > </div>
-            <div class="input-container"><input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required="required" value="<?php echo $email?>" ></div>
-            <div class="input-container"><input type="password" name="pass" class="form-control mb-3" autocomplete="new-password" placeholder="كلمة المرور" required="required"></div>
-            <div class="input-container"><input type="password" name="pass_conform" class="form-control mb-3" autocomplete="new-password" placeholder="تأكيد كلمة المرور" required="required"></div>
+            <div><input type="text" name="username" class="form-control mb-3" placeholder="اسم العرض (عربي او انجليزي)" required="required" value="<?php echo $username?>" > </div>
+            <div><input type="email" name="email" class="form-control mb-3" placeholder="البريد الإلكتروني" required="required" value="<?php echo $email?>" ></div>
+            <div><input type="password" name="pass" class="form-control mb-3" autocomplete="new-password" placeholder="كلمة المرور" required="required"></div>
+            <div><input type="password" name="pass_conform" class="form-control mb-3" autocomplete="new-password" placeholder="تأكيد كلمة المرور" required="required"></div>
             <input type="submit" class="btn btn-block" name="signup" value="تسجيل">
 
         </form>

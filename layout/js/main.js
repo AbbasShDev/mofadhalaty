@@ -1,5 +1,6 @@
 $('document').ready(function () {
 
+
     'use strict'
 
     //toggler acttive class
