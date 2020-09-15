@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/includes/libraries/vendor/autoload.php';
 
-$info = Embed\Embed::create('https://www.youtube.com/watch?v=RyBC-Bu872Y&ab_channel=BasimKarbalaei%2F%D8%A8%D8%A7%D8%B3%D9%85%D8%A7%D9%84%D9%83%D8%B1%D8%A8%D9%84%D8%A7%D8%A6%D9%8A');
+$info = Embed\Embed::create('https://arabsciences.com/2017/07/06/air-crash-s14ep1/');
 
 echo '<strong>title: </strong>'.$info->title;
 echo '<br>';

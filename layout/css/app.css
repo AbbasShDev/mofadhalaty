@@ -8,7 +8,6 @@
 
 body {
     font-style: normal;
-    color: #ffffff;
     font-family:noto naskh arabic,Arial,sans-serif !important;
 }
 
@@ -36,8 +35,7 @@ body {
 }
 /* notification message */
 
-.sidebar,
-.main-panel {
+.sidebar {
     overflow: auto;
     max-height: 100%;
     height: 100%;
@@ -274,25 +272,99 @@ body {
 }
 /* End navbar */
 
-.main-panel {
-    position: relative;
+/* Start content */
+
+.content {
+    width: calc(100% - 240px);
     float: left;
-    width: calc(100% - 260px);
-    min-height: 100%;
+    color: var(--darker-main-color);
 }
 
-.main-panel>.content {
-    padding: 30px 15px;
-    min-height: calc(100% - 123px);
+.content .card {
+    border-radius: 0px;
+    height: 348px !important;
+    width: 289px !important;
 }
 
-.navbar .navbar-brand {
+.content .card-body h5 {
+    font-size: 18px;
+}
+
+.content .card-body .card-title {
+    font-weight: 700;
 
 }
 
-.navbar-toggle {
+.content .card-body .card-text {
+    font-weight: 200;
+    color: #4F4F4F;
+}
+
+.content .card-body img {
+    height: 20px !important;
+    width: 20px !important;
+    margin: 0 0 0 12px;
+}
+
+.content .card-body .action-btn i:first-child {
+    font-size: 18px;
+}
+
+.content .card-body .action-btn i {
+    cursor: pointer;
+    position: relative;
+    color: var(--main-color);
+}
+
+.content .card-body .action-btn i span{
+    display: none;
+    position: absolute;
+    color: #FFFFFF;
+    background-color: var(--main-color);
+    bottom: 26px;
+    left: -46px;
 
 }
 
-@media (max-width: 991px) {
+.content .card-body .action-btn i:first-child span {
+    bottom: 29px;
+    left: -46px;
 }
+
+.content .card-body .action-btn i:last-child span {
+    bottom: 26px;
+    left: -14px;
+}
+
+.content .card-body .action-btn i span:before{
+    content: "";
+    border-style: solid;
+    border-color: var(--main-color) transparent transparent transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    border-width: 9px;
+    left: 42px;
+    top: 17px;
+}
+
+.content .card-body .action-btn i:first-child span:before {
+    left: 45px;
+    top: 19px;
+}
+
+.content .card-body .action-btn i:last-child span:before {
+    left: 11px;
+    top: 16px;
+}
+
+@media only screen and (max-width: 1150px) {
+    .content {
+        width: 100%;
+        float: none;
+    }
+}
+/* End content */
+
+
+

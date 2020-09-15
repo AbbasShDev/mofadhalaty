@@ -48,4 +48,13 @@ $('document').ready(function () {
 
 
     })
+
+    //display action btn description
+    $('.content .card-body .action-btn i').hover(function () {
+
+        $(this).find('span').show();
+
+    }, function () {
+        $(this).find('span').hide();
+    })
 })

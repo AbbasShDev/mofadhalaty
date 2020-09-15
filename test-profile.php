@@ -4,8 +4,8 @@ session_start();
 $pageTitle = 'حسابي';
 
 if (!isset($_SESSION['user_name'])){
-    header('location:app.php');
-    die();
+header('location:app.php');
+die();
 }
 
 require_once 'includes/config/database.php';
@@ -24,7 +24,7 @@ $errors = [];
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- main CSS -->
-    <link rel="stylesheet" href="layout/css/main.css">
+    <link rel="stylesheet" href="layout/css/app.css">
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/6652aa2ce8.js" crossorigin="anonymous"></script>
     <!-- Bootstrap css -->
@@ -44,23 +44,50 @@ $errors = [];
 unset($_SESSION['notify_message']); ?>
 
 <!--    notification message -->
-
-<!-- Start header -->
+<!-- Start navbar-->
 <div class="navbar-area">
-    <div class="container">
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.php"><img class="logo" src="layout/images/logo.png" alt=""></a>
+    <nav class="navbar col-12 mx-auto">
+        <div class="container px-0">
 
-            <div class="nav-item dropdown profile-dropdown ml-auto">
+            <div class="sidebar-toggler pr-2">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <a class="navbar-brand m-0" href="app.php"><img class="logo" src="layout/images/logo.png" alt=""></a>
+
+            <div class=" row ml-auto ml-sm-0 mr-sm-auto pr-4 pr-sm-0">
+                <div class="nav-item mx-auto order-1 order-sm-0">
+                    <a class="nav-link p-0 pl-3 add-url-icon" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z"/>
+                            <line x1="12" y1="5" x2="12" y2="19" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="nav-item mx-auto order-0 order-sm-1">
+                    <a class="nav-link p-0 pl-2 search-url-icon" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg"  width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z"/>
+                            <circle cx="10" cy="10" r="7" />
+                            <line x1="21" y1="21" x2="15" y2="15" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="nav-item dropdown profile-dropdown">
                 <a class="nav-link dropdown-toggle p-0" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img class="rounded-circle header-profile-img" style="height: 40px !important; width: 40px !important;" src="
-                    <?php
-                    if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
+                        <?php if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
                         echo $_SESSION['avatar'];
                     }else{
                         echo 'uploads/avatars/default.png';
                     }
-                    ?>" alt="">
+                    ?>"
+                         alt="">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
@@ -69,68 +96,76 @@ unset($_SESSION['notify_message']); ?>
                     <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                 </div>
             </div>
-        </nav>
-    </div> <!-- container -->
-</div> <!-- navbar area -->
 
-    <div class="container profile">
-        <div class="row justify-content-around ">
-            <div class="col-11 col-lg-3 order-1 order-md-0 profile-left mt-3 mb-5">
-                <div class="container">
-                    <img class="rounded-circle img-thumbnail img d-flex mx-auto" style="height: 100px !important; width: 100px !important;" src="<?php
-                    if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
-                        echo $_SESSION['avatar'];
+        </div>
+    </nav>
+</div>
+<!-- End navbar -->
+<div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+    <div class="sidebar-wrapper">
+        <div class="hide-sidebar">
+            <i class="fas fa-chevron-right"></i>
+        </div>
+
+        <div class="container nav">
+            <img class="rounded-circle img-thumbnail img d-flex mx-auto" style="height: 100px !important; width: 100px !important;" src="<?php
+            if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
+                echo $_SESSION['avatar'];
+            }else{
+                echo 'uploads/avatars/default.png';
+            }
+            ?>" alt="">
+            <p class="text-center pt-4">مرحباً <?php echo $_SESSION['user_name'] ?></p>
+            <hr>
+
+            <ul class="left-nav mt-5">
+                <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                    <a class="nav-link my-2
+                            <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
+                        echo '';
                     }else{
-                        echo 'uploads/avatars/default.png';
-                    }
-                    ?>" alt="">
-                    <p class="text-center pt-4">مرحباً <?php echo $_SESSION['user_name'] ?></p>
-                    <hr>
-
-                    <ul class="left-nav mt-5">
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
-                            <a class="nav-link my-2
+                        echo 'active';
+                    } ?>"
+                       href="profile.php">
+                        <i class="fas fa-user-circle pr-1"></i>
+                        ملفي الشخصي
+                    </a>
+                </li>
+                <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                    <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
-                                echo '';
-                            }else{
-                                echo 'active';
-                            } ?>"
-                             href="profile.php">
-                                <i class="fas fa-user-circle pr-1"></i>
-                                ملفي الشخصي
-                            </a>
-                        </li>
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
-                            <a class="nav-link my-2
-                            <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
-                                echo 'active';
-                            } ?>"
-                            href="profile.php?do=export">
-                                <i class="fas fa-cloud-download-alt pr-1"></i>
-                                تصدير
-                            </a>
-                        </li>
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
-                            <a class="nav-link text-danger my-2" href="logout.php">
-                                <i class="fa fa-power-off pr-1"></i>
-                                خروج
-                            </a>
-                        </li>
+                        echo 'active';
+                    } ?>"
+                       href="profile.php?do=export">
+                        <i class="fas fa-cloud-download-alt pr-1"></i>
+                        تصدير
+                    </a>
+                </li>
+                <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                    <a class="nav-link text-danger my-2" href="logout.php">
+                        <i class="fa fa-power-off pr-1"></i>
+                        خروج
+                    </a>
+                </li>
 
-                    </ul>
-                </div>
-            </div>
+            </ul>
+        </div>
+    </div>
+</div>
 
-    <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){ ?>
+<!-- Start content -->
+<div class="content-profile">
+    <div class="container col-11">
+<?php if(isset($_GET['do']) && $_GET['do'] == 'export'){ ?>
 
-    <div class="col-11 col-lg-7 order-0 order-md-1 profile-right my-5">
-        <div class="container">
+<div class="profile">
+        <div class="container my-5">
 
             <h4 class="text-center pb-3">تصدير البيانات</h4>
 
         </div>
-    </div>
-    <?php }else{
+</div>
+<?php }else{
     $userId = $_SESSION['user_id'];
 
     $stat = $mysqli->query("SELECT * FROM users WHERE user_id='$userId'");
@@ -231,10 +266,8 @@ unset($_SESSION['notify_message']); ?>
 
         }
     } ?>
-    <div class="col-11 col-lg-7 order-0 order-md-1 profile-right my-5">
-
-        <div class="loader-bg d-none justify-content-center"><span class="spinner-grow" role="status"></span></div>
-        <div class="container">
+    <div class="profile">
+        <div class="container my-5">
             <h4 class="text-center pb-3">تحديث المعلومات الشخصية</h4>
 
             <form action="?do=edit_profile" method="post" enctype="multipart/form-data">
@@ -278,16 +311,32 @@ unset($_SESSION['notify_message']); ?>
                 </div>
 
             </form>
-
         </div>
-        </div>
-
-             <?php }?>
-    </div>
     </div>
 
+
+<?php }?>
+    </div>
+</div>
+<!-- Start footer -->
+<footer class="footer">
+
+</footer>
+<!-- End footer -->
+</body>
+<!-- font awesome -->
+<script src="https://kit.fontawesome.com/6652aa2ce8.js" crossorigin="anonymous"></script>
+<!-- jQuery js -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<!-- Bootstrap js -->
+<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script src="layout/js/app.js" type="text/javascript"></script>
+
+</html>
 <?php
-include_once 'includes/templates/main-footer.php';
 
 ob_end_flush();
 ?>

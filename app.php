@@ -149,15 +149,173 @@ if (isset($_SESSION['user_name'])){
         </nav>
 </div>
     <!-- End navbar -->
-    <div class="main-panel">
-        <div class="content">
 
+        <!-- Start content -->
+        <div class="content">
+            <div class="container col-11">
+                <div class="row justify-content-around justify-content-md-start pb-5">
+                    <div class="col-12 col-md-6 col-lg-4 mt-5">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 59-->
+                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
+                                    The Video ID and Embed Vi...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 50-->
+                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-12 col-md-6 col-lg-4 mt-5">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 59-->
+                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
+                                    The Video ID and Embed Vi...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 50-->
+                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div><div class="col-12 col-md-6 col-lg-4 mt-5">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 59-->
+                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
+                                    The Video ID and Embed Vi...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
+                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
+                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <div class="card-body px-0 pb-3">
+                                <!-- 50-->
+                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
+                                <!-- 100-->
+                                <p class="card-text">
+                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
+                                </p>
+                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <div class="action-btn float-left">
+                                    <i class="far fa-heart">
+                                        <span class="badge">إضافة الى المفضلة</span>
+                                    </i>
+                                    <i class="fas fa-file-archive pl-1">
+                                        <span class="badge">إضافة الى الإرشيف</span>
+                                    </i>
+                                    <i class="text-danger fas fa-trash-alt pl-1">
+                                        <span class="badge badge-pill">حذف</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+        <!-- End content -->
+
+        <!-- Start footer -->
         <footer class="footer">
 
         </footer>
-    </div>
-
+        <!-- End footer -->
 </body>
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/6652aa2ce8.js" crossorigin="anonymous"></script>
