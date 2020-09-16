@@ -43,13 +43,19 @@ if (isset($_POST['url'])){
             $urlDesc = 'الوصف غير متاح<i class="far fa-frown fa-fw"></i>';
         }
 
+        $urlProviderName = $info->providerName;
+        if (mb_strlen($info->providerName) > 32){
+            $urlProviderName  = mb_substr($info->providerName, 0, 32);
+            $urlProviderName .= '...';
+        }
+
 
         $output = '';
         $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
         $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
         $output .= '<img class="card-img-top" src="';
         $output .= "$urlImage";
-        $output .= '" alt="Card image cap">';
+        $output .= '" alt="">';
         $output .= '<div class="card-body px-0 pb-3">';
         $output .= '<h5 class="card-title">';
         $output .= "$urlTitle";
@@ -58,7 +64,7 @@ if (isset($_POST['url'])){
         $output .= '<a href="';
         $output .= "$info->providerUrl";
         $output .= '" target="_blank">';
-        $output .= "$info->providerName";
+        $output .= "$urlProviderName";
         $output .= '</a>';
         $output .= '</p>';
         $output .= '<p class="card-text">';
@@ -66,7 +72,7 @@ if (isset($_POST['url'])){
         $output .= '</p>';
         $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
         $output .= "$info->providerIcon";
-        $output .= '" alt="Card image cap">';
+        $output .= '" alt="">';
         $output .= '<div class="action-btn float-left">';
         $output .= '<i class="far fa-heart">
                         <span class="badge">إضافة الى المفضلة</span>
@@ -88,7 +94,7 @@ if (isset($_POST['url'])){
         $dbUrlImage                 = mysqli_real_escape_string($mysqli, $urlImage);
         $dbUrlDesc                  = mysqli_real_escape_string($mysqli, $urlDesc);
         $dbUrlProviderIcon          = mysqli_real_escape_string($mysqli, $info->providerIcon);
-        $dbUrlProviderIconName      = mysqli_real_escape_string($mysqli, $info->providerName);
+        $dbUrlProviderIconName      = mysqli_real_escape_string($mysqli, $urlProviderName);
         $dbUrlProviderIconNameUrl   = mysqli_real_escape_string($mysqli, $info->providerUrl);
 
 

@@ -153,26 +153,34 @@ if (isset($_SESSION['user_name'])){
     <!-- End navbar -->
 
         <!-- Start content -->
+<?php
+
+        $userId = $_SESSION['user_id'];
+        $stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId ORDER BY url_id DESC");
+        $urls = $stat->fetch_all(MYSQLI_ASSOC);
+
+
+?>
         <div class="content">
             <div class="container col-11">
                 <div class="row justify-content-around justify-content-md-start pb-5">
                     <div class="loader-bg">
                         <img src="layout/images/preloader.gif" alt="">
                     </div>
+                    <?php foreach ($urls as $url): ?>
                     <div class="col-12 col-md-6 col-lg-4 mt-5">
                         <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <img class="card-img-top" src="<?php echo $url['url_image'] ?>" alt="Card image cap">
                             <div class="card-body px-0 pb-3">
                                 <!-- 59-->
-                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
+                                <h5 class="card-title"><?php echo $url['url_title'] ?></h5>
 <!--                                35-->
-                                <p class="provider-name mb-2"><a href="https://www.youtube.com" target="_blank">youtube</a></p>
+                                <p class="provider-name mb-2"><a href="<?php echo $url['url_providerUrl'] ?>" target="_blank"><?php echo $url['url_providerName'] ?></a></p>
                                 <!-- 100-->
                                 <p class="card-text">
-                                    Parse Url And Get Compqwertyuioplkjhgonents Practical Example on Parse Youtube Url and Get
-                                    The Video ID and Embed Vi...
+                                    <?php echo $url['url_description'] ?>
                                 </p>
-                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
+                                <img class="rounded-circle header-profile-img float-right"  src="<?php echo $url['url_providerIcon'] ?>" alt="">
                                 <div class="action-btn float-left">
                                     <i class="far fa-heart">
                                         <span class="badge">إضافة الى المفضلة</span>
@@ -187,33 +195,7 @@ if (isset($_SESSION['user_name'])){
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
-                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="layout/images/default-url-img.png" alt="">
-                            <div class="card-body px-0 pb-3">
-                                <!-- 50-->
-                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
-                                <p class="provider-name">youtube</p>
-                                <!-- 100-->
-                                <p class="card-text">
-                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيالبيسشضصثقفغعهخرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
-                                </p>
-                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
-                                <div class="action-btn float-left">
-                                    <i class="far fa-heart">
-                                        <span class="badge">إضافة الى المفضلة</span>
-                                    </i>
-                                    <i class="fas fa-file-archive pl-1">
-                                        <span class="badge">إضافة الى الإرشيف</span>
-                                    </i>
-                                    <i class="text-danger fas fa-trash-alt pl-1">
-                                        <span class="badge badge-pill">حذف</span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+            <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -256,7 +238,9 @@ if (isset($_SESSION['user_name'])){
                         $('.content .container .row .loader-bg').fadeOut();
                         $('.content .container .row').prepend(data);
 
-                        $('.alert-ajax').show().delay(3000).remove();
+                        $('.alert-ajax').delay(500).fadeIn().delay(3000).fadeOut(10, function () {
+                            $(this).remove();
+                        });
                     },
                     error:function (xhr, status, error) {
                         $('.alert-normal p').html(error);
