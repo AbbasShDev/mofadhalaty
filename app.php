@@ -3,7 +3,6 @@ session_start();
 require_once 'includes/config/database.php';
 
 
-
 if (isset($_SESSION['user_name'])){
 ?>
 <!DOCTYPE html>
@@ -28,6 +27,9 @@ if (isset($_SESSION['user_name'])){
 <?php }
     unset($_SESSION['notify_message']); ?>
 <!--    notification message -->
+<div class="alert alert-danger alert-normal">
+    <p class="m-0"></p>
+</div>
     <div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
         <div class="sidebar-wrapper">
             <div class="hide-sidebar">
@@ -122,7 +124,7 @@ if (isset($_SESSION['user_name'])){
                     <form class="add-url nav-item ml-auto" action="">
 
                         <input type="text" class="" placeholder="حفظ رابط (URL) ...">
-                        <button class="btn btn-primary ml-1" type="submit">حفظ</button>
+                        <button class="btn btn-primary ml-1 save-btn">حفظ</button>
                         <button class="close-search-add-form btn btn-outline-secondary ml-3">إلغاء</button>
 
                             <svg xmlns="http://www.w3.org/2000/svg" class="close-search-add-form" width="32" height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3f64b5" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -154,15 +156,20 @@ if (isset($_SESSION['user_name'])){
         <div class="content">
             <div class="container col-11">
                 <div class="row justify-content-around justify-content-md-start pb-5">
+                    <div class="loader-bg">
+                        <img src="layout/images/preloader.gif" alt="">
+                    </div>
                     <div class="col-12 col-md-6 col-lg-4 mt-5">
                         <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
                             <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
                             <div class="card-body px-0 pb-3">
                                 <!-- 59-->
                                 <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
+<!--                                35-->
+                                <p class="provider-name mb-2"><a href="https://www.youtube.com" target="_blank">youtube</a></p>
                                 <!-- 100-->
                                 <p class="card-text">
-                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
+                                    Parse Url And Get Compqwertyuioplkjhgonents Practical Example on Parse Youtube Url and Get
                                     The Video ID and Embed Vi...
                                 </p>
                                 <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
@@ -182,113 +189,14 @@ if (isset($_SESSION['user_name'])){
                     </div>
                     <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
                         <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
+                            <img class="card-img-top" src="layout/images/default-url-img.png" alt="">
                             <div class="card-body px-0 pb-3">
                                 <!-- 50-->
                                 <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
+                                <p class="provider-name">youtube</p>
                                 <!-- 100-->
                                 <p class="card-text">
-                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
-                                </p>
-                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
-                                <div class="action-btn float-left">
-                                    <i class="far fa-heart">
-                                        <span class="badge">إضافة الى المفضلة</span>
-                                    </i>
-                                    <i class="fas fa-file-archive pl-1">
-                                        <span class="badge">إضافة الى الإرشيف</span>
-                                    </i>
-                                    <i class="text-danger fas fa-trash-alt pl-1">
-                                        <span class="badge badge-pill">حذف</span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                    </div><div class="col-12 col-md-6 col-lg-4 mt-5">
-                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
-                            <div class="card-body px-0 pb-3">
-                                <!-- 59-->
-                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
-                                <!-- 100-->
-                                <p class="card-text">
-                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
-                                    The Video ID and Embed Vi...
-                                </p>
-                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
-                                <div class="action-btn float-left">
-                                    <i class="far fa-heart">
-                                        <span class="badge">إضافة الى المفضلة</span>
-                                    </i>
-                                    <i class="fas fa-file-archive pl-1">
-                                        <span class="badge">إضافة الى الإرشيف</span>
-                                    </i>
-                                    <i class="text-danger fas fa-trash-alt pl-1">
-                                        <span class="badge badge-pill">حذف</span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
-                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
-                            <div class="card-body px-0 pb-3">
-                                <!-- 50-->
-                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
-                                <!-- 100-->
-                                <p class="card-text">
-                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
-                                </p>
-                                <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
-                                <div class="action-btn float-left">
-                                    <i class="far fa-heart">
-                                        <span class="badge">إضافة الى المفضلة</span>
-                                    </i>
-                                    <i class="fas fa-file-archive pl-1">
-                                        <span class="badge">إضافة الى الإرشيف</span>
-                                    </i>
-                                    <i class="text-danger fas fa-trash-alt pl-1">
-                                        <span class="badge badge-pill">حذف</span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                    </div><div class="col-12 col-md-6 col-lg-4 mt-5">
-                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
-                            <div class="card-body px-0 pb-3">
-                                <!-- 59-->
-                                <h5 class="card-title">Parse Url And Get Components Practical Example on Parse You...</h5>
-                                <!-- 100-->
-                                <p class="card-text">
-                                    Parse Url And Get Components Practical Example on Parse Youtube Url and Get
-                                    The Video ID and Embed Vi...
-                                </p>
-                                <img class="rounded-circle header-profile-img float-right"  src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
-                                <div class="action-btn float-left">
-                                    <i class="far fa-heart">
-                                        <span class="badge">إضافة الى المفضلة</span>
-                                    </i>
-                                    <i class="fas fa-file-archive pl-1">
-                                        <span class="badge">إضافة الى الإرشيف</span>
-                                    </i>
-                                    <i class="text-danger fas fa-trash-alt pl-1">
-                                        <span class="badge badge-pill">حذف</span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">
-                        <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                            <img class="card-img-top" src="https://res.cloudinary.com/practicaldev/image/fetch/s--6AFlf9Ki--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https:/dev-to-uploads.s3.amazonaws.com/i/ol50x6e5im0w9aou9lsl.png" alt="Card image cap">
-                            <div class="card-body px-0 pb-3">
-                                <!-- 50-->
-                                <h5 class="card-title">حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغييرة...</h5>
-                                <!-- 100-->
-                                <p class="card-text">
-                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
+                                    حادث تصادم عنيف بين يونايتد إكسبريس 5925 وطائرة خاصة صغيالبيسشضصثقفغعهخرة تُوقِع المحققين في حالةٍ من الارتباك حتى يعل...
                                 </p>
                                 <img class="rounded-circle header-profile-img float-right" src="https://abs.twimg.com/responsive-web/client-web-legacy/icon-ios.8ea219d5.png" alt="">
                                 <div class="action-btn float-left">
@@ -309,6 +217,7 @@ if (isset($_SESSION['user_name'])){
                 </div>
             </div>
         </div>
+
         <!-- End content -->
 
         <!-- Start footer -->
@@ -317,6 +226,7 @@ if (isset($_SESSION['user_name'])){
         </footer>
         <!-- End footer -->
 </body>
+
 <!-- font awesome -->
 <script src="https://kit.fontawesome.com/6652aa2ce8.js" crossorigin="anonymous"></script>
 <!-- jQuery js -->
@@ -327,7 +237,41 @@ if (isset($_SESSION['user_name'])){
 <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="layout/js/app.js" type="text/javascript"></script>
+<script>
+    $(document).ready(function () {
 
+        $('.add-url').on('submit', function (e) {
+            e.preventDefault();
+            let addValue = $(this).find('input').val()
+            if (addValue != ''){
+                $.ajax({
+                    method: 'POST',
+                    url:'add-url.php',
+                    data:{url: addValue},
+                    beforeSend: function () {
+                        $('.content .container .row .loader-bg').fadeIn();
+                    },
+                    success:function (data) {
+                        $('.add-url input').val('');
+                        $('.content .container .row .loader-bg').fadeOut();
+                        $('.content .container .row').prepend(data);
+
+                        $('.alert-ajax').show().delay(3000).remove();
+                    },
+                    error:function (xhr, status, error) {
+                        $('.alert-normal p').html(error);
+                        $('.alert-normal').fadeIn().delay(3000).fadeOut();
+                    }
+                })
+            }else {
+                $('.alert-normal p').html('حقل ادخال الرابط فارغ');
+                $('.alert-normal').fadeIn().delay(3000).fadeOut();
+            }
+
+        })
+
+    })
+</script>
 </html>
 <?php }else{
     echo 'You can not access this page';

@@ -1,7 +1,7 @@
 <?php
 include __DIR__.'/includes/libraries/vendor/autoload.php';
 
-$info = Embed\Embed::create('https://arabsciences.com/2017/07/06/air-crash-s14ep1/');
+$info = Embed\Embed::create('https://twitter.com/Alaa_Najmi/status/1304871255947063296');
 
 echo '<strong>title: </strong>'.$info->title;
 echo '<br>';

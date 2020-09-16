@@ -4,7 +4,7 @@ session_start();
 $pageTitle = 'حسابي';
 
 if (!isset($_SESSION['user_name'])){
-    header('location:app.php');
+    header('location:index.php');
     die();
 }
 
@@ -75,7 +75,7 @@ unset($_SESSION['notify_message']); ?>
 
     <div class="container profile">
         <div class="row justify-content-around ">
-            <div class="col-11 col-lg-3 order-1 order-md-0 profile-left mt-3 mb-5">
+            <div class="col-11 col-lg-3 order-1 order-lg-0 profile-left mt-3 mb-5">
                 <div class="container">
                     <img class="rounded-circle img-thumbnail img d-flex mx-auto" style="height: 100px !important; width: 100px !important;" src="<?php
                     if (isset($_SESSION['avatar']) && !empty($_SESSION['avatar'])){
@@ -92,6 +92,8 @@ unset($_SESSION['notify_message']); ?>
                             <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
                                 echo '';
+                            }elseif (isset($_GET['do']) && $_GET['do'] == 'change_password'){
+                                echo '';
                             }else{
                                 echo 'active';
                             } ?>"
@@ -102,11 +104,21 @@ unset($_SESSION['notify_message']); ?>
                         </li>
                         <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
                             <a class="nav-link my-2
+                            <?php if(isset($_GET['do']) && $_GET['do'] == 'change_password'){
+                                echo 'active';
+                            } ?>"
+                            href="profile.php?do=change_password">
+                                <i class="fas fa-cloud-download-alt pr-1"></i>
+                                تغير كلمة السر
+                            </a>
+                        </li>
+                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                            <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
                                 echo 'active';
                             } ?>"
                             href="profile.php?do=export">
-                                <i class="fas fa-cloud-download-alt pr-1"></i>
+                                <i class="fas fa-key pr-1"></i>
                                 تصدير
                             </a>
                         </li>
@@ -123,14 +135,120 @@ unset($_SESSION['notify_message']); ?>
 
     <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){ ?>
 
-    <div class="col-11 col-lg-7 order-0 order-md-1 profile-right my-5">
+    <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
         <div class="container">
 
             <h4 class="text-center pb-3">تصدير البيانات</h4>
 
         </div>
     </div>
+    <?php }elseif (isset($_GET['do']) && $_GET['do'] == 'change_password'){
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+            $oldPass          = mysqli_real_escape_string($mysqli, $_POST['pass_old']);
+            $newPass          = mysqli_real_escape_string($mysqli, $_POST['pass_new']);
+            $conformPass    = mysqli_real_escape_string($mysqli, $_POST['pass_confirm']);
+
+
+
+                if (empty($oldPass)) {
+                    array_push($errors, 'يجب إدخال كلمة السر القديمة');
+                }
+                if (empty($newPass)) {
+                    array_push($errors, 'يجب إدخال كلمة السر الجديدة');
+                }
+                if (empty($conformPass)) {
+                    array_push($errors, 'يجب إدخال تأكيد كلمة السر الجديدة');
+                }
+
+                if (!empty($oldPass) && !empty($newPass) && !empty($conformPass)){
+                    if (strlen($oldPass) < 6 || strlen($newPass) < 6) {
+                        array_push($errors, 'يجب أن يكون طول كلمة السر على الأقل 6 حروفٍ/حرفًا');
+                    }
+                    if ($conformPass != $newPass) {
+                        array_push($errors, 'حقل التأكيد غير مُطابق للحقل كلمة السر');
+                    }
+                }
+
+
+
+            if (!count($errors)){
+
+                $userId = $_SESSION['user_id'];
+                $query = "SELECT user_password FROM users WHERE user_id = '$userId'";
+
+                $userExist = $mysqli->query($query);
+
+                if (!$userExist->num_rows){
+                    array_push($errors, 'البيانات المدخلة غير متطابقة مع البيانات المسجلة لدينا');
+                }else{
+
+                    $user_found = $userExist->fetch_assoc();
+
+                    if (password_verify($oldPass, $user_found['user_password'])){
+
+                        $hashNewPass = password_hash($newPass, PASSWORD_DEFAULT);
+                        $query = "UPDATE users SET user_password='$hashNewPass' WHERE user_id=$userId";
+
+
+                        if ($mysqli->query($query)){
+
+                            $_SESSION['notify_message'] = 'تم تحديث بياناتك بنجاح';
+
+                            header("location:profile.php?do=change_password");
+                            die();
+                        }
+
+                    }else{
+                        array_push($errors, 'البيانات المدخلة غير متطابقة مع البيانات المسجلة لدينا');
+                    }
+
+                }
+
+            }
+        }
+
+        ?>
+        <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
+            <div class="container">
+                <h4 class="text-center pb-3">تغير كلمة السر</h4>
+                <form action="?do=change_password" method="post" enctype="multipart/form-data">
+
+                    <?php
+                    if (count($errors)){ ?>
+                        <div class="alert alert-danger mx-auto">
+                            <?php foreach ($errors as $error) :?>
+                                <p class="m-0">- <?php echo $error ?></p>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php } ?>
+
+                    <div class="form-group">
+                        <label for="pass_old">كلمة المرور القديمة:</label>
+                        <input type="password" name="pass_old" class="form-control" placeholder="كلمة المرور القديمة" id="pass_old">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass_new">كلمة المرور الجديدة:</label>
+                        <input type="password" name="pass_new" class="form-control" placeholder="كلمة المرور الجديدة" id="pass_new">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pass_conform">تأكيد كلمة المرور الجديدة:</label>
+                        <input type="password" name="pass_confirm" class="form-control" placeholder="تأكيد كلمة المرور الجديدة" id="password">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn d-flex mx-auto px-5">تحديث</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     <?php }else{
+
+
     $userId = $_SESSION['user_id'];
 
     $stat = $mysqli->query("SELECT * FROM users WHERE user_id='$userId'");
@@ -155,17 +273,16 @@ unset($_SESSION['notify_message']); ?>
             $errors = $upload->upload();
 
             $filePath = $upload->filePath;
-            if (!count($errors)){
+            if (!count($errors) && !empty($avatar)){
                 unlink($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'my-favoraite-app/'.$avatar);
+                $avatar = $filePath;
+            }elseif (!count($errors) && empty($avatar)){
                 $avatar = $filePath;
             }
         }
 
         $username       = mysqli_real_escape_string($mysqli, $_POST['username']);
         $email          = mysqli_real_escape_string($mysqli, $_POST['email']);
-        $pass           = mysqli_real_escape_string($mysqli, $_POST['pass']);
-        $passConform    = mysqli_real_escape_string($mysqli, $_POST['pass_confirm']);
-
 
         if (empty($username)) {
             array_push($errors, 'يجب ادخال اسم مستخدم');
@@ -174,40 +291,7 @@ unset($_SESSION['notify_message']); ?>
             array_push($errors, 'يجب ادخال بريد الكتروني');
         }
 
-        if (!empty($pass)){
-            if (strlen($pass) < 6) {
-                array_push($errors, 'يجب أن يكون طول كلمة السر على الأقل 6 حروفٍ/حرفًا');
-            }
-            if ($passConform != $pass) {
-                array_push($errors, 'حقل التأكيد غير مُطابق للحقل كلمة السر');
-            }
-
-        }
-
-        if (!count($errors) && !empty($pass)) {
-
-            if (isset($filePath)){
-                $saveFilePath =", user_avatar='$filePath'";
-            }else{
-                $saveFilePath= '';
-            }
-
-            $passHash = password_hash($pass, PASSWORD_DEFAULT);
-            $query = "UPDATE users SET user_name='$username' ,user_email='$email', user_password='$passHash' $saveFilePath WHERE user_id=$userId";
-
-
-            if ($mysqli->query($query)){
-
-                $_SESSION['user_name'] = $username;
-                $_SESSION['avatar'] = $avatar;
-                $_SESSION['notify_message'] = 'تم تحديث بياناتك بنجاح';
-
-                header("location:profile.php");
-                die();
-            }
-        }
-
-        if (!count($errors) && empty($pass)) {
+        if (!count($errors)) {
 
             if (isset($filePath)){
                 $saveFilePath =", user_avatar='$filePath'";
@@ -220,6 +304,7 @@ unset($_SESSION['notify_message']); ?>
 
             if ($mysqli->query($query)){
 
+
                 $_SESSION['user_name'] = $username;
                 $_SESSION['avatar'] = $avatar;
                 $_SESSION['notify_message'] = 'تم تحديث بياناتك بنجاح';
@@ -227,17 +312,16 @@ unset($_SESSION['notify_message']); ?>
                 header("location:profile.php");
                 die();
             }
-
-
         }
-    } ?>
-    <div class="col-11 col-lg-7 order-0 order-md-1 profile-right my-5">
 
-        <div class="loader-bg d-none justify-content-center"><span class="spinner-grow" role="status"></span></div>
+    } ?>
+    <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
+
+<!--        <div class="loader-bg d-none justify-content-center"><span class="spinner-grow" role="status"></span></div>-->
         <div class="container">
             <h4 class="text-center pb-3">تحديث المعلومات الشخصية</h4>
 
-            <form action="?do=edit_profile" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
 
                 <?php
                 if (count($errors)){ ?>
@@ -256,16 +340,6 @@ unset($_SESSION['notify_message']); ?>
                 <div class="form-group">
                     <label for="email">البريد الإلكتروني:</label>
                     <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني" id="email" value="<?php echo $userInfo['user_email']?>" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="pass">كلمة المرور:</label>
-                    <input type="password" name="pass" class="form-control" placeholder="اترك فارغ اذا كنت لاتريد تغيره" id="password">
-                </div>
-
-                <div class="form-group">
-                    <label for="pass_conform">تأكيد كلمة المرور:</label>
-                    <input type="password" name="pass_confirm" class="form-control" placeholder="اترك فارغ اذا كنت لاتريد تغيره" id="password">
                 </div>
 
                 <div class="form-group">
