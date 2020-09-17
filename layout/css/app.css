@@ -428,7 +428,40 @@ body {
         float: none;
     }
 }
+
+.empty-search-result {
+    color: var(--main-color);
+    text-align: center;
+    margin-top: 200px;
+}
+
+.empty-search-result div {
+    z-index: 500;
+    width: 120px;
+}
 /* End content */
 
+/* Start footer */
+.footer {
+    background-color: var(--main-color);
+    width: 100%;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+
+.footer i {
+    text-align: center;
+    color: #fff;
+    transform: scaleX(1);
+    font-size: 16px;
+    transition: all .3s ease-in-out;
+}
+
+.footer i:hover {
+    transform: scale(1.4);
+}
+/* End footer */
 
 

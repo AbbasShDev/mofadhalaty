@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pageTitle = 'تغير كلمة المرور';
+$pageTitle = '| تغير كلمة المرور';
 require_once 'includes/config/database.php';
 require_once 'includes/config/app.php';
 require_once 'includes/templates/main-header.php';

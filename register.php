@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pageTitle = 'التسجيل';
+$pageTitle = '| التسجيل';
 
 if (isset($_SESSION['user_name'])){
     header('location:app.php');

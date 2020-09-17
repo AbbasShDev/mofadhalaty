@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pageTitle = 'طلب تغير كلمة المرور';
+$pageTitle = '| طلب تغير كلمة المرور';
 
 if (isset($_SESSION['user_name'])){
     header('location:app.php');

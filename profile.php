@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-$pageTitle = 'حسابي';
+$pageTitle = '| حسابي';
 
 if (!isset($_SESSION['user_name'])){
     header('location:index.php');
@@ -32,7 +32,7 @@ $errors = [];
     <!-- bootstrap-select CSS -->
     <!--    <link rel="stylesheet"-->
     <!--          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">-->
-    <title><?php echo "$config[app_name] | $pageTitle"?></title>
+    <title><?php echo "$config[app_name] $pageTitle"?></title>
 </head>
 <body>
 <!--    notification message -->
