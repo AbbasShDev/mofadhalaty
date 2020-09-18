@@ -370,6 +370,20 @@ body {
     margin: 0 0 0 12px;
 }
 
+.content .card-body .action-btn form{
+    display: inline-block;
+}
+
+.content .card-body .action-btn form button{
+    border: none;
+    padding: 0;
+    background: none;
+}
+
+.content .card-body .action-btn form button:focus{
+    border: none;
+    outline: none;
+}
 .content .card-body .action-btn i:first-child {
     font-size: 18px;
 }
@@ -378,8 +392,12 @@ body {
     cursor: pointer;
     position: relative;
     color: var(--main-color);
+    transition: transform .3s ease-in-out;
 }
 
+.iScale {
+    transform: scale(1.5);
+}
 .content .card-body .action-btn i span{
     display: none;
     position: absolute;

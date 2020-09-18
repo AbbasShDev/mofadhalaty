@@ -1,6 +1,5 @@
 <?php
 ob_start();
-require_once 'includes/config/app.php';
 
 ?>
 
@@ -54,9 +53,9 @@ unset($_SESSION['notify_message']); ?>
                 </a>
             </li>
             <li class="pr-3 pr-lg-0">
-                <a class="nav-link text-left my-3" href="#">
+                <a class="nav-link text-left my-3  <?php if ($pageTitle == "| اخرى") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>other_url.php">
                     <i class="fas fa-file-alt  fa-fw"></i>
-                    المقالات
+                    اخرى
                 </a>
             </li>
             <li class="pr-3 pr-lg-0">

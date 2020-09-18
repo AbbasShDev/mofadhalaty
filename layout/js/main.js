@@ -33,4 +33,22 @@ $('document').ready(function () {
 
         $(this).prev('span').text($(this).val().substring(12))
     })
+
+    //change log bg on small devices
+    function logoGg() {
+        let logoSrc = $('.navbar-area .navbar-brand img');
+        if ($(window).width() < 992){
+            logoSrc.attr('src', 'layout/images/logo-dark.png');
+        }
+
+        $(window).resize(function () {
+            if ($(this).width() < 992){
+                logoSrc.attr('src', 'layout/images/logo-dark.png');
+            }else{
+                logoSrc.attr('src', 'layout/images/logo.png');
+            }
+        })
+    }
+    logoGg();
+
 })

@@ -93,6 +93,7 @@ if (isset($_POST['url'])){
         $dbUrlTitle                 = mysqli_real_escape_string($mysqli, $urlTitle );
         $dbUrlImage                 = mysqli_real_escape_string($mysqli, $urlImage);
         $dbUrlDesc                  = mysqli_real_escape_string($mysqli, $urlDesc);
+        $dbUrlType                  = mysqli_real_escape_string($mysqli, $info->type);
         $dbUrlProviderIcon          = mysqli_real_escape_string($mysqli, $info->providerIcon);
         $dbUrlProviderIconName      = mysqli_real_escape_string($mysqli, $urlProviderName);
         $dbUrlProviderIconNameUrl   = mysqli_real_escape_string($mysqli, $info->providerUrl);
@@ -106,6 +107,7 @@ if (isset($_POST['url'])){
                             url_title,
                             url_image,
                             url_description,
+                            url_type,
                             url_providerIcon,
                             url_providerName,
                             url_providerUrl
@@ -117,6 +119,7 @@ if (isset($_POST['url'])){
                             '$dbUrlTitle',
                             '$dbUrlImage',
                             '$dbUrlDesc',
+                            '$dbUrlType',
                             '$dbUrlProviderIcon',
                             '$dbUrlProviderIconName',
                             '$dbUrlProviderIconNameUrl'

@@ -20,4 +20,42 @@
 <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="layout/js/app.js" type="text/javascript"></script>
+<script>
+    $('.content .card-body .action-btn .favourite').on('submit', function (e) {
+        e.preventDefault();
+
+        let favBtn = $(this).find('button'),
+            form   = $(this)
+
+        let data = {favStatus:form.data('fav'), urlId: form.data('urlid')};
+        $.post('fav_not_fav.php',{data:JSON.stringify(data)}).done(function (data) {
+            if (data == 1){
+                form.data('fav', '1');
+                favBtn.html('');
+                favBtn.html('<i class="fas fa-heart"> <span class="badge">حذف من المفضلة</span> </i>');
+                favBtn.find('i').addClass('iScale');
+                setTimeout(function () {
+                    favBtn.find('i').removeClass('iScale');
+                },100)
+
+
+            }else {
+                form.data('fav', '0')
+                favBtn.html('')
+                favBtn.html('<i class="far fa-heart"> <span class="badge">إضافة الى المفضلة</span> </i>')
+                favBtn.find('i').addClass('iScale');
+                setTimeout(function () {
+                    favBtn.find('i').removeClass('iScale');
+                },100)
+                <?php if ($pageTitle == "| المفضلة"){ ?>
+                form.parents('.card').parent().remove();
+                <?php } ?>
+            }
+
+        }).fail(function () {
+            $('.alert-normal p').html('حدث خطأ');
+            $('.alert-normal').fadeIn().delay(3000).fadeOut();
+        })
+    })
+</script>
 <?php ob_end_flush(); ?>

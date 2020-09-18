@@ -112,10 +112,10 @@ if (!isset($_SESSION['user_name'])) {
         <div class="hero">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-7 order-1 order-lg-0">
+                <div class="col-lg-7 order-1 order-lg-0 animate__animated wow animate__fadeInRight" data-wow-duration="1s" >
                     <img class="hero-image img-fluid" src="layout/images/hero-img.png" alt="">
                 </div>
-                <div class="col-10 col-lg-4 mx-auto">
+                <div class="col-10 col-lg-4 mx-auto animate__animated wow animate__fadeInLeft" data-wow-duration="2s">
                     <div class="intro text-center order-0 order-lg-1">
                         <h4 class="text-center font-head">إجمع كل ما تفضل من محتوى في مكان واحد</h4>
                         <a href="register.php"><button class="btn btn-success mt-4 font-head" href="#">تسجيل</button></a>
@@ -133,13 +133,13 @@ if (!isset($_SESSION['user_name'])) {
 <div id="about-us" class="section about container text-center col-12 ">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-10 col-lg-6 mx-auto px-0">
+            <div class="col-10 col-lg-6 mx-auto px-0 animate__animated wow animate__rotateIn" data-wow-duration="1s" data-wow-delay="0.3s">
                 <div class="about-us text-center order-0 order-lg-1">
                     <h1 class="font-head">ماهو <span>مفضلتي</span></h1>
                     <p class="pt-5 col-12 col-lg-10 mx-auto px-0">هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. اضاف اي محتوى من الانترنت وتمتع به في اي وقت، في مكان واحد.</p>
                 </div>
             </div>
-            <div class="col-lg-6 order-1 order-lg-0">
+            <div class="col-lg-6 order-1 order-lg-0 animate__animated wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
                 <img class="img-fluid" src="layout/images/about-us.png" alt="">
             </div>
 
@@ -150,8 +150,8 @@ if (!isset($_SESSION['user_name'])) {
 
 <!-- Start contact -->
 <div id="contact" class="section contact">
-    <h1 class="pb-1 text-center font-head">تواصل منا</h1>
-    <div class="container col-10 col-md-8 col-lg-6 mt-5 mx-auto p-4">
+    <h1 class="pb-1 text-center font-head animate__animated wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.3s">تواصل منا</h1>
+    <div class="container col-10 col-md-8 col-lg-6 mt-5 mx-auto p-4 animate__animated wow animate__fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.3s">
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label for="name" class="font-head">الإسم</label>
@@ -175,7 +175,10 @@ if (!isset($_SESSION['user_name'])) {
     </div>
 </div>
 <!-- End contact -->
-
+    <script src="layout/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
 
 <?php
 } else {

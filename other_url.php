@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pageTitle = "| المفضلة";
+$pageTitle = "| اخرى";
 require_once 'includes/config/database.php';
 require_once 'includes/config/app.php';
 require_once 'includes/templates/app-header.php';
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_name'])){
 }
 
 $userId = $_SESSION['user_id'];
-$stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId AND url_favourite=1 ORDER BY url_id DESC");
+$stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId AND url_type!='video' ORDER BY url_id DESC");
 $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
 
@@ -35,7 +35,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
                             </p>
                             <img class="rounded-circle header-profile-img float-right"  src="<?php echo $url['url_providerIcon'] ?>" alt="">
                             <div class="action-btn float-left">
-                                <form action="" class="favourite" method="post" data-fav="<?php echo $url['url_favourite']?>" data-urlid="<?php echo $url['url_id']?>" >
+                                <form action="app.php" method="post" data-fav="<?php echo $url['url_favourite']?>" data-urlid="<?php echo $url['url_id']?>" >
                                     <button>
                                         <?php if ($url['url_favourite'] == 0){ ?>
                                             <i class="far fa-heart"><span class="badge">إضافة الى المفضلة</span></i>

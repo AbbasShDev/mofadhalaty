@@ -28,19 +28,22 @@ if (!isset($_SESSION['user_name'])){
                     <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
                         <img class="card-img-top" src="<?php echo $url['url_image'] ?>" alt="Card image cap">
                         <div class="card-body px-0 pb-3">
-                            <!-- 59-->
                             <h5 class="card-title"><?php echo $url['url_title'] ?></h5>
-<!--                                35-->
                             <p class="provider-name mb-2"><a href="<?php echo $url['url_providerUrl'] ?>" target="_blank"><?php echo $url['url_providerName'] ?></a></p>
-                            <!-- 100-->
                             <p class="card-text">
                                 <?php echo $url['url_description'] ?>
                             </p>
                             <img class="rounded-circle header-profile-img float-right"  src="<?php echo $url['url_providerIcon'] ?>" alt="">
                             <div class="action-btn float-left">
-                                <i class="far fa-heart">
-                                    <span class="badge">إضافة الى المفضلة</span>
-                                </i>
+                                <form action="" class="favourite" method="post" data-fav="<?php echo $url['url_favourite']?>" data-urlid="<?php echo $url['url_id']?>" >
+                                    <button>
+                                        <?php if ($url['url_favourite'] == 0){ ?>
+                                            <i class="far fa-heart"><span class="badge">إضافة الى المفضلة</span></i>
+                                        <?php }else{?>
+                                            <i class="fas fa-heart"> <span class="badge">حذف من المفضلة</span> </i>
+                                        <?php } ?>
+                                    </button>
+                                </form>
                                 <i class="fas fa-file-archive pl-1">
                                     <span class="badge">إضافة الى الإرشيف</span>
                                 </i>
@@ -130,6 +133,7 @@ if (!isset($_SESSION['user_name'])){
 
             })
         })
+
 
     })
 </script>
