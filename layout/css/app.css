@@ -19,6 +19,11 @@ body {
     box-sizing: border-box;
 }
 
+.font-head {
+    font-family:railway,cairo,Arial,sans-serif !important;
+    font-weight: 700;
+}
+
 /* notification messages */
 .notify-message {
     padding: 5px;
@@ -54,20 +59,13 @@ body {
 /* notification messages */
 
 .sidebar {
-    overflow: auto;
-    max-height: 100%;
-    height: 100%;
-}
-
-.sidebar{
     position: absolute;
     top: 0px;
     bottom: 0;
     right: 0;
     width: 240px;
-    height: 100%;
+    height: fit-content;
     display: block;
-    z-index: -1;
     color: #fff;
     text-align: center;
     background-color: #FFFFFF;
@@ -78,6 +76,62 @@ body {
 .sidebar.active {
     right: 0;
 }
+
+
+.sidebar .my-list form {
+    padding-top: 10px;
+    display: inline-flex;
+    padding-right: 55px;
+    justify-content: right;
+}
+
+
+
+@media only screen and (max-width: 1150px) {
+    .sidebar .my-list form{
+        padding-right: 35px;
+        margin-left: 20px;
+    }
+}
+
+
+.sidebar .my-list form input{
+    color: var(--main-color);
+    border: none;
+    box-shadow: 0px 0px 2px var(--main-color);
+    border-radius: 10px;
+    width: 150px;
+    padding-right: 10px;
+}
+
+.sidebar .my-list form input::placeholder {
+    color: var(--main-color);
+
+}
+
+.sidebar .my-list form input:focus {
+    border: none;
+    outline: none;
+}
+
+.sidebar .my-list form button {
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.sidebar .my-list form button i {
+    color: var(--main-color);
+    font-size: 22px;
+    margin: 6px 10px 0px 0px;
+    cursor: pointer;
+}
+
+.sidebar .my-list form button i.fa-spinner {
+    display: none;
+}
+
+
 
 @media only screen and (max-width: 1150px) {
     .sidebar{
@@ -109,23 +163,55 @@ body {
 
 }
 
-.sidebar .nav{
+.sidebar .sidebar-wrapper {
     margin-top: 110px;
+}
+
+
+@media only screen and (max-width: 1150px) {
+    .sidebar .sidebar-wrapper {
+        margin-top: 20px;
+    }
+}
+
+.sidebar .sidebar-wrapper h4{
+    color: #828282;
+    font-size: 18px;
+    font-weight: 400;
+    padding-right: 72px;
+    text-align: right;
+}
+
+@media only screen and (max-width: 1150px) {
+    .sidebar .sidebar-wrapper h4{
+        padding-right: 52px;
+    }
+}
+
+.sidebar .nav{
     float: none;
     display: block;
     transition: all .3s ease-in-out;
 }
 
 @media only screen and (max-width: 1150px) {
-    .sidebar .nav{
-        margin-top: 50px;
+    .sidebar .all{
+        padding-top: 30px;
     }
 }
 
 .sidebar .nav li{
     padding-right: 55px;
-
 }
+
+@media only screen and (max-width: 1150px) {
+    .sidebar .nav li{
+        padding-right: 35px;
+        margin-left: 20px;
+    }
+}
+
+
 
 .sidebar .nav li a {
     color: var(--main-color);
@@ -326,8 +412,6 @@ body {
     }
 }
 
-
-
 .content .card {
     border-radius: 0px;
     height: 389px !important;
@@ -337,6 +421,11 @@ body {
 .content .card .card-img-top{
    height: 145px !important;
     width: 289px !important;
+}
+
+.content .card-body a {
+    color: var(--darker-main-color);
+    text-decoration: none;
 }
 
 .content .card-body h5 {
@@ -398,27 +487,41 @@ body {
 .iScale {
     transform: scale(1.5);
 }
+
 .content .card-body .action-btn i span{
     display: none;
     position: absolute;
     color: #FFFFFF;
     background-color: var(--main-color);
-    bottom: 26px;
-    left: -46px;
-
-}
-
-.content .card-body .action-btn i:first-child span {
     bottom: 29px;
-    left: -46px;
+    left: -47px;
+
 }
 
-.content .card-body .action-btn i:last-child span {
-    bottom: 26px;
+.content .card-body .action-btn i.fa-plus-circle span{
+    left: -44px;
+}
+
+.content .card-body .action-btn i.fa-minus-circle span{
+    left: -49px;;
+}
+
+.content .card-body .action-btn form:first-child i.far span {
+    bottom: 29px;
+    left: -44px;
+}
+
+.content .card-body .action-btn form:first-child i.fas span {
+    bottom: 29px;
+    left: -39px;
+}
+
+.content .card-body .action-btn form:last-child i span {
+    bottom: 29px;
     left: -14px;
 }
 
-.content .card-body .action-btn i span:before{
+.content .card-body .action-btn form i span:before{
     content: "";
     border-style: solid;
     border-color: var(--main-color) transparent transparent transparent;
@@ -426,18 +529,18 @@ body {
     width: 0;
     position: absolute;
     border-width: 9px;
-    left: 42px;
-    top: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 18px;
 }
 
-.content .card-body .action-btn i:first-child span:before {
-    left: 45px;
-    top: 19px;
+.content .card-body .action-btn form:first-child i span:before {
+
 }
 
-.content .card-body .action-btn i:last-child span:before {
-    left: 11px;
-    top: 16px;
+.content .card-body .action-btn form:last-child  i span:before {
+    /*left: 11px;*/
+    /*top: 16px;*/
 }
 
 @media only screen and (max-width: 1150px) {
@@ -447,6 +550,9 @@ body {
     }
 }
 
+.content .card-body .action-btn .fas.fa-star {
+    color: #FCB643;
+}
 .empty-search-result {
     color: var(--main-color);
     text-align: center;

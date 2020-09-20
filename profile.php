@@ -108,7 +108,7 @@ unset($_SESSION['notify_message']); ?>
                                 echo 'active';
                             } ?>"
                             href="profile.php?do=change_password">
-                                <i class="fas fa-cloud-download-alt pr-1"></i>
+                                <i class="fas fa-key pr-1"></i>
                                 تغير كلمة السر
                             </a>
                         </li>
@@ -118,7 +118,7 @@ unset($_SESSION['notify_message']); ?>
                                 echo 'active';
                             } ?>"
                             href="profile.php?do=export">
-                                <i class="fas fa-key pr-1"></i>
+                                <i class="fas fa-cloud-download-alt pr-1"></i>
                                 تصدير
                             </a>
                         </li>

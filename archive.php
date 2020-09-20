@@ -1,6 +1,6 @@
 <?php
 session_start();
-$pageTitle = "| المواقع";
+$pageTitle = "| الإرشيف";
 require_once 'includes/config/database.php';
 require_once 'includes/config/app.php';
 require_once 'includes/templates/app-header.php';
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_name'])){
 }
 
 $userId = $_SESSION['user_id'];
-$stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId AND url_type!='video' AND url_archive=0 ORDER BY url_id DESC");
+$stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId AND url_archive=1 ORDER BY url_id DESC");
 $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
 
@@ -68,7 +68,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
             <?php endforeach; ?>
         </div>
     </div>
-</div
+</div>
 
 <!-- End content -->
 <?php require_once 'includes/templates/app-footer.php'?>

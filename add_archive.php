@@ -8,18 +8,17 @@ if (!isset($_SESSION['user_name'])){
 
 require_once 'includes/config/database.php';
 
-
 include __DIR__.'/includes/libraries/vendor/autoload.php';
 
 if (isset($_POST['data'])){
     $data = json_decode($_POST['data'], true);
 
-    $favStatus  =  $data['favStatus'];
+    $archiveStatus  =  $data['archiveStatus'];
 
 
-    if ($favStatus == 0){
+    if ($archiveStatus == 0){
 
-        $st = $mysqli->prepare("UPDATE urls SET url_favourite=1 WHERE url_id=? AND user_id=?");
+        $st = $mysqli->prepare("UPDATE urls SET url_archive=1 WHERE url_id=? AND user_id=?");
         $st->bind_param('ii', $urlId, $userId);
 
         $urlId      = $data['urlId'];
@@ -30,15 +29,16 @@ if (isset($_POST['data'])){
         }
 
     }else{
-        $st = $mysqli->prepare("UPDATE urls SET url_favourite=0 WHERE url_id=? AND user_id=?");
+        $st = $mysqli->prepare("UPDATE urls SET url_archive=0 WHERE url_id=? AND user_id=?");
         $st->bind_param('ii', $urlId, $userId);
 
         $urlId      = $data['urlId'];
-        $userId     = $_SESSION['user_id'];
+        $userId = $_SESSION['user_id'];
 
         if ($st->execute()){
             echo 0;
         }
+
     }
 
 }

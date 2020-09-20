@@ -49,88 +49,84 @@ if (isset($_POST['url'])){
             $urlProviderName .= '...';
         }
 
-
-        $output = '';
-        $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
-        $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
-        $output .= '<img class="card-img-top" src="';
-        $output .= "$urlImage";
-        $output .= '" alt="">';
-        $output .= '<div class="card-body px-0 pb-3">';
-        $output .= '<h5 class="card-title">';
-        $output .= "$urlTitle";
-        $output .= '</h5>';
-        $output .= '<p class="provider-name  mb-2">';
-        $output .= '<a href="';
-        $output .= "$info->providerUrl";
-        $output .= '" target="_blank">';
-        $output .= "$urlProviderName";
-        $output .= '</a>';
-        $output .= '</p>';
-        $output .= '<p class="card-text">';
-        $output .= "$urlDesc";
-        $output .= '</p>';
-        $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
-        $output .= "$info->providerIcon";
-        $output .= '" alt="">';
-        $output .= '<div class="action-btn float-left">';
-        $output .= '<i class="far fa-heart">
-                        <span class="badge">إضافة الى المفضلة</span>
-                    </i>
-                    <i class="fas fa-file-archive pl-1">
-                        <span class="badge">إضافة الى الإرشيف</span>
-                    </i>
-                    <i class="text-danger fas fa-trash-alt pl-1">
-                        <span class="badge badge-pill">حذف</span>
-                    </i>';
-        $output .= '</div>';
-        $output .= '</div>';
-        $output .= '</div>';
-        $output .= '</div>';
-
-
-        $dbUrl                      = mysqli_real_escape_string($mysqli, $url);
-        $dbUrlTitle                 = mysqli_real_escape_string($mysqli, $urlTitle );
-        $dbUrlImage                 = mysqli_real_escape_string($mysqli, $urlImage);
-        $dbUrlDesc                  = mysqli_real_escape_string($mysqli, $urlDesc);
-        $dbUrlType                  = mysqli_real_escape_string($mysqli, $info->type);
-        $dbUrlProviderIcon          = mysqli_real_escape_string($mysqli, $info->providerIcon);
-        $dbUrlProviderIconName      = mysqli_real_escape_string($mysqli, $urlProviderName);
-        $dbUrlProviderIconNameUrl   = mysqli_real_escape_string($mysqli, $info->providerUrl);
-
-
-        $query = "INSERT INTO 
+        $stat = $mysqli->prepare("INSERT INTO
                             urls
-                            (
-                            user_id,
-                            url_name,
-                            url_title,
-                            url_image,
-                            url_description,
-                            url_type,
-                            url_providerIcon,
-                            url_providerName,
-                            url_providerUrl
-                            )
-                        VALUES 
-                            (
-                            '$userId',
-                            '$dbUrl',
-                            '$dbUrlTitle',
-                            '$dbUrlImage',
-                            '$dbUrlDesc',
-                            '$dbUrlType',
-                            '$dbUrlProviderIcon',
-                            '$dbUrlProviderIconName',
-                            '$dbUrlProviderIconNameUrl'
-                            )";
+                            ( user_id, url_name, url_title, url_image, url_description, url_type, url_providerIcon, url_providerName, url_providerUrl)
+                        VALUES
+                            (?,?,?,?,?,?,?,?,?)");
+        $stat->bind_param('issssssss', $dbUserId, $dbUrl, $dbUrlTitle, $dbUrlImage, $dbUrlDesc, $dbUrlType, $dbUrlProviderIcon, $dbUrlProviderName, $dbUrlProviderUrl);
 
-        $mysqli->query($query);
+        $dbUserId                   = $_SESSION['user_id'];
+        $dbUrl                      = $url;
+        $dbUrlTitle                 = filter_var($urlTitle, FILTER_SANITIZE_STRING);
+        $dbUrlImage                 = filter_var($urlImage, FILTER_SANITIZE_URL);
+        $dbUrlDesc                  = filter_var($urlDesc, FILTER_SANITIZE_STRING);
+        $dbUrlType                  = filter_var($info->type, FILTER_SANITIZE_STRING);
+        $dbUrlProviderIcon          = filter_var($info->providerIcon, FILTER_SANITIZE_URL);
+        $dbUrlProviderName          = filter_var($urlProviderName, FILTER_SANITIZE_STRING);
+        $dbUrlProviderUrl           = filter_var($info->providerUrl, FILTER_SANITIZE_URL);
 
-        echo $output;
+        $stat->execute();
+
+        $dbUrlId =$mysqli->insert_id;
+
+            $output = '';
+            $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
+            $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
+            $output .= '<a href="url.php?url_id=';
+            $output .= "$dbUrlId";
+            $output .= '">';
+            $output .= '<img class="card-img-top" src="';
+            $output .= "$dbUrlImage";
+            $output .= '" alt="url_image"></a>';
+            $output .= '<div class="card-body px-0 pb-3">';
+            $output .= '<a href="url.php?url_id=';
+            $output .= "$dbUrlId";
+            $output .= '">';
+            $output .= '<h5 class="card-title">';
+            $output .= "$dbUrlTitle";
+            $output .= '</h5></a>';
+            $output .= '<p class="provider-name  mb-2">';
+            $output .= '<a href="';
+            $output .= "$dbUrlProviderUrl";
+            $output .= '" target="_blank">';
+            $output .= "$dbUrlProviderName";
+            $output .= '</a>';
+            $output .= '</p>';
+            $output .= '<p class="card-text">';
+            $output .= "$dbUrlDesc";
+            $output .= '</p>';
+            $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
+            $output .= "$dbUrlProviderIcon";
+            $output .= '" alt="">';
+            $output .= '<div class="action-btn float-left">';
+            $output .= '<form action="" class="favourite" method="post" data-fav="0" data-urlid="';
+            $output .= "$dbUrlId";
+            $output .= '">';
+            $output .= '<button><i class="far fa-star"><span class="badge">إضافة الى المفضلة</span></i></button>';
+            $output .= '</form>';
+            $output .= '<form action="" class="archive" method="post" data-archive="0" data-urlid="';
+            $output .= "$dbUrlId";
+            $output .= '">';
+            $output .= '<button><i class="fas fa-minus-circle pl-1"><span class="badge">إضافة الى الإرشيف</span></i></button>';
+            $output .= '</form>';
+            $output .= '<form action="app.php" class="" method="post">';
+            $output .= '<input type="hidden" name="urlid" value="';
+            $output .= "$dbUrlId";
+            $output .= '">';
+            $output .= '<button button type="submit" name="delete_url" onclick="return confirm(';
+            $output .= "'هل تريد الحذف؟'";
+            $output .= ')">';
+            $output .= '<i class="text-danger fas fa-trash-alt pl-1"><span class="badge badge-pill">حذف</span></i></button>';
+            $output .= '</form>';
+            $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
+            $output .= '</div>';
+
+            echo $output;
 
     }else{
-
         echo '<div class="alert alert-danger alert-ajax">
                 <p class="m-0">'.'الرابط المدخل غير صالح'.'</p>
               </div>';

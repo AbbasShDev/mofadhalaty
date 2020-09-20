@@ -21,41 +21,123 @@
 <!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
 <script src="layout/js/app.js" type="text/javascript"></script>
 <script>
-    $('.content .card-body .action-btn .favourite').on('submit', function (e) {
-        e.preventDefault();
 
-        let favBtn = $(this).find('button'),
-            form   = $(this)
+    $(document).ready(function () {
 
-        let data = {favStatus:form.data('fav'), urlId: form.data('urlid')};
-        $.post('fav_not_fav.php',{data:JSON.stringify(data)}).done(function (data) {
-            if (data == 1){
-                form.data('fav', '1');
-                favBtn.html('');
-                favBtn.html('<i class="fas fa-heart"> <span class="badge">حذف من المفضلة</span> </i>');
-                favBtn.find('i').addClass('iScale');
-                setTimeout(function () {
-                    favBtn.find('i').removeClass('iScale');
-                },100)
+        $(document).on('submit', '.content .card-body .action-btn .favourite', function (e) {
+            e.preventDefault();
+
+            let favBtn = $(this).find('button'),
+                form   = $(this)
+
+            let data = {favStatus:form.data('fav'), urlId: form.data('urlid')};
+            $.post('fav_not_fav.php',{data:JSON.stringify(data)}).done(function (data) {
+                if (data == 1){
+                    form.data('fav', '1');
+                    favBtn.html('');
+                    favBtn.html('<i class="fas fa-star"><span class="badge">حذف من المفضلة</span></i>');
+                    favBtn.find('i').addClass('iScale');
+                    setTimeout(function () {
+                        favBtn.find('i').removeClass('iScale');
+                    },100)
 
 
+                }else {
+                    form.data('fav', '0')
+                    favBtn.html('')
+                    favBtn.html('<i class="far fa-star"><span class="badge">إضافة الى المفضلة</span></i>')
+                    favBtn.find('i').addClass('iScale');
+                    setTimeout(function () {
+                        favBtn.find('i').removeClass('iScale');
+                    },100)
+                    <?php if ($pageTitle == "| المفضلة"){ ?>
+                    form.parents('.card').parent().remove();
+                    <?php } ?>
+                }
+
+            }).fail(function () {
+                $('.alert-normal p').html('حدث خطأ');
+                $('.alert-normal').fadeIn().delay(3000).fadeOut();
+            })
+        });
+
+        $(document).on('submit', '.content .card-body .action-btn .archive',  function (e) {
+            e.preventDefault();
+
+            let archiveBtn = $(this).find('button'),
+                form   = $(this)
+
+            let data = {archiveStatus:form.data('archive'), urlId: form.data('urlid')};
+            $.post('add_archive.php',{data:JSON.stringify(data)}).done(function (data) {
+                if (data == 1){
+                    form.data('archive', '1');
+                    archiveBtn.html('');
+                    archiveBtn.html('<i class="fas fa-plus-circle pl-1"><span class="badge">حذف من الإرشيف</span></i>');
+                    archiveBtn.find('i').addClass('iScale');
+                    setTimeout(function () {
+                        archiveBtn.find('i').removeClass('iScale');
+                    },100)
+
+                    form.parents('.card').parent().remove();
+                }else {
+                    form.data('archive', '0')
+                    archiveBtn.html('')
+                    archiveBtn.html('<i class="fas fa-minus-circle pl-1"><span class="badge">إضافة الى الإرشيف</span></i>')
+                    archiveBtn.find('i').addClass('iScale');
+                    setTimeout(function () {
+                        archiveBtn.find('i').removeClass('iScale');
+                    },100)
+                    form.parents('.card').parent().remove();
+                }
+
+            }).fail(function () {
+                $('.alert-normal p').html('حدث خطأ');
+                $('.alert-normal').fadeIn().delay(3000).fadeOut();
+            })
+        })
+
+        $('.sidebar .my-list form').on('submit', function (e) {
+            e.preventDefault();
+
+            let sectionValue = $(this).find('input').val()
+            if (sectionValue != ''){
+                $.ajax({
+                    method: 'POST',
+                    url:'add-section.php',
+                    data:{addSection: sectionValue},
+                    beforeSend: function () {
+                        $('.sidebar .my-list form button i.fa-plus-circle').hide();
+                        $('.sidebar .my-list form button i.fa-spinner').show();
+                    },
+                    success:function (data) {
+                        $('.sidebar .my-list form input').val('');
+                        $('.sidebar .my-list form button i.fa-spinner').hide();
+                        $('.sidebar .my-list form button i.fa-plus-circle').show();
+
+                         $('.sidebar .my-list').append(data);
+
+                        $('.alert-ajax').delay(500).show().delay(3000).fadeOut(10, function () {
+                            $(this).remove();
+                        });
+
+                    },
+                    error:function (xhr, status, error) {
+                        $('.sidebar .my-list form button i.fa-spinner').hide();
+                        $('.alert-normal p').html(error);
+                        $('.alert-normal').fadeIn().delay(3000).fadeOut();
+                    }
+                })
             }else {
-                form.data('fav', '0')
-                favBtn.html('')
-                favBtn.html('<i class="far fa-heart"> <span class="badge">إضافة الى المفضلة</span> </i>')
-                favBtn.find('i').addClass('iScale');
-                setTimeout(function () {
-                    favBtn.find('i').removeClass('iScale');
-                },100)
-                <?php if ($pageTitle == "| المفضلة"){ ?>
-                form.parents('.card').parent().remove();
-                <?php } ?>
+                $('.alert-normal p').html('حقل اضافة القائمة فارغ');
+                $('.alert-normal').fadeIn().delay(3000).fadeOut();
             }
 
-        }).fail(function () {
-            $('.alert-normal p').html('حدث خطأ');
-            $('.alert-normal').fadeIn().delay(3000).fadeOut();
         })
-    })
+
+
+
+    });
+
+
 </script>
 <?php ob_end_flush(); ?>

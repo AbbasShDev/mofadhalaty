@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_name'])){
 }
 
     $userId = $_SESSION['user_id'];
-    $stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId ORDER BY url_id DESC");
+    $stat = $mysqli->query("SELECT * FROM urls WHERE user_id=$userId AND url_archive=0 ORDER BY url_id DESC");
     $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
 
@@ -26,9 +26,9 @@ if (!isset($_SESSION['user_name'])){
                 <?php foreach ($urls as $url): ?>
                 <div class="col-12 col-md-6 col-lg-4 mt-5">
                     <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
-                        <img class="card-img-top" src="<?php echo $url['url_image'] ?>" alt="Card image cap">
+                        <a href="url.php?url_id=<?php echo $url['url_id']?>"><img class="card-img-top" src="<?php echo $url['url_image'] ?>" alt="url_image"></a>
                         <div class="card-body px-0 pb-3">
-                            <h5 class="card-title"><?php echo $url['url_title'] ?></h5>
+                            <a href="url.php?url_id=<?php echo $url['url_id']?>"><h5 class="card-title font-head"><?php echo $url['url_title'] ?></h5></a>
                             <p class="provider-name mb-2"><a href="<?php echo $url['url_providerUrl'] ?>" target="_blank"><?php echo $url['url_providerName'] ?></a></p>
                             <p class="card-text">
                                 <?php echo $url['url_description'] ?>
@@ -38,18 +38,28 @@ if (!isset($_SESSION['user_name'])){
                                 <form action="" class="favourite" method="post" data-fav="<?php echo $url['url_favourite']?>" data-urlid="<?php echo $url['url_id']?>" >
                                     <button>
                                         <?php if ($url['url_favourite'] == 0){ ?>
-                                            <i class="far fa-heart"><span class="badge">إضافة الى المفضلة</span></i>
+                                            <i class="far fa-star"><span class="badge">إضافة الى المفضلة</span></i>
                                         <?php }else{?>
-                                            <i class="fas fa-heart"> <span class="badge">حذف من المفضلة</span> </i>
+                                            <i class="fas fa-star"><span class="badge">حذف من المفضلة</span></i>
                                         <?php } ?>
                                     </button>
                                 </form>
-                                <i class="fas fa-file-archive pl-1">
-                                    <span class="badge">إضافة الى الإرشيف</span>
-                                </i>
-                                <i class="text-danger fas fa-trash-alt pl-1">
-                                    <span class="badge badge-pill">حذف</span>
-                                </i>
+                                <form action="" class="archive" method="post" data-archive="<?php echo $url['url_archive']?>" data-urlid="<?php echo $url['url_id']?>" >
+                                    <button>
+                                        <?php if ($url['url_archive'] == 0){ ?>
+                                            <i class="fas fa-minus-circle pl-1"><span class="badge">إضافة الى الإرشيف</span></i>
+                                        <?php }else{?>
+                                            <i class="fas fa-plus-circle pl-1"><span class="badge">حذف من الإرشيف</span></i>
+                                        <?php } ?>
+                                    </button>
+                                </form>
+                                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="" method="post">
+                                    <input type="hidden" name="urlid" value="<?php echo $url['url_id']?>">
+                                    <button type="submit" name="delete_url" onclick="return confirm('هل تريد الحذف؟')">
+                                        <i class="text-danger fas fa-trash-alt pl-1"><span class="badge badge-pill">حذف</span></i>
+                                    </button>
+                                </form>
+
                             </div>
                         </div>
                     </div>

@@ -50,13 +50,6 @@ $(document).ready(function () {
     })
 
     //display action btn description
-    // $('.content .card-body .action-btn').on('hover','i', function () {
-    //
-    //     $(this).find('span').show();
-    //
-    // }, function () {
-    //     $(this).find('span').hide();
-    // })
 
     $(document).on({
         mouseenter: function () {

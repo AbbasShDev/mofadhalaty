@@ -28,18 +28,48 @@ unset($_SESSION['notify_message']); ?>
 <div class="alert alert-danger alert-normal">
     <p class="m-0"></p>
 </div>
-<div class="sidebar" data-image="../assets/img/sidebar-5.jpg">
+<div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="hide-sidebar">
             <i class="fas fa-chevron-right"></i>
         </div>
-        <ul class="nav">
+        <ul class="nav all">
             <li class="pr-3 pr-lg-0">
                 <a class="nav-link text-left my-3 <?php if ($pageTitle == "| الرئيسية") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>app.php">
                     <i class="fas fa-home fa-fw"></i>
-                    قوائمي
+                    مفضلتي
                 </a>
             </li>
+        </ul>
+        <h4 class="font-head mt-4">قوائمي</h4>
+        <ul class="nav my-list">
+                <form action="">
+                    <input type="text" name="add-section" placeholder="اضافة قائمة جديدة">
+                    <button type="submit">
+                        <i class="fas fa-plus-circle"></i>
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </button>
+                </form>
+
+            <?php
+            $userId = $_SESSION['user_id'];
+            $stat = $mysqli->query("SELECT * FROM sections WHERE user_id=$userId");
+            $sections = $stat->fetch_all(MYSQLI_ASSOC);
+
+            foreach ($sections as $section){?>
+            <li class="pr-3 pr-lg-0" data-sectionId="<?php echo $section['section_id']?>">
+                <a class="nav-link text-left my-3" href="section.php?section_id=<?php echo $section['section_id']?>">
+                    <i class="fas fa-th-list fa-fw pr-1"></i>
+                    <?php echo $section['section_name']?>
+                </a>
+            </li>
+           <?php } ?>
+
+        </ul>
+
+
+        <h4 class="font-head mt-4">تصفية</h4>
+        <ul class="nav">
             <li class="pr-3 pr-lg-0">
                 <a class="nav-link text-left my-3 <?php if ($pageTitle == "| المفضلة") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>favorite.php">
                     <i class="fas fa-star fa-fw"></i>
@@ -53,14 +83,14 @@ unset($_SESSION['notify_message']); ?>
                 </a>
             </li>
             <li class="pr-3 pr-lg-0">
-                <a class="nav-link text-left my-3  <?php if ($pageTitle == "| اخرى") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>other_url.php">
-                    <i class="fas fa-file-alt  fa-fw"></i>
-                    اخرى
+                <a class="nav-link text-left my-3  <?php if ($pageTitle == "| المواقع") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>other_url.php">
+                    <i class="fas fa-file-alt fa-fw"></i>
+                    المواقع
                 </a>
             </li>
             <li class="pr-3 pr-lg-0">
-                <a class="nav-link text-left my-3" href="#">
-                    <i class="fas fa-file-archive fa-fw"></i>
+                <a class="nav-link text-left my-3 <?php if ($pageTitle == "| الإرشيف") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>archive.php">
+                    <i class="fas fa-archive fa-fw"></i>
                     الإرشيف
                 </a>
             </li>
@@ -151,3 +181,22 @@ unset($_SESSION['notify_message']); ?>
     </nav>
 </div>
 <!-- End navbar -->
+
+<?php
+
+if (isset($_POST['delete_url'])){
+
+    $urlId  = mysqli_real_escape_string($mysqli, $_POST['urlid']);
+    $userId = mysqli_real_escape_string($mysqli, $_SESSION['user_id']);
+
+    $query = "DELETE FROM urls WHERE url_id='$urlId' AND user_id='$userId'";
+    if ($mysqli->query($query)){
+
+        $_SESSION['notify_message'] = "تم الحذف";
+        header("location:$_SERVER[PHP_SELF]");
+        die();
+
+    }
+}
+
+?>
