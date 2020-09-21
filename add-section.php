@@ -19,12 +19,9 @@ if (isset($_POST['addSection'])){
         $result = $findSection ->get_result();
 
 
-
         if ($result->num_rows > 0){
 
-            echo '<div class="alert alert-danger alert-ajax">
-                <p class="m-0">'.'اسم القائمة مكرر'.'</p>
-              </div>';
+            echo 1;
 
         }else{
 
@@ -41,13 +38,24 @@ if (isset($_POST['addSection'])){
 
 
         $output = '';
-        $output .= '<li class="pr-3 pr-lg-0" data-sectionId="';
+        $output .= '<li class="sections pr-3 pr-lg-0" data-sectionId="';
+        $output .= $newSection['section_id'];
+        $output .= '" data-sectionname="';
+        $output .= $newSection['section_name'];
+        $output .= '">';
+        $output .= '<a class="nav-link text-left my-3" href="section.php?section_id="';
         $output .= $newSection['section_id'];
         $output .= '">';
-        $output .= '<a class="nav-link text-left my-3" href="#">';
         $output .= '<i class="fas fa-th-list fa-fw pr-1"></i>';
         $output .= $newSection['section_name'];
-        $output .= '</a></li>';
+        $output .= '<form action="app.php" class="float-right" method="post">';
+        $output .= '<input type="hidden" name="sectionId" value="';
+        $output .= $newSection['section_id'];
+        $output .= '">';
+        $output .= '<button type="submit" name="delete-section" onclick="return confirm(';
+        $output .= "'هل تريد حذف القائمة؟'";
+        $output .= ')">';
+        $output .= '<i class="fas fa-times"></i></button></form></a></li>';
 
         echo $output;
         }

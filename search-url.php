@@ -32,42 +32,70 @@ if (isset($_POST['search'])){
         $output = '';
         foreach ($urls as $url){
 
-        $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
-        $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
-        $output .= '<img class="card-img-top" src="';
-        $output .= "$url[url_image]";
-        $output .= '" alt="">';
-        $output .= '<div class="card-body px-0 pb-3">';
-        $output .= '<h5 class="card-title">';
-        $output .= "$url[url_title]";
-        $output .= '</h5>';
-        $output .= '<p class="provider-name  mb-2">';
-        $output .= '<a href="';
-        $output .= "$url[url_providerUrl]";
-        $output .= '" target="_blank">';
-        $output .= "$url[url_providerName]";
-        $output .= '</a>';
-        $output .= '</p>';
-        $output .= '<p class="card-text">';
-        $output .= "$url[url_description]";
-        $output .= '</p>';
-        $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
-        $output .= "$url[url_providerIcon]";
-        $output .= '" alt="">';
-        $output .= '<div class="action-btn float-left">';
-        $output .= '<i class="far fa-heart">
-                        <span class="badge">إضافة الى المفضلة</span>
-                    </i>
-                    <i class="fas fa-file-archive pl-1">
-                        <span class="badge">إضافة الى الإرشيف</span>
-                    </i>
-                    <i class="text-danger fas fa-trash-alt pl-1">
-                        <span class="badge badge-pill">حذف</span>
-                    </i>';
-        $output .= '</div>';
-        $output .= '</div>';
-        $output .= '</div>';
-        $output .= '</div>';
+            $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
+            $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
+            $output .= '<a href="read.php?url_id=';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<img class="card-img-top" src="';
+            $output .= "$url[url_image]";
+            $output .= '" alt="url_image"></a>';
+            $output .= '<div class="card-body px-0 pb-3">';
+            $output .= '<a href="read.php?url_id=';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<h5 class="card-title">';
+            $output .= "$url[url_title]";
+            $output .= '</h5></a>';
+            $output .= '<p class="provider-name  mb-2">';
+            $output .= '<a href="';
+            $output .= "$url[url_providerUrl]";
+            $output .= '" target="_blank">';
+            $output .= "$url[url_providerName]";
+            $output .= '</a>';
+            $output .= '</p>';
+            $output .= '<p class="card-text">';
+            $output .= "$url[url_description]";
+            $output .= '</p>';
+            $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
+            $output .= "$url[url_providerIcon]";
+            $output .= '" alt="">';
+            $output .= '<div class="fav-icon mr-2 float-right"></div>';
+            $output .= '<div class="action-btn float-left">';
+            $output .= '<div class="dropup">';
+            $output .= '<div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+            $output .= '<i class="fas fa-ellipsis-h fa-lg"></i>';
+            $output .= '</div>';
+            $output .= '<div class="dropdown-menu">';
+            $output .= '<div class="dropdown-item px-0">';
+            $output .= '<form action="" class="favourite" method="post" data-fav="0" data-urlid="';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<button>';
+            $output .= '<i class="far fa-star fa-lg fa-fw mx-2"></i><span class="">إضافة الى المفضلة</span>';
+            $output .= '</button></form></div>';
+            $output .= '<div class="dropdown-item px-0">';
+            $output .= '<form action="" class="archive" method="post" data-archive="0" data-urlid="';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<button><i class="fas fa-archive fa-lg fa-fw mx-2"></i><span class="">إضافة الى الإرشيف</span></button>';
+            $output .= '</form></div>';
+            $output .= '<div class="dropdown-item px-0">';
+            $output .= '<form action="app.php" method="post">';
+            $output .= '<input type="hidden" name="urlid" value="';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<button button type="submit" name="delete_url" onclick="return confirm(';
+            $output .= "'هل تريد الحذف؟'";
+            $output .= ')">';
+            $output .= '<i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span></button>';
+            $output .= '</form></div>';
+            $output .= '<div class="dropdown-item px-0">';
+            $output .= '<div class="add-section-toggler" data-toggle="modal" data-target="#add-url-to-section" data-urlid="';
+            $output .= "$url[url_id]";
+            $output .= '">';
+            $output .= '<i class="fas fa-th-list fa-lg fa-fw mx-2"></i><span class="">إضافة الى قائمة</span></div>';
+            $output .= '</div></div></div></div></div></div></div>';
         }
 
         echo $output;

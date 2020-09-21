@@ -13,6 +13,8 @@ ob_start();
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
+    <!-- bootstrap-select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link href="layout/css/app.css" rel="stylesheet" />
 </head>
 
@@ -43,7 +45,7 @@ unset($_SESSION['notify_message']); ?>
         </ul>
         <h4 class="font-head mt-4">قوائمي</h4>
         <ul class="nav my-list">
-                <form action="">
+                <form class="add-section" action="">
                     <input type="text" name="add-section" placeholder="اضافة قائمة جديدة">
                     <button type="submit">
                         <i class="fas fa-plus-circle"></i>
@@ -57,10 +59,16 @@ unset($_SESSION['notify_message']); ?>
             $sections = $stat->fetch_all(MYSQLI_ASSOC);
 
             foreach ($sections as $section){?>
-            <li class="pr-3 pr-lg-0" data-sectionId="<?php echo $section['section_id']?>">
+            <li class="sections pr-3 pr-lg-0" data-sectionId="<?php echo $section['section_id']?>" data-sectionname="<?php echo $section['section_name']?>">
                 <a class="nav-link text-left my-3" href="section.php?section_id=<?php echo $section['section_id']?>">
                     <i class="fas fa-th-list fa-fw pr-1"></i>
                     <?php echo $section['section_name']?>
+                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="float-right" method="post">
+                        <input type="hidden" name="sectionId" value="<?php echo $section['section_id']?>">
+                        <button type="submit" name="delete-section" onclick="return confirm('هل تريد حذف القائمة؟')">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </form>
                 </a>
             </li>
            <?php } ?>
@@ -181,6 +189,43 @@ unset($_SESSION['notify_message']); ?>
     </nav>
 </div>
 <!-- End navbar -->
+<!-- start add-url-to-section -->
+<div class="modal" id="add-url-to-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel">إضافة الرابط الى قائمة</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="urlid" value="">
+                <select class="custom-select" name="selected-section">
+
+                    <?php
+                    $st = $mysqli->query("SELECT * FROM sections WHERE user_id=$userId");
+                    $sections = $st->fetch_all(MYSQLI_ASSOC);
+                    if (!empty($sections)){ ?>
+                        <option selected disabled>اختر قائمة</option>
+
+                        <?php foreach ($sections as $section):?>
+                            <option value="<?php echo $section['section_id']?>"><?php echo $section['section_name']?></option>
+                        <?php endforeach;
+
+                    }else{ ?>
+                        <option selected disabled>لاتوجد قائمة</option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="add_to_section" class="btn btn-primary">حفظ التغيرات</button>
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end add-url-to-section -->
 
 <?php
 
@@ -199,4 +244,67 @@ if (isset($_POST['delete_url'])){
     }
 }
 
+if (isset($_POST['add_to_section'])){
+
+
+    $foundSection = $mysqli->prepare('SELECT * FROM urls WHERE section_id=? AND url_id =?');
+    $foundSection->bind_param('ii',$sectionId, $urlId );
+    $urlId      = $_POST['urlid'];
+    $sectionId  = $_POST['selected-section'];
+    $foundSection->execute();
+    $result = $foundSection->get_result();
+
+
+    if ($result->num_rows == 0){
+
+        $upSection = $mysqli->prepare("UPDATE urls SET section_id=? WHERE url_id =?");
+        $upSection->bind_param('ii',$sectionId, $urlId );
+        $urlId      = $_POST['urlid'];
+        $sectionId  = $_POST['selected-section'];
+
+        if ($upSection->execute()){
+            header("location:$_SERVER[PHP_SELF]");
+            die();
+        }
+    }else{
+        $_SESSION['notify_message'] = "مضاف في نفس القائمة مسباقاً";
+        header("location:$_SERVER[PHP_SELF]");
+        die();
+    }
+
+
+}
+
+
+if (isset($_POST['delete-url-section'])){
+
+
+    $stat = $mysqli->prepare("UPDATE urls SET section_id = NULL WHERE url_id=? AND user_id=?");
+    $stat->bind_param('ii', $url_id, $user_id);
+    $url_id  = $_POST['urlId'];
+    $user_id = $_SESSION['user_id'];
+    if ($stat->execute()){
+
+        $_SESSION['notify_message'] = "تم الحذف من القائمة";
+        header("location:$_SERVER[PHP_SELF]");
+        die();
+
+    }
+}
+
+if (isset($_POST['delete-section'])){
+
+
+    $stat = $mysqli->prepare("DELETE FROM sections WHERE section_id=?");
+    $stat->bind_param('i', $sectionId);
+    $sectionId  = $_POST['sectionId'];
+
+    if ($stat->execute()){
+
+        $_SESSION['notify_message'] = "تم حذف القائمة";
+        header("location:$_SERVER[PHP_SELF]");
+        die();
+
+    }
+}
 ?>

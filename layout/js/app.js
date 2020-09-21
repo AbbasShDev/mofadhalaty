@@ -49,14 +49,10 @@ $(document).ready(function () {
 
     })
 
-    //display action btn description
+    $(document).on('click','.content .card-body .action-btn .add-section-toggler', function () {
 
-    $(document).on({
-        mouseenter: function () {
-            $(this).find('span').show();
-        },
-        mouseleave: function () {
-            $(this).find('span').hide();
-        }
-    }, ".content .card-body .action-btn i");
+        $('.modal .modal-content input').val($(this).data('urlid'));
+
+    })
+
 })

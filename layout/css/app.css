@@ -4,6 +4,8 @@
 
 :root {
     --main-color: #3f64b5;
+    --darker-main-color: #1e3056;
+    --light-color: #d9e6f4
 }
 
 body {
@@ -11,6 +13,11 @@ body {
     font-family:noto naskh arabic,Arial,sans-serif !important;
 }
 
+button:focus,
+select:focus,
+select:active{
+    outline: none;
+}
 * {
     margin: 0;
     padding: 0;
@@ -57,6 +64,37 @@ body {
     z-index: 9999;
 }
 /* notification messages */
+
+/* start add-url-to-section */
+
+.modal .modal-content .modal-header .modal-title {
+    color: var(--darker-main-color);
+}
+
+.modal .modal-content .modal-header button span {
+    color: var(--darker-main-color);
+}
+
+.modal .modal-content .modal-body select {
+    border: none;
+    color: var(--darker-main-color);
+    background-color: var(--light-color);
+}
+
+.modal .modal-content .modal-footer .btn:first-child {
+    border: none;
+    color: #FFFFFF;
+    background-color: var(--main-color);
+    opacity: 0.9;
+    transition: opacity .3s ease-in-out;
+}
+
+.modal .modal-content .modal-footer .btn:first-child:hover {
+    opacity: 1;
+}
+
+/* end add-url-to-section */
+
 
 .sidebar {
     position: absolute;
@@ -129,6 +167,23 @@ body {
 
 .sidebar .my-list form button i.fa-spinner {
     display: none;
+}
+
+.sidebar .my-list .sections a {
+   overflow: hidden;
+}
+
+.sidebar .my-list .sections form {
+    padding: 0;
+}
+
+.sidebar .my-list .sections form button i {
+    color: var(--main-color);
+    font-size: 19px;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: all .3s ease-in-out;
 }
 
 
@@ -459,11 +514,55 @@ body {
     margin: 0 0 0 12px;
 }
 
-.content .card-body .action-btn form{
+.content .card-body .fav-icon {
+    color: #FCB643;
+}
+
+.content .card-body .list-badge {
+    background-color: var(--darker-main-color);
+    color: var(--light-color);
+    margin-top: -4px;
+    padding: 5px 6px 2px 6px;
+    border-radius: 10px;
+    font-size: 12px;
+}
+
+.content .card-body .list-badge form{
     display: inline-block;
 }
 
+.content .card-body .list-badge form button{
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.content .card-body .list-badge form button i{
+    color: var(--light-color);
+    font-size: 11px;
+    padding-left: 2px;
+}
+
+.content .card-body .action-btn .dropdown-menu {
+    border: none;
+    box-shadow: 0px 0px 10px #bcbdbecc;
+}
+
+.content .card-body .action-btn .dropdown-menu .dropdown-item:hover {
+    background-color: var(--light-color);
+}
+
+.content .card-body .action-btn .dropdown-menu .dropdown-item:hover {
+    cursor: pointer;
+}
+
+.content .card-body .action-btn .dropdown-menu .dropdown-item:active {
+    background-color: var(--light-color);
+}
+
 .content .card-body .action-btn form button{
+    cursor: pointer;
     border: none;
     padding: 0;
     background: none;
@@ -473,14 +572,11 @@ body {
     border: none;
     outline: none;
 }
-.content .card-body .action-btn i:first-child {
-    font-size: 18px;
-}
 
 .content .card-body .action-btn i {
     cursor: pointer;
     position: relative;
-    color: var(--main-color);
+    color: var(--darker-main-color);
     transition: transform .3s ease-in-out;
 }
 
@@ -488,60 +584,56 @@ body {
     transform: scale(1.5);
 }
 
-.content .card-body .action-btn i span{
-    display: none;
-    position: absolute;
-    color: #FFFFFF;
-    background-color: var(--main-color);
-    bottom: 29px;
-    left: -47px;
-
+.content .card-body .action-btn span{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--darker-main-color);
 }
 
-.content .card-body .action-btn i.fa-plus-circle span{
-    left: -44px;
-}
+/*.content .card-body .action-btn i.fa-plus-circle span{*/
+/*    left: -44px;*/
+/*}*/
 
-.content .card-body .action-btn i.fa-minus-circle span{
-    left: -49px;;
-}
+/*.content .card-body .action-btn i.fa-minus-circle span{*/
+/*    left: -49px;;*/
+/*}*/
 
-.content .card-body .action-btn form:first-child i.far span {
-    bottom: 29px;
-    left: -44px;
-}
+/*.content .card-body .action-btn form:first-child i.far span {*/
+/*    bottom: 29px;*/
+/*    left: -44px;*/
+/*}*/
 
-.content .card-body .action-btn form:first-child i.fas span {
-    bottom: 29px;
-    left: -39px;
-}
+/*.content .card-body .action-btn form:first-child i.fas span {*/
+/*    bottom: 29px;*/
+/*    left: -39px;*/
+/*}*/
 
-.content .card-body .action-btn form:last-child i span {
-    bottom: 29px;
-    left: -14px;
-}
+/*.content .card-body .action-btn form:last-child i span {*/
+/*    bottom: 29px;*/
+/*    left: -14px;*/
+/*}*/
 
-.content .card-body .action-btn form i span:before{
-    content: "";
-    border-style: solid;
-    border-color: var(--main-color) transparent transparent transparent;
-    height: 0;
-    width: 0;
-    position: absolute;
-    border-width: 9px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 18px;
-}
+/*.content .card-body .action-btn form i span:before{*/
+/*    content: "";*/
+/*    border-style: solid;*/
+/*    border-color: var(--main-color) transparent transparent transparent;*/
+/*    height: 0;*/
+/*    width: 0;*/
+/*    position: absolute;*/
+/*    border-width: 9px;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    top: 18px;*/
+/*}*/
 
-.content .card-body .action-btn form:first-child i span:before {
+/*.content .card-body .action-btn form:first-child i span:before {*/
 
-}
+/*}*/
 
-.content .card-body .action-btn form:last-child  i span:before {
-    /*left: 11px;*/
-    /*top: 16px;*/
-}
+/*.content .card-body .action-btn form:last-child  i span:before {*/
+/*    !*left: 11px;*!*/
+/*    !*top: 16px;*!*/
+/*}*/
 
 @media only screen and (max-width: 1150px) {
     .content {

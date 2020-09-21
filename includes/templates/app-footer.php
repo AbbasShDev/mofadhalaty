@@ -18,12 +18,15 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <!-- Bootstrap js -->
 <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
-<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<!-- bootstrap-select js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- app js -->
 <script src="layout/js/app.js" type="text/javascript"></script>
 <script>
 
     $(document).ready(function () {
 
+        //add to favourite
         $(document).on('submit', '.content .card-body .action-btn .favourite', function (e) {
             e.preventDefault();
 
@@ -35,21 +38,18 @@
                 if (data == 1){
                     form.data('fav', '1');
                     favBtn.html('');
-                    favBtn.html('<i class="fas fa-star"><span class="badge">حذف من المفضلة</span></i>');
-                    favBtn.find('i').addClass('iScale');
+                    favBtn.html('<i class="fas fa-star fa-lg fa-fw mx-2"></i><span class="">حذف من المفضلة</span>');
+                    favBtn.parents('.action-btn').siblings('.fav-icon').html('<i class="fas fa-star fa-lg fa-fw"></i>').addClass('iScale');
                     setTimeout(function () {
-                        favBtn.find('i').removeClass('iScale');
+                        favBtn.parents('.action-btn').siblings('.fav-icon').removeClass('iScale');
                     },100)
 
 
                 }else {
                     form.data('fav', '0')
                     favBtn.html('')
-                    favBtn.html('<i class="far fa-star"><span class="badge">إضافة الى المفضلة</span></i>')
-                    favBtn.find('i').addClass('iScale');
-                    setTimeout(function () {
-                        favBtn.find('i').removeClass('iScale');
-                    },100)
+                    favBtn.html('<i class="far fa-star fa-lg fa-fw mx-2"></i><span class="">إضافة الى المفضلة</span>')
+                    favBtn.parents('.action-btn').siblings('.fav-icon').html('');
                     <?php if ($pageTitle == "| المفضلة"){ ?>
                     form.parents('.card').parent().remove();
                     <?php } ?>
@@ -61,6 +61,7 @@
             })
         });
 
+        //add to archive
         $(document).on('submit', '.content .card-body .action-btn .archive',  function (e) {
             e.preventDefault();
 
@@ -72,21 +73,13 @@
                 if (data == 1){
                     form.data('archive', '1');
                     archiveBtn.html('');
-                    archiveBtn.html('<i class="fas fa-plus-circle pl-1"><span class="badge">حذف من الإرشيف</span></i>');
-                    archiveBtn.find('i').addClass('iScale');
-                    setTimeout(function () {
-                        archiveBtn.find('i').removeClass('iScale');
-                    },100)
+                    archiveBtn.html('<i class="fas fa-plus-square fa-lg fa-fw mx-2"></i><span class="">حذف من الإرشيف</span>');
 
                     form.parents('.card').parent().remove();
                 }else {
                     form.data('archive', '0')
                     archiveBtn.html('')
-                    archiveBtn.html('<i class="fas fa-minus-circle pl-1"><span class="badge">إضافة الى الإرشيف</span></i>')
-                    archiveBtn.find('i').addClass('iScale');
-                    setTimeout(function () {
-                        archiveBtn.find('i').removeClass('iScale');
-                    },100)
+                    archiveBtn.html('<i class="fas fa-archive fa-lg fa-fw mx-2"></i><span class="">إضافة الى الإرشيف</span>')
                     form.parents('.card').parent().remove();
                 }
 
@@ -96,7 +89,8 @@
             })
         })
 
-        $('.sidebar .my-list form').on('submit', function (e) {
+        //Add new section
+        $('.sidebar .my-list .add-section').on('submit', function (e) {
             e.preventDefault();
 
             let sectionValue = $(this).find('input').val()
@@ -114,11 +108,25 @@
                         $('.sidebar .my-list form button i.fa-spinner').hide();
                         $('.sidebar .my-list form button i.fa-plus-circle').show();
 
-                         $('.sidebar .my-list').append(data);
 
-                        $('.alert-ajax').delay(500).show().delay(3000).fadeOut(10, function () {
-                            $(this).remove();
-                        });
+
+                         if(data != 1){
+
+                             $('.sidebar .my-list').append(data);
+
+                             //adding the section to the list in the (add url to sction)
+                             $lastSectionId = $(".sidebar .my-list").find('li').last().data('sectionid')
+                             $lastSectionName = $(".sidebar .my-list").find('li').last().data('sectionname')
+                             $('.modal .modal-content .modal-body select').append(`<option value="${$lastSectionId}">${$lastSectionName}</option>`);
+
+
+                         }else{
+                             $('.sidebar').append('<div class="alert alert-danger alert-ajax"><p class="m-0">اسم القائمة مكرر</p></div>');
+
+                             $('.alert-ajax').delay(500).show().delay(3000).fadeOut(10, function () {
+                                 $(this).remove();
+                             });
+                         }
 
                     },
                     error:function (xhr, status, error) {
