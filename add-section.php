@@ -48,14 +48,25 @@ if (isset($_POST['addSection'])){
         $output .= '">';
         $output .= '<i class="fas fa-th-list fa-fw pr-1"></i>';
         $output .= $newSection['section_name'];
-        $output .= '<form action="app.php" class="float-right" method="post">';
+        $output .= '<div class="dropright float-right">
+                        <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i></div>
+                        <div class="dropdown-menu">
+                        <div class="dropdown-item px-0">';
+        $output .= '<div class="rename-section" data-toggle="modal" data-target="#rename-section" data-sectionid="';
+        $output .= $newSection['section_id'];
+        $output .= '" data-sectionname="';
+        $output .= $newSection['section_name'];
+        $output .= '">';
+        $output .= '<i class="fas fa-edit fa-lg fa-fw mx-2"></i><span class="">إعادة تسمية</span></div></div><div class="dropdown-item px-0">';
+        $output .= '<form action="app.php" class="" method="post">';
         $output .= '<input type="hidden" name="sectionId" value="';
         $output .= $newSection['section_id'];
         $output .= '">';
         $output .= '<button type="submit" name="delete-section" onclick="return confirm(';
         $output .= "'هل تريد حذف القائمة؟'";
         $output .= ')">';
-        $output .= '<i class="fas fa-times"></i></button></form></a></li>';
+        $output .= '<i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف القائمة</span></button></form></div></div></div></a></li>';
 
         echo $output;
         }

@@ -51,8 +51,15 @@ $(document).ready(function () {
 
     $(document).on('click','.content .card-body .action-btn .add-section-toggler', function () {
 
-        $('.modal .modal-content input').val($(this).data('urlid'));
+        $('.add-url-to-section .modal-content input').val($(this).data('urlid'));
 
+    })
+
+    $(document).on('click', '.sidebar .my-list .sections .dropright .dropdown-menu .rename-section', function (e) {
+
+        e.preventDefault();
+        $('.rename-section .modal-content input:first-child').val($(this).data('sectionid'));
+        $('.rename-section .modal-content .modal-title').html(`إعادة تسمية القائمة (<strong>${$(this).data('sectionname')}</strong>)`);
     })
 
 })

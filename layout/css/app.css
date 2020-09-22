@@ -93,6 +93,22 @@ select:active{
     opacity: 1;
 }
 
+.rename-section .modal-content .modal-body input {
+    color: var(--darker-main-color);
+    border: none;
+    box-shadow: 0px 0px 2px var(--darker-main-color);
+    border-radius: 5px;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+}
+.rename-section .modal-content .modal-body input::placeholder {
+    color: var(--darker-main-color);
+}
+.rename-section .modal-content .modal-body input:focus {
+    outline: none;
+}
+
 /* end add-url-to-section */
 
 
@@ -169,9 +185,6 @@ select:active{
     display: none;
 }
 
-.sidebar .my-list .sections a {
-   overflow: hidden;
-}
 
 .sidebar .my-list .sections form {
     padding: 0;
@@ -186,7 +199,33 @@ select:active{
     transition: all .3s ease-in-out;
 }
 
+.sidebar .my-list .sections .dropright {
+    display: inline-block;
+    color: var(--main-color);
+}
 
+.sidebar .my-list .sections .dropright .dropdown-toggle::before {
+    display: none !important;
+}
+.sidebar .my-list .sections .dropright .dropdown-menu {
+    transform: none !important;
+    border: none;
+    box-shadow: 0px 0px 10px #bcbdbecc;
+}
+
+.sidebar .my-list .sections .dropright .dropdown-menu .dropdown-item i,
+.sidebar .my-list .sections .dropright .dropdown-menu .dropdown-item span {
+    color: var(--darker-main-color) ;
+    cursor: pointer;
+}
+
+.sidebar .my-list .sections .dropright .dropdown-menu .dropdown-item:hover {
+    background-color: var(--light-color);
+}
+
+.sidebar .my-list .sections .dropright .dropdown-menu .dropdown-item:active {
+    background-color: var(--light-color);
+}
 
 @media only screen and (max-width: 1150px) {
     .sidebar{
@@ -551,11 +590,9 @@ select:active{
 
 .content .card-body .action-btn .dropdown-menu .dropdown-item:hover {
     background-color: var(--light-color);
-}
-
-.content .card-body .action-btn .dropdown-menu .dropdown-item:hover {
     cursor: pointer;
 }
+
 
 .content .card-body .action-btn .dropdown-menu .dropdown-item:active {
     background-color: var(--light-color);

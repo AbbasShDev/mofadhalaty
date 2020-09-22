@@ -1,6 +1,5 @@
 <?php
 ob_start();
-
 ?>
 
 <!DOCTYPE html>
@@ -63,12 +62,26 @@ unset($_SESSION['notify_message']); ?>
                 <a class="nav-link text-left my-3" href="section.php?section_id=<?php echo $section['section_id']?>">
                     <i class="fas fa-th-list fa-fw pr-1"></i>
                     <?php echo $section['section_name']?>
-                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="float-right" method="post">
-                        <input type="hidden" name="sectionId" value="<?php echo $section['section_id']?>">
-                        <button type="submit" name="delete-section" onclick="return confirm('هل تريد حذف القائمة؟')">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </form>
+                    <div class="dropright float-right">
+                        <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </div>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-item px-0">
+                                <div class="rename-section" data-toggle="modal" data-target="#rename-section" data-sectionid="<?php echo $section['section_id']?>" data-sectionname="<?php echo $section['section_name']?>">
+                                    <i class="fas fa-edit fa-lg fa-fw mx-2"></i><span class="">إعادة تسمية</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-item px-0">
+                                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="" method="post">
+                                    <input type="hidden" name="sectionId" value="<?php echo $section['section_id']?>">
+                                    <button type="submit" name="delete-section" onclick="return confirm('هل تريد حذف القائمة؟')">
+                                        <i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف القائمة</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </a>
             </li>
            <?php } ?>
@@ -190,7 +203,7 @@ unset($_SESSION['notify_message']); ?>
 </div>
 <!-- End navbar -->
 <!-- start add-url-to-section -->
-<div class="modal" id="add-url-to-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+<div class="modal add-url-to-section" id="add-url-to-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="modal-content">
             <div class="modal-header">
@@ -226,6 +239,29 @@ unset($_SESSION['notify_message']); ?>
     </div>
 </div>
 <!-- end add-url-to-section -->
+
+<!-- start rename-section -->
+<div class="modal rename-section" id="rename-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="modal-content rename-section">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenteredLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="sectionid" value="">
+                <input type="text" name="newSectionName" placeholder="الاسم الجديد">
+            </div>
+            <div class="modal-footer">
+                <button type="submit" name="rename-section" class="btn btn-primary">حفظ التغيرات</button>
+                <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">إلغاء</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end rename-section -->
 
 <?php
 
@@ -306,5 +342,39 @@ if (isset($_POST['delete-section'])){
         die();
 
     }
+}
+
+if (isset($_POST['rename-section'])){
+
+
+
+    $foundSection = $mysqli->prepare('SELECT * FROM sections WHERE section_name=? AND user_id=?');
+    $foundSection->bind_param('si', $sectionNewName, $user_id );
+    $sectionNewName     = $_POST['newSectionName'];
+    $user_id            = $_SESSION['user_id'];
+    $foundSection->execute();
+    $result = $foundSection->get_result();
+
+
+    if ($result->num_rows == 0){
+
+        $stat = $mysqli->prepare("UPDATE sections SET section_name=? WHERE section_id=?");
+        $stat->bind_param('si', $sectionNewName,$sectionId );
+        $sectionNewName     = $_POST['newSectionName'];
+        $sectionId          = $_POST['sectionid'];
+
+        if ($stat->execute()){
+
+            $_SESSION['notify_message'] = "تم إعادة تسمية القائمة";
+            header("location:$_SERVER[PHP_SELF]");
+            die();
+
+        }
+    }else{
+        $_SESSION['notify_message'] = "الاسم موجود مسبقاُ";
+        header("location:$_SERVER[PHP_SELF]");
+        die();
+    }
+
 }
 ?>
