@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. كما يمكن انشاء القوائم الخاصة بك واضافة المحتوى اليها. اضاف اي محتوى من الانترنت وتمتع به في اي وقت، في مكان واحد.">
+    <meta name="author" content="AbbasShDev @AbbasShDev">
+    <link rel="icon" type="image/png" href="layout/images/favicon.svg">
     <!-- main CSS -->
     <link rel="stylesheet" href="layout/css/main.css">
     <!-- font awesome -->

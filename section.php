@@ -1,20 +1,35 @@
 <?php
 session_start();
-$pageTitle = "| المواقع";
+
 require_once 'includes/config/database.php';
 require_once 'includes/config/app.php';
-require_once 'includes/templates/app-header.php';
 
 if (!isset($_SESSION['user_name'])){
     header('location:index.php');
     die();
 }
 
-$userId = $_SESSION['user_id'];
-$stat = $mysqli->query("SELECT urls.*, sections.section_name  FROM urls LEFT OUTER JOIN sections ON sections.section_id=urls.section_id WHERE urls.user_id=$userId AND urls.url_type!='video' AND urls.url_archive=0 ORDER BY urls.url_id DESC");
-$urls = $stat->fetch_all(MYSQLI_ASSOC);
+if (isset($_GET['section_id']) && !empty($_GET['section_id']) && is_numeric($_GET['section_id'])){
 
 
+    $stat = $mysqli->prepare("SELECT urls.*, sections.section_name  FROM urls LEFT OUTER JOIN sections ON sections.section_id=urls.section_id WHERE urls.user_id=? AND urls.section_id=? AND urls.url_archive=0 ORDER BY url_id DESC");
+    $stat->bind_param('ii',$userId, $sectionId);
+    $sectionId = intval($_GET['section_id']);
+    $userId = $_SESSION['user_id'];
+    $stat->execute();
+    $result = $stat->get_result();
+
+    if ($result->num_rows == 0){
+        $_SESSION['error_message'] = 'القائمة فارغة اضف الى القائمة';
+        header("location:$_SERVER[HTTP_REFERER]");
+        die();
+    }else{
+        $urls = $result->fetch_all(MYSQLI_ASSOC);
+        $sectionName = $urls[0]['section_name'];
+
+        $pageTitle = "| $sectionName";
+        require_once 'includes/templates/app-header.php';
+    }
 ?>
 <!-- Start content -->
 <div class="content">
@@ -45,7 +60,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
                             <?php if (!empty($url['section_id'])){ ?>
                                 <div class="list-badge float-right mx-2">
-                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                    <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                         <input type="hidden" name="urlId" value="<?php echo $url['url_id'] ?>">
                                         <button type="submit" name="delete-url-section" onclick="return confirm('هل تريد الحذف من القائمة؟')">
                                             <i class="fas fa-times"></i>
@@ -83,7 +98,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
                                             </form>
                                         </div>
                                         <div class="dropdown-item px-0">
-                                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                                 <button type="submit" name="delete_url" onclick="return confirm('هل تريد الحذف؟')">
                                                     <i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span>
                                                 </button>
@@ -104,8 +119,16 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
             <?php endforeach; ?>
         </div>
     </div>
-</div
+</div>
 
 <!-- End content -->
-<?php require_once 'includes/templates/app-footer.php'?>
+<?php
+require_once 'includes/templates/app-footer.php';
+
+}else{
+    header("location:app.php");
+    die();
+}
+?>
+
 </html>

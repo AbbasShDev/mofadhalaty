@@ -44,7 +44,7 @@ if (!isset($_SESSION['user_name'])){
 
                             <?php if (!empty($url['section_id'])){ ?>
                             <div class="list-badge float-right mx-2">
-                                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                     <input type="hidden" name="urlId" value="<?php echo $url['url_id'] ?>">
                                     <button type="submit" name="delete-url-section" onclick="return confirm('هل تريد الحذف من القائمة؟')">
                                         <i class="fas fa-times"></i>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_name'])){
                                             </form>
                                         </div>
                                         <div class="dropdown-item px-0">
-                                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                                 <button type="submit" name="delete_url" onclick="return confirm('هل تريد الحذف؟')">
                                                     <i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span>
                                                 </button>

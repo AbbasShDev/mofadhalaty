@@ -2,6 +2,7 @@
 @import 'https://fonts.googleapis.com/earlyaccess/notonaskharabic.css?display=swap';
 @import 'https://fonts.googleapis.com/css?family=Cairo:200,400,600?display=swap';
 
+/* Start general rules */
 :root {
     --main-color: #3f64b5;
     --darker-main-color: #1e3056;
@@ -13,11 +14,6 @@ body {
     font-family:noto naskh arabic,Arial,sans-serif !important;
 }
 
-button:focus,
-select:focus,
-select:active{
-    outline: none;
-}
 * {
     margin: 0;
     padding: 0;
@@ -26,12 +22,19 @@ select:active{
     box-sizing: border-box;
 }
 
+button:focus,
+select:focus,
+select:active{
+    outline: none;
+}
+
 .font-head {
     font-family:railway,cairo,Arial,sans-serif !important;
     font-weight: 700;
 }
+/* End general rules */
 
-/* notification messages */
+/* Start notification messages */
 .notify-message {
     padding: 5px;
     border-radius: 10px;
@@ -63,10 +66,9 @@ select:active{
     right: 250px;
     z-index: 9999;
 }
-/* notification messages */
+/* End notification messages */
 
-/* start add-url-to-section */
-
+/* Start add-url-to-section model */
 .modal .modal-content .modal-header .modal-title {
     color: var(--darker-main-color);
 }
@@ -92,7 +94,9 @@ select:active{
 .modal .modal-content .modal-footer .btn:first-child:hover {
     opacity: 1;
 }
+/* End add-url-to-section model */
 
+/* Start rename-section model */
 .rename-section .modal-content .modal-body input {
     color: var(--darker-main-color);
     border: none;
@@ -108,10 +112,9 @@ select:active{
 .rename-section .modal-content .modal-body input:focus {
     outline: none;
 }
+/* End rename-section model */
 
-/* end add-url-to-section */
-
-
+/* Start sidebar */
 .sidebar {
     position: absolute;
     top: 0px;
@@ -131,7 +134,6 @@ select:active{
     right: 0;
 }
 
-
 .sidebar .my-list form {
     padding-top: 10px;
     display: inline-flex;
@@ -139,15 +141,12 @@ select:active{
     justify-content: right;
 }
 
-
-
 @media only screen and (max-width: 1150px) {
     .sidebar .my-list form{
         padding-right: 35px;
         margin-left: 20px;
     }
 }
-
 
 .sidebar .my-list form input{
     color: var(--main-color);
@@ -190,19 +189,25 @@ select:active{
     padding: 0;
 }
 
-.sidebar .my-list .sections form button i {
-    color: var(--main-color);
-    font-size: 19px;
-    margin: 0;
-    cursor: pointer;
-    vertical-align: middle;
-    transition: all .3s ease-in-out;
-}
-
 .sidebar .my-list .sections .dropright {
     display: inline-block;
     color: var(--main-color);
+    width: 20%;
+    height: 100%;
 }
+
+.sidebar .my-list .sections .dropright .dropdown-toggle {
+    margin: 4px 0 0 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar .my-list .sections .dropright .dropdown-toggle i{
+    text-align: end;
+    width: 29px;
+    height: 20px;
+}
+
 
 .sidebar .my-list .sections .dropright .dropdown-toggle::before {
     display: none !important;
@@ -261,7 +266,6 @@ select:active{
     margin-top: 110px;
 }
 
-
 @media only screen and (max-width: 1150px) {
     .sidebar .sidebar-wrapper {
         margin-top: 20px;
@@ -305,8 +309,6 @@ select:active{
     }
 }
 
-
-
 .sidebar .nav li a {
     color: var(--main-color);
     cursor: pointer !important;
@@ -321,6 +323,7 @@ select:active{
     background: #3f64b536;
     border-radius: 5px;
 }
+/* End sidebar */
 
 /* Start navbar */
 .sidebar-toggler {
@@ -333,7 +336,6 @@ select:active{
         display: block;
     }
 }
-
 
 .sidebar-toggler span {
     background-color: var(--main-color);
@@ -372,6 +374,16 @@ select:active{
 .navbar-area .dropdown-menu {
     border: none;
     box-shadow: 0px 0px 6px #bcbdbecc;
+}
+
+.navbar-area .dropdown-menu .dropdown-item:hover {
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+
+.navbar-area .dropdown-menu .dropdown-item:active {
+    background-color: var(--light-color);
+    color: var(--darker-main-color);
 }
 
 .navbar-area .dropdown-menu a{
@@ -471,7 +483,6 @@ select:active{
 /* End navbar */
 
 /* Start content */
-
 .content {
     width: calc(100% - 240px);
     float: left;
@@ -593,7 +604,6 @@ select:active{
     cursor: pointer;
 }
 
-
 .content .card-body .action-btn .dropdown-menu .dropdown-item:active {
     background-color: var(--light-color);
 }
@@ -627,51 +637,6 @@ select:active{
     color: var(--darker-main-color);
 }
 
-/*.content .card-body .action-btn i.fa-plus-circle span{*/
-/*    left: -44px;*/
-/*}*/
-
-/*.content .card-body .action-btn i.fa-minus-circle span{*/
-/*    left: -49px;;*/
-/*}*/
-
-/*.content .card-body .action-btn form:first-child i.far span {*/
-/*    bottom: 29px;*/
-/*    left: -44px;*/
-/*}*/
-
-/*.content .card-body .action-btn form:first-child i.fas span {*/
-/*    bottom: 29px;*/
-/*    left: -39px;*/
-/*}*/
-
-/*.content .card-body .action-btn form:last-child i span {*/
-/*    bottom: 29px;*/
-/*    left: -14px;*/
-/*}*/
-
-/*.content .card-body .action-btn form i span:before{*/
-/*    content: "";*/
-/*    border-style: solid;*/
-/*    border-color: var(--main-color) transparent transparent transparent;*/
-/*    height: 0;*/
-/*    width: 0;*/
-/*    position: absolute;*/
-/*    border-width: 9px;*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%);*/
-/*    top: 18px;*/
-/*}*/
-
-/*.content .card-body .action-btn form:first-child i span:before {*/
-
-/*}*/
-
-/*.content .card-body .action-btn form:last-child  i span:before {*/
-/*    !*left: 11px;*!*/
-/*    !*top: 16px;*!*/
-/*}*/
-
 @media only screen and (max-width: 1150px) {
     .content {
         width: 100%;
@@ -682,15 +647,14 @@ select:active{
 .content .card-body .action-btn .fas.fa-star {
     color: #FCB643;
 }
-.empty-search-result {
+.empty-result {
     color: var(--main-color);
     text-align: center;
     margin-top: 200px;
 }
 
-.empty-search-result div {
+.empty-result div {
     z-index: 500;
-    width: 120px;
 }
 /* End content */
 

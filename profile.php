@@ -19,10 +19,11 @@ $errors = [];
 <html lang="ar" dir="rtl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta name="author" content="AbbasShDev @AbbasShDev">
+    <link rel="icon" type="image/png" href="layout/images/favicon.svg">
     <!-- main CSS -->
     <link rel="stylesheet" href="layout/css/main.css">
     <!-- font awesome -->
@@ -35,7 +36,7 @@ $errors = [];
     <title><?php echo "$config[app_name] $pageTitle"?></title>
 </head>
 <body>
-<!--    notification message -->
+<!-- Start notification message -->
 <?php if (isset($_SESSION['notify_message'])) {?>
     <div class="notify-message">
         <?php echo $_SESSION['notify_message'];?>
@@ -43,9 +44,9 @@ $errors = [];
 <?php }
 unset($_SESSION['notify_message']); ?>
 
-<!--    notification message -->
+<!-- End notification message -->
 
-<!-- Start header -->
+<!-- Start navbar -->
 <div class="navbar-area">
     <div class="container">
         <nav class="navbar navbar-expand-lg">
@@ -70,11 +71,13 @@ unset($_SESSION['notify_message']); ?>
                 </div>
             </div>
         </nav>
-    </div> <!-- container -->
-</div> <!-- navbar area -->
+    </div>
+</div>
+<!-- Start navbar -->
 
-    <div class="container profile">
-        <div class="row justify-content-around ">
+<!-- Start profile -->
+<div class="container profile">
+    <div class="row justify-content-around ">
             <div class="col-11 col-lg-3 order-1 order-lg-0 profile-left mt-3 mb-5">
                 <div class="container">
                     <img class="rounded-circle img-thumbnail img d-flex mx-auto" style="height: 100px !important; width: 100px !important;" src="<?php
@@ -358,8 +361,8 @@ unset($_SESSION['notify_message']); ?>
 
              <?php }?>
     </div>
-    </div>
-
+</div>
+<!-- End profile -->
 <?php
 include_once 'includes/templates/main-footer.php';
 

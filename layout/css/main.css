@@ -2,9 +2,11 @@
 @import 'https://fonts.googleapis.com/earlyaccess/notonaskharabic.css?display=swap';
 @import 'https://fonts.googleapis.com/css?family=Cairo:200,400,600?display=swap';
 
+/* Start general rules */
 :root {
     --main-color: #3f64b5;
     --darker-main-color: #1e3056;
+    --light-color: #d9e6f4
 }
 
 body {
@@ -35,8 +37,9 @@ button:focus {
 span{
     display: inline-block;
 }
+/* End general rules */
 
-/* notification message */
+/* Start notification message */
 .notify-message {
     padding: 5px;
     border-radius: 10px;
@@ -50,8 +53,9 @@ span{
     left: -400px;
     z-index: 9999;
 }
-/* notification message */
+/* End notification message */
 
+/* Start header */
 .header {
     position: relative;
 }
@@ -85,7 +89,6 @@ span{
         transform: none;
     }
 }
-
 
 /* Start navbar */
 .navbar-area {
@@ -153,7 +156,6 @@ span{
     color: #47f870;
 }
 
-
 .navbar-area .navbar-nav .btn {
     display: inline-block;
     padding: 2px 6px;
@@ -185,6 +187,18 @@ span{
     box-shadow: 0px 0px 6px #bcbdbecc;
 }
 
+
+.navbar-area .dropdown-menu .dropdown-item:hover {
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+
+
+.navbar-area .dropdown-menu .dropdown-item:active {
+    background-color: var(--light-color);
+    color: var(--darker-main-color);
+}
+
 .navbar-area .dropdown-menu a{
     font-size: 14px;
 }
@@ -197,8 +211,6 @@ span{
     box-shadow: 0px 0px 6px #717272e3;
 
 }
-
-
 
 /* End navbar */
 
@@ -271,6 +283,8 @@ span{
     }
 }
 /* End hero */
+
+/* End header */
 
 /* Start about */
 .about {
@@ -384,8 +398,7 @@ span{
 }
 /* End footer */
 
-/* ============== Register Login CSS ============== */
-
+/* ============== Start Register Login CSS ============== */
 .login-register {
     background-color: #f7f9fc;
     padding: 100px 0px;
@@ -435,10 +448,9 @@ span{
 .login-register .container a:hover {
     text-decoration: underline !important;
 }
+/* ============== End Register Login CSS ============== */
 
-
-/* ===== profile page ===== */
-
+/* ===== Start profile page ===== */
 .profile .profile-left p {
     color: var(--darker-main-color);
 }
@@ -546,4 +558,4 @@ span{
     margin-top: 100px;
     background-color: var(--main-color);
 }
-/* ===== profile page ===== */
+/* ===== End profile page ===== */

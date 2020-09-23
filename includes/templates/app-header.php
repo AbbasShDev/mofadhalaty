@@ -6,10 +6,11 @@ ob_start();
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/png" href="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title><?php echo "$config[app_name] $pageTitle"?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta name="author" content="AbbasShDev @AbbasShDev">
+    <link rel="icon" type="image/png" href="layout/images/favicon.svg">
+    <title><?php echo "$config[app_name] $pageTitle"?></title>
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
     <!-- bootstrap-select CSS -->
@@ -18,17 +19,29 @@ ob_start();
 </head>
 
 <body>
-<!--    notification message -->
+<!-- Start messages -->
+<!-- Start notification message -->
 <?php if (isset($_SESSION['notify_message'])) {?>
     <div class="notify-message">
         <?php echo $_SESSION['notify_message'];?>
     </div>
 <?php }
 unset($_SESSION['notify_message']); ?>
-<!--    notification message -->
+<!-- End notification message -->
+<!-- Start error message -->
+<?php if (isset($_SESSION['error_message'])) {?>
+    <div class="notify-message bg-danger">
+        <?php echo $_SESSION['error_message'];?>
+    </div>
+<?php }
+unset($_SESSION['error_message']); ?>
+<!-- End error message -->
 <div class="alert alert-danger alert-normal">
     <p class="m-0"></p>
 </div>
+<!-- End messages -->
+
+<!-- Start sidebar -->
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="hide-sidebar">
@@ -59,12 +72,12 @@ unset($_SESSION['notify_message']); ?>
 
             foreach ($sections as $section){?>
             <li class="sections pr-3 pr-lg-0" data-sectionId="<?php echo $section['section_id']?>" data-sectionname="<?php echo $section['section_name']?>">
-                <a class="nav-link text-left my-3" href="section.php?section_id=<?php echo $section['section_id']?>">
+                <a class="nav-link text-left my-3 <?php if ($pageTitle == "| $section[section_name]") { echo 'active';}else{ echo '';}?> " href="section.php?section_id=<?php echo $section['section_id']?>">
                     <i class="fas fa-th-list fa-fw pr-1"></i>
                     <?php echo $section['section_name']?>
                     <div class="dropright float-right">
                         <div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v"></i>
+                            <i class="fas fa-ellipsis-v float-right"></i>
                         </div>
                         <div class="dropdown-menu">
                             <div class="dropdown-item px-0">
@@ -73,7 +86,7 @@ unset($_SESSION['notify_message']); ?>
                                 </div>
                             </div>
                             <div class="dropdown-item px-0">
-                                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" class="" method="post">
+                                <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" class="" method="post">
                                     <input type="hidden" name="sectionId" value="<?php echo $section['section_id']?>">
                                     <button type="submit" name="delete-section" onclick="return confirm('هل تريد حذف القائمة؟')">
                                         <i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف القائمة</span>
@@ -104,12 +117,6 @@ unset($_SESSION['notify_message']); ?>
                 </a>
             </li>
             <li class="pr-3 pr-lg-0">
-                <a class="nav-link text-left my-3  <?php if ($pageTitle == "| المواقع") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>other_url.php">
-                    <i class="fas fa-file-alt fa-fw"></i>
-                    المواقع
-                </a>
-            </li>
-            <li class="pr-3 pr-lg-0">
                 <a class="nav-link text-left my-3 <?php if ($pageTitle == "| الإرشيف") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>archive.php">
                     <i class="fas fa-archive fa-fw"></i>
                     الإرشيف
@@ -118,6 +125,8 @@ unset($_SESSION['notify_message']); ?>
         </ul>
     </div>
 </div>
+<!-- End sidebar -->
+
 <!-- Start navbar-->
 <div class="navbar-area">
     <nav class="navbar col-12 mx-auto">
@@ -202,10 +211,11 @@ unset($_SESSION['notify_message']); ?>
     </nav>
 </div>
 <!-- End navbar -->
-<!-- start add-url-to-section -->
+
+<!-- Start add-url-to-section -->
 <div class="modal add-url-to-section" id="add-url-to-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="modal-content">
+        <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post" class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenteredLabel">إضافة الرابط الى قائمة</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -238,12 +248,12 @@ unset($_SESSION['notify_message']); ?>
         </form>
     </div>
 </div>
-<!-- end add-url-to-section -->
+<!-- End add-url-to-section -->
 
-<!-- start rename-section -->
+<!-- Start rename-section -->
 <div class="modal rename-section" id="rename-section" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenteredLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" class="modal-content rename-section">
+        <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post" class="modal-content rename-section">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenteredLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -261,7 +271,7 @@ unset($_SESSION['notify_message']); ?>
         </form>
     </div>
 </div>
-<!-- end rename-section -->
+<!-- End rename-section -->
 
 <?php
 
@@ -273,8 +283,8 @@ if (isset($_POST['delete_url'])){
     $query = "DELETE FROM urls WHERE url_id='$urlId' AND user_id='$userId'";
     if ($mysqli->query($query)){
 
-        $_SESSION['notify_message'] = "تم الحذف";
-        header("location:$_SERVER[PHP_SELF]");
+        $_SESSION['error_message'] = "تم الحذف";
+        header("location:$_SERVER[REQUEST_URI]");
         die();
 
     }
@@ -299,12 +309,12 @@ if (isset($_POST['add_to_section'])){
         $sectionId  = $_POST['selected-section'];
 
         if ($upSection->execute()){
-            header("location:$_SERVER[PHP_SELF]");
+            header("location:$_SERVER[REQUEST_URI]");
             die();
         }
     }else{
-        $_SESSION['notify_message'] = "مضاف في نفس القائمة مسباقاً";
-        header("location:$_SERVER[PHP_SELF]");
+        $_SESSION['error_message'] = "مضاف في نفس القائمة مسباقاً";
+        header("location:$_SERVER[REQUEST_URI]");
         die();
     }
 
@@ -321,8 +331,8 @@ if (isset($_POST['delete-url-section'])){
     $user_id = $_SESSION['user_id'];
     if ($stat->execute()){
 
-        $_SESSION['notify_message'] = "تم الحذف من القائمة";
-        header("location:$_SERVER[PHP_SELF]");
+        $_SESSION['error_message'] = "تم الحذف من القائمة";
+        header("location:$_SERVER[REQUEST_URI]");
         die();
 
     }
@@ -337,16 +347,14 @@ if (isset($_POST['delete-section'])){
 
     if ($stat->execute()){
 
-        $_SESSION['notify_message'] = "تم حذف القائمة";
-        header("location:$_SERVER[PHP_SELF]");
+        $_SESSION['error_message'] = "تم حذف القائمة";
+        header("location:$_SERVER[HTTP_REFERER]");
         die();
 
     }
 }
 
 if (isset($_POST['rename-section'])){
-
-
 
     $foundSection = $mysqli->prepare('SELECT * FROM sections WHERE section_name=? AND user_id=?');
     $foundSection->bind_param('si', $sectionNewName, $user_id );
@@ -366,13 +374,13 @@ if (isset($_POST['rename-section'])){
         if ($stat->execute()){
 
             $_SESSION['notify_message'] = "تم إعادة تسمية القائمة";
-            header("location:$_SERVER[PHP_SELF]");
+            header("location:$_SERVER[HTTP_REFERER]");
             die();
 
         }
     }else{
-        $_SESSION['notify_message'] = "الاسم موجود مسبقاُ";
-        header("location:$_SERVER[PHP_SELF]");
+        $_SESSION['error_message'] = "الاسم موجود مسبقاُ";
+        header("location:$_SERVER[HTTP_REFERER]");
         die();
     }
 

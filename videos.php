@@ -14,7 +14,7 @@ $userId = $_SESSION['user_id'];
 $stat = $mysqli->query("SELECT urls.*, sections.section_name  FROM urls LEFT OUTER JOIN sections ON sections.section_id=urls.section_id WHERE urls.user_id=$userId AND urls.url_type='video' AND urls.url_archive=0 ORDER BY urls.url_id DESC");
 $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
-
+if (!empty($urls)){
 ?>
 <!-- Start content -->
 <div class="content">
@@ -45,7 +45,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
 
                             <?php if (!empty($url['section_id'])){ ?>
                                 <div class="list-badge float-right mx-2">
-                                    <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                    <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                         <input type="hidden" name="urlId" value="<?php echo $url['url_id'] ?>">
                                         <button type="submit" name="delete-url-section" onclick="return confirm('هل تريد الحذف من القائمة؟')">
                                             <i class="fas fa-times"></i>
@@ -83,7 +83,7 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
                                             </form>
                                         </div>
                                         <div class="dropdown-item px-0">
-                                            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
+                                            <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
                                                 <button type="submit" name="delete_url" onclick="return confirm('هل تريد الحذف؟')">
                                                     <i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span>
                                                 </button>
@@ -107,5 +107,22 @@ $urls = $stat->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <!-- End content -->
-<?php require_once 'includes/templates/app-footer.php'?>
+<?php }else{ ?>
+<!-- Start content -->
+<div class="content">
+    <div class="container col-11">
+        <div class="row justify-content-around justify-content-md-start pb-5">
+            <div class="empty-result mx-auto">
+                <div>
+                <i class="fas fa-video fa-lg"></i>
+                <p class="font-head">لم يتم اضافة اي عناوين في هذا القسم</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- End content -->
+<?php }
+require_once 'includes/templates/app-footer.php'; ?>
 </html>

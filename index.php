@@ -11,6 +11,14 @@ if (isset($_SESSION['notify_message'])) {?>
 <?php }
     unset($_SESSION['notify_message']);
 /* ==== notification message ==== */
+/* ====   error message ==== */
+if (isset($_SESSION['error_message'])) { ?>
+    <div class="notify-message bg-danger">
+        <?php echo $_SESSION['error_message'];?>
+    </div>
+<?php }
+unset($_SESSION['error_message']);
+/* ====   error message ==== */
 
 
 require_once 'includes/config/app.php';
@@ -136,7 +144,7 @@ if (!isset($_SESSION['user_name'])) {
             <div class="col-10 col-lg-6 mx-auto px-0 animate__animated wow animate__rotateIn" data-wow-duration="1s" data-wow-delay="0.3s">
                 <div class="about-us text-center order-0 order-lg-1">
                     <h1 class="font-head">ماهو <span>مفضلتي</span></h1>
-                    <p class="pt-5 col-12 col-lg-10 mx-auto px-0">هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. اضاف اي محتوى من الانترنت وتمتع به في اي وقت، في مكان واحد.</p>
+                    <p class="pt-5 col-12 col-lg-10 mx-auto px-0">هي خدمة لحفظ وتجميع المحتوى من الانترنت في مكان واحد. يمكن حفظ المقالات و الفيديوهات او اي صفحة. كما يمكن انشاء القوائم الخاصة بك واضافة المحتوى اليها. اضاف اي محتوى من الانترنت وتمتع به في اي وقت، في مكان واحد.</p>
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-0 animate__animated wow animate__fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
