@@ -90,8 +90,8 @@ unset($_SESSION['notify_message']); ?>
                     <p class="text-center pt-4">مرحباً <?php echo $_SESSION['user_name'] ?></p>
                     <hr>
 
-                    <ul class="left-nav mt-5">
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                    <ul class="left-nav mt-3">
+                        <li class="pr-3 pr-lg-0 d-flex justify-content-center">
                             <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
                                 echo '';
@@ -105,7 +105,7 @@ unset($_SESSION['notify_message']); ?>
                                 ملفي الشخصي
                             </a>
                         </li>
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                        <li class="pr-3 pr-lg-0 d-flex justify-content-center">
                             <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'change_password'){
                                 echo 'active';
@@ -115,7 +115,7 @@ unset($_SESSION['notify_message']); ?>
                                 تغير كلمة السر
                             </a>
                         </li>
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                        <li class="pr-3 pr-lg-0 d-flex justify-content-center">
                             <a class="nav-link my-2
                             <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){
                                 echo 'active';
@@ -125,7 +125,7 @@ unset($_SESSION['notify_message']); ?>
                                 تصدير
                             </a>
                         </li>
-                        <li class="pr-3 pr-lg-0 d-flex justify-content-center justify-content-lg-start">
+                        <li class="pr-3 pr-lg-0 d-flex justify-content-center">
                             <a class="nav-link text-danger my-2" href="logout.php">
                                 <i class="fa fa-power-off pr-1"></i>
                                 خروج
@@ -136,13 +136,20 @@ unset($_SESSION['notify_message']); ?>
                 </div>
             </div>
 
-    <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){ ?>
+    <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){//export data (urls)
+
+
+
+        ?>
 
     <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
-        <div class="container">
+        <div class="container export">
 
-            <h4 class="text-center pb-3">تصدير البيانات</h4>
-
+            <h4 class="text-center font-head pb-5">تصدير البيانات</h4>
+            <div class="p-5 mt-5">
+                <p>يمكنك تحميل ملف نصي (txt) يحتوي على جميع الروابط المحفوظة في <strong>مفضلتي</strong></p>
+                <a href="<?php echo $config['app_url']?>export_data.php">تحميل بياناتي</a>
+            </div>
         </div>
     </div>
     <?php }elseif (isset($_GET['do']) && $_GET['do'] == 'change_password'){
@@ -215,7 +222,7 @@ unset($_SESSION['notify_message']); ?>
         ?>
         <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
             <div class="container">
-                <h4 class="text-center pb-3">تغير كلمة السر</h4>
+                <h4 class="text-center font-head pb-3">تغير كلمة السر</h4>
                 <form action="?do=change_password" method="post" enctype="multipart/form-data">
 
                     <?php
@@ -322,7 +329,7 @@ unset($_SESSION['notify_message']); ?>
 
 <!--        <div class="loader-bg d-none justify-content-center"><span class="spinner-grow" role="status"></span></div>-->
         <div class="container">
-            <h4 class="text-center pb-3">تحديث المعلومات الشخصية</h4>
+            <h4 class="text-center font-head pb-3">تحديث المعلومات الشخصية</h4>
 
             <form action="" method="post" enctype="multipart/form-data">
 

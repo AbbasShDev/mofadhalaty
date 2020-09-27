@@ -574,4 +574,28 @@ span{
     margin-top: 100px;
     background-color: var(--main-color);
 }
+
+.profile-right .export div {
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
+    box-shadow: 0px 0px 6px #bcbdbecc;
+    border-radius: 10px;
+}
+
+.profile-right .export p {
+    color: var(--darker-main-color);
+}
+
+.profile-right .export p strong{
+    color: var(--main-color);
+}
+
+.profile-right .export a {
+    color: var(--main-color);
+    text-decoration: underline !important;
+}
+
+.profile-right .export a:hover {
+    color: var(--darker-main-color);
+}
 /* ===== End profile page ===== */
