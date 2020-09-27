@@ -184,6 +184,8 @@ span{
 
 .navbar-area .dropdown-menu {
     border: none;
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
 }
 
@@ -208,6 +210,8 @@ span{
 }
 
 .navbar-area .header-profile-img {
+    -moz-box-shadow: 0px 0px 6px #717272e3;
+    -webkit-box-shadow: 0px 0px 6px #717272e3;
     box-shadow: 0px 0px 6px #717272e3;
 
 }
@@ -255,6 +259,8 @@ span{
     color: var(--main-color);
     background-color: #ffffff;
     border-color: #ffffff;
+    -moz-box-shadow: 0px 0px 4px #354a7c;
+    -webkit-box-shadow: 0px 0px 4px #354a7c;
     box-shadow: 0px 0px 4px #354a7c;
     transition: all .3s ease-out;
 
@@ -337,6 +343,8 @@ span{
 
 .contact .container {
     border-radius: 10px;
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
 }
 
@@ -405,6 +413,8 @@ span{
 }
 
 .login-register .container{
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
     background-color: #FFFFFF;
     padding: 30px;
@@ -422,6 +432,8 @@ span{
 .login-register .container .sign input{
     color: var(--darker-main-color);
     border-radius: 10px;
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
     height: 50px;
     border: none;
@@ -497,6 +509,8 @@ span{
 .profile .profile-right form input {
     color: var(--darker-main-color);
     border-radius: 10px;
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
     height: 50px;
 }
@@ -514,6 +528,8 @@ span{
 .profile .profile-right form  .custom-file {
     color: var(--darker-main-color);
     border-radius: 10px;
+    -moz-box-shadow: 0px 0px 6px #bcbdbecc;
+    -webkit-box-shadow: 0px 0px 6px #bcbdbecc;
     box-shadow: 0px 0px 6px #bcbdbecc;
     height: 50px;
 }

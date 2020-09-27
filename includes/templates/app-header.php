@@ -5,17 +5,19 @@ ob_start();
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <meta name="author" content="AbbasShDev @AbbasShDev">
-    <link rel="icon" type="image/png" href="layout/images/favicon.svg">
-    <title><?php echo "$config[app_name] $pageTitle"?></title>
+    <link rel="icon" type="image/png" href="<?php echo $config['app_url']?>layout/images/favicon.svg">
+    <title><?php echo "$config[app_name] $pageTitle" ?></title>
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-    <!-- bootstrap-select CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
-    <link href="layout/css/app.css" rel="stylesheet" />
+    <!-- app css -->
+    <link href="<?php echo $config['app_url']?>layout/css/app.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -40,7 +42,6 @@ unset($_SESSION['error_message']); ?>
     <p class="m-0"></p>
 </div>
 <!-- End messages -->
-
 <!-- Start sidebar -->
 <div class="sidebar">
     <div class="sidebar-wrapper">
@@ -51,7 +52,7 @@ unset($_SESSION['error_message']); ?>
             <li class="pr-3 pr-lg-0">
                 <a class="nav-link text-left my-3 <?php if ($pageTitle == "| الرئيسية") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>app.php">
                     <i class="fas fa-home fa-fw"></i>
-                    مفضلتي
+                    الكل
                 </a>
             </li>
         </ul>

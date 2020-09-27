@@ -36,14 +36,14 @@ if (isset($_POST['search'])){
             $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
             $output .= '<a href="read.php?url_id=';
             $output .= "$url[url_id]";
-            $output .= '">';
+            $output .= '" >';
             $output .= '<img class="card-img-top" src="';
             $output .= "$url[url_image]";
             $output .= '" alt="url_image"></a>';
             $output .= '<div class="card-body px-0 pb-3">';
             $output .= '<a href="read.php?url_id=';
             $output .= "$url[url_id]";
-            $output .= '">';
+            $output .= '" >';
             $output .= '<h5 class="card-title">';
             $output .= "$url[url_title]";
             $output .= '</h5></a>';

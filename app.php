@@ -13,7 +13,6 @@ if (!isset($_SESSION['user_name'])){
     $userId = $_SESSION['user_id'];
     $stat = $mysqli->query("SELECT urls.*, sections.section_name  FROM urls LEFT OUTER JOIN sections ON sections.section_id=urls.section_id WHERE urls.user_id=$userId AND urls.url_archive=0 ORDER BY url_id DESC");
     $urls = $stat->fetch_all(MYSQLI_ASSOC);
-
 ?>
     <!-- Start content -->
     <div class="content">
@@ -97,6 +96,8 @@ if (!isset($_SESSION['user_name'])){
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
                 </div>

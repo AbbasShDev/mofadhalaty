@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_name'])){
 }
 
 require_once 'includes/config/database.php';
+require_once 'includes/config/app.php';
 $userId = $_SESSION['user_id'];
 
 include __DIR__.'/includes/libraries/vendor/autoload.php';
@@ -25,12 +26,22 @@ if (isset($_POST['url'])){
             if (!empty($info->image)){
                 $urlImage = $info->image;
             }else{
-                $urlImage = 'layout/images/default-url-img.png';
+                $urlImage = "$config[app_url]layout/images/default-url-img.png";
             }
 
-            $urlTitle = $info->title;
-            if (mb_strlen($info->title) > 59){
-                $urlTitle  = mb_substr($info->title, 0, 59);
+            if (!empty($info->providerIcon)){
+                $urlProviderIcon = $info->providerIcon;
+            }else{
+                $urlProviderIcon = "$config[app_url]layout/images/default-url-img.png";
+            }
+
+            if (filter_var($info->title, FILTER_VALIDATE_URL)){
+                $urlTitle = $info->authorName;
+            }else{
+                $urlTitle = $info->title;
+            }
+            if (mb_strlen( $urlTitle) > 59){
+                $urlTitle  = mb_substr( $urlTitle, 0, 59);
                 $urlTitle .= '...';
             }
             if (empty($info->title)){
@@ -65,7 +76,7 @@ if (isset($_POST['url'])){
             $dbUrlImage                 = filter_var($urlImage, FILTER_SANITIZE_URL);
             $dbUrlDesc                  = filter_var($urlDesc, FILTER_SANITIZE_STRING);
             $dbUrlType                  = filter_var($info->type, FILTER_SANITIZE_STRING);
-            $dbUrlProviderIcon          = filter_var($info->providerIcon, FILTER_SANITIZE_URL);
+            $dbUrlProviderIcon          = filter_var($urlProviderIcon, FILTER_SANITIZE_URL);
             $dbUrlProviderName          = filter_var($urlProviderName, FILTER_SANITIZE_STRING);
             $dbUrlProviderUrl           = filter_var($info->providerUrl, FILTER_SANITIZE_URL);
 
@@ -78,14 +89,14 @@ if (isset($_POST['url'])){
             $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
             $output .= '<a href="read.php?url_id=';
             $output .= "$dbUrlId";
-            $output .= '">';
+            $output .= '" >';
             $output .= '<img class="card-img-top" src="';
             $output .= "$dbUrlImage";
             $output .= '" alt="url_image"></a>';
             $output .= '<div class="card-body px-0 pb-3">';
             $output .= '<a href="read.php?url_id=';
             $output .= "$dbUrlId";
-            $output .= '">';
+            $output .= '" >';
             $output .= '<h5 class="card-title">';
             $output .= "$dbUrlTitle";
             $output .= '</h5></a>';

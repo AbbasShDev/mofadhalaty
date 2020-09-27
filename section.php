@@ -14,22 +14,47 @@ if (isset($_GET['section_id']) && !empty($_GET['section_id']) && is_numeric($_GE
 
     $stat = $mysqli->prepare("SELECT urls.*, sections.section_name  FROM urls LEFT OUTER JOIN sections ON sections.section_id=urls.section_id WHERE urls.user_id=? AND urls.section_id=? AND urls.url_archive=0 ORDER BY url_id DESC");
     $stat->bind_param('ii',$userId, $sectionId);
-    $sectionId = intval($_GET['section_id']);
     $userId = $_SESSION['user_id'];
+    $sectionId = intval($_GET['section_id']);
     $stat->execute();
     $result = $stat->get_result();
 
     if ($result->num_rows == 0){
-        $_SESSION['error_message'] = 'القائمة فارغة اضف الى القائمة';
-        header("location:$_SERVER[HTTP_REFERER]");
-        die();
-    }else{
+        $stat = $mysqli->prepare("SELECT section_name  FROM sections WHERE user_id=? AND section_id=?");
+        $stat->bind_param('ii',$userId, $sectionId);
+        $userId = $_SESSION['user_id'];
+        $sectionId = intval($_GET['section_id']);
+        $stat->execute();
+        $result = $stat->get_result();
+
+        $sectionName = $result->fetch_assoc();
+
+        $pageTitle = "| $sectionName[section_name]";
+        require_once 'includes/templates/app-header.php'; ?>
+
+        <!-- Start content -->
+        <div class="content">
+            <div class="container col-11">
+                <div class="row justify-content-around justify-content-md-start pb-5">
+                    <div class="empty-result mx-auto">
+                        <div>
+                            <i class="fas fa-th-list fa-lg"></i>
+                            <p class="font-head">لم يتم اضافة اي عناوين في هذا القسم</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- End content -->
+
+<?php    }else{
         $urls = $result->fetch_all(MYSQLI_ASSOC);
         $sectionName = $urls[0]['section_name'];
 
         $pageTitle = "| $sectionName";
         require_once 'includes/templates/app-header.php';
-    }
+
 ?>
 <!-- Start content -->
 <div class="content">
@@ -123,6 +148,7 @@ if (isset($_GET['section_id']) && !empty($_GET['section_id']) && is_numeric($_GE
 
 <!-- End content -->
 <?php
+}
 require_once 'includes/templates/app-footer.php';
 
 }else{
