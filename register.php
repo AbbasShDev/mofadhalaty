@@ -74,10 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <div class="collapse navbar-collapse py-3" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item mx-auto">
-                                <a class="nav-link font-head" href="index.php">ماهو مفضلتي؟</a>
+                                <a class="nav-link font-head" href="index.php#about-us">ماهو مفضلتي؟</a>
                             </li>
                             <li class="nav-item pr-lg-4 mx-auto">
-                                <a class="nav-link font-head " href="index.php">تواصل معنا</a>
+                                <a class="nav-link font-head " href="index.php#contact">تواصل معنا</a>
                             </li>
                             <li class="nav-item mx-auto">
                                 <a href="login.php"><button class="nav-link btn font-head login-btn">دخول</button></a>

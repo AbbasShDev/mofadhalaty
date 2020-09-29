@@ -21,7 +21,11 @@ if (isset($_POST['search'])){
                                                     url_title LIKE '%$searchValue%' 
                                                 OR  url_description LIKE '%$searchValue%'
                                                     )
-                                                AND user_id=$userId");
+                                                AND user_id=$userId 
+                                                ORDER
+                                                BY
+                                                    url_id
+                                                DESC");
 
         if ($stat->num_rows > 0){
 
@@ -32,7 +36,7 @@ if (isset($_POST['search'])){
         $output = '';
         foreach ($urls as $url){
 
-            $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
+            $output .= '<div class="col-12 col-md-6 col-lg-4 mb-5 mx-auto mx-lg-0">';
             $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
             $output .= '<a href="read.php?url_id=';
             $output .= "$url[url_id]";

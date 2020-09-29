@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/config/database.php';
 $pageTitle = '';
 
 
@@ -60,22 +61,45 @@ if (!$message) {
 
 if (!$nameError && !$emailError && !$messageError){
 
-    $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=UFT-8' . "\r\n";
-    $headers .= 'From: '.$email."\r\n".
-        'Reply-To: '.$email."\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
-    $messageHtml = '<html><body>';
-    $messageHtml .= "<h4 style='color: #1b262c'>$name</h4>";
-    $messageHtml .= "<p style='color: darkgreen'>$message</p>";
-    $messageHtml .= '</body></html>';
 
-    if (mail('abbas20alzaeem@gmail.com','رسالة من موقع مفضلتي', $messageHtml, $headers )){
-        unset($_SESSION['contact_form']);
-        echo "<script>alert('شكرا تم ارسال الرسالة')</script>";
+
+    $st = $mysqli->prepare('INSERT INTO messages (name, email, message) VALUES (?,?,?)');
+
+    $st->bind_param('sss', $dbName, $dbEmail, $dbMessage);
+    $dbName = $name;
+    $dbEmail = $email;
+    $dbMessage = $message;
+
+
+
+    if ($st->execute()){
+        $headers  = 'MIME-Version: 1.0' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=UFT-8' . "\r\n";
+        $headers .= 'From: '.$email."\r\n".
+            'Reply-To: '.$email."\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        $messageHtml = '<html><body>';
+        $messageHtml .= "<h4 style='color: #1b262c'>$name</h4>";
+        $messageHtml .= "<p style='color: darkgreen'>$message</p>";
+        $messageHtml .= '</body></html>';
+
+
+        if (mail('abbas20alzaeem@gmail.com','رسالة من موقع مفضلتي', $messageHtml, $headers )){
+            unset($_SESSION['contact_form']);
+            $_SESSION['notify_message'] = 'شكرا تم ارسال الرسالة';
+            header('location:index.php');
+            die();
+        }else{
+            $_SESSION['error_message'] = 'حدث خطأ أثناء إرسال الرسالة';
+            header('location:index.php');
+            die();
+        }
     }else{
-        echo "<script>alert('حدث خطأ أثناء إرسال الرسالة')</script>";
+        $_SESSION['error_message'] = 'حدث خطأ أثناء إرسال الرسالة';
+        header('location:index.php');
+        die();
     }
 
 }
@@ -101,10 +125,10 @@ if (!isset($_SESSION['user_name'])) {
                     <div class="collapse navbar-collapse py-3" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item mx-auto">
-                                <a class="nav-link font-head" href="index.php">ماهو مفضلتي؟</a>
+                                <a class="nav-link scroll font-head" href="" data-scroll="about-us">ماهو مفضلتي؟</a>
                             </li>
                             <li class="nav-item pr-lg-4 mx-auto">
-                                <a class="nav-link font-head " href="index.php">تواصل معنا</a>
+                                <a class="nav-link scroll font-head " href="" data-scroll="contact">تواصل معنا</a>
                             </li>
                             <li class="nav-item  mx-auto">
                                 <a href="login.php"><button class="nav-link btn font-head login-btn">دخول</button></a>
@@ -160,7 +184,7 @@ if (!isset($_SESSION['user_name'])) {
 <div id="contact" class="section contact">
     <h1 class="pb-1 text-center font-head animate__animated wow animate__fadeInLeftBig" data-wow-duration="1s" data-wow-delay="0.3s">تواصل منا</h1>
     <div class="container col-10 col-md-8 col-lg-6 mt-5 mx-auto p-4 animate__animated wow animate__fadeInRightBig" data-wow-duration="1s" data-wow-delay="0.3s">
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" >
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" >
             <div class="form-group">
                 <label for="name" class="font-head">الإسم</label>
                 <input type="text" class="form-control" name="name" value="<?php if (isset($_SESSION['contact_form']['name'])) echo $_SESSION['contact_form']['name']?>" placeholder="إسمك...">

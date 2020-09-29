@@ -21,6 +21,11 @@ ob_start();
 </head>
 
 <body>
+<!-- start scroll-up -->
+<div class="scroll-up">
+    <i class="fas fa-chevron-up fa-fw"></i>
+</div>
+<!-- End scroll-up -->
 <!-- Start messages -->
 <!-- Start notification message -->
 <?php if (isset($_SESSION['notify_message'])) {?>
@@ -310,6 +315,7 @@ if (isset($_POST['add_to_section'])){
         $sectionId  = $_POST['selected-section'];
 
         if ($upSection->execute()){
+            $_SESSION['notify_message'] = "تمت الاضافة في القائمة";
             header("location:$_SERVER[REQUEST_URI]");
             die();
         }

@@ -2,6 +2,25 @@ $(document).ready(function () {
 
     'use strict'
 
+    //scroll top btn
+    $('.scroll-up').click(function() {
+        $('html, body').animate(
+            {
+                scrollTop: 0
+            },
+            1000
+        );
+    });
+    $(window).scroll(function() {
+        let scrollUp = $('.scroll-up');
+        if ($(window).scrollTop() >= 1000) {
+            scrollUp.slideDown(200);
+        } else {
+            scrollUp.slideUp(200);
+        }
+    });
+
+
     //toggler sidebar class
     $('.sidebar-toggler').on('click', function () {
         $('.sidebar').addClass('active');

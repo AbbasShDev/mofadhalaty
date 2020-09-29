@@ -147,8 +147,8 @@ unset($_SESSION['notify_message']); ?>
 
             <h4 class="text-center font-head pb-5">تصدير البيانات</h4>
             <div class="p-5 mt-5">
-                <p>يمكنك تحميل ملف نصي (txt) يحتوي على جميع الروابط المحفوظة في <strong>مفضلتي</strong></p>
-                <a href="<?php echo $config['app_url']?>export_data.php">تحميل بياناتي</a>
+                <p class="text-center text-md-left">يمكنك تحميل ملف نصي (txt) يحتوي على جميع الروابط المحفوظة في <strong>مفضلتي</strong></p>
+                <p class="text-center text-md-left"><a href="<?php echo $config['app_url']?>export_data.php">تحميل بياناتي</a></p>
             </div>
         </div>
     </div>

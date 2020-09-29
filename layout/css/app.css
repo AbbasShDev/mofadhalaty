@@ -132,6 +132,26 @@ select:active{
 }
 /* End rename-section model */
 
+/* start scroll-up  */
+.scroll-up {
+    text-align: center;
+    background-color: var(--main-color);
+    position: fixed;
+    z-index: 1000;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    padding: 5px 4px 3px 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+.scroll-up i {
+    font-size: 20px;
+}
+/* end scroll-up  */
+
 /* Start sidebar */
 .sidebar {
     position: absolute;
@@ -520,6 +540,43 @@ select:active{
 
 .content .container {
     position: relative;
+}
+
+.content .container .list-title {
+    color: var(--darker-main-color);
+    position: relative;
+    width: fit-content;
+    right: 0px;
+    transform: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .content .container .list-title {
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
+
+.content .container .list-title span{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    bottom: -7px;
+    right: 0;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .content .container .list-title span{
+        display: block;
+    }
+}
+
+.content .container .list-title hr{
+    border-top: 3px dashed var(--main-color);
 }
 
 .content .container .row .loader-bg {

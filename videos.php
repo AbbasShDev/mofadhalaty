@@ -19,12 +19,14 @@ if (!empty($urls)){
 <!-- Start content -->
 <div class="content">
     <div class="container col-11">
+
+        <h5 class="list-title mt-5 mb-4 text-center text-lg-left">الفيديوهات<span></span></h5>
         <div class="row justify-content-around justify-content-md-start pb-5">
             <div class="loader-bg">
                 <img src="layout/images/preloader.gif" alt="">
             </div>
             <?php foreach ($urls as $url): ?>
-                <div class="col-12 col-md-6 col-lg-4 mt-5">
+                <div class="col-12 col-md-6 col-lg-4 mb-5">
                     <div class="card border-top-0 border-right-0 border-left-0 mx-auto">
                         <a href="read.php?url_id=<?php echo $url['url_id']?>"><img class="card-img-top" src="<?php echo $url['url_image'] ?>" alt="url_image"></a>
                         <div class="card-body px-0 pb-3">
@@ -111,6 +113,7 @@ if (!empty($urls)){
 <!-- Start content -->
 <div class="content">
     <div class="container col-11">
+        <h5 class="list-title mt-5 mb-4 text-center text-lg-left">الفيديوهات<span></span></h5>
         <div class="row justify-content-around justify-content-md-start pb-5">
             <div class="empty-result mx-auto">
                 <div>

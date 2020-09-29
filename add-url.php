@@ -45,7 +45,7 @@ if (isset($_POST['url'])){
                 $urlTitle .= '...';
             }
             if (empty($info->title)){
-                $urlTitle = 'العنوان غير متاح';
+                $urlTitle = 'لا يوجد عنوان';
             }
 
             $urlDesc = $info->description;
@@ -54,7 +54,7 @@ if (isset($_POST['url'])){
                 $urlDesc .= '...';
             }
             if (empty($info->description)){
-                $urlDesc = 'الوصف غير متاح<i class="far fa-frown fa-fw"></i>';
+                $urlDesc = 'لا يوجد وصف';
             }
 
             $urlProviderName = $info->providerName;
@@ -80,77 +80,85 @@ if (isset($_POST['url'])){
             $dbUrlProviderName          = filter_var($urlProviderName, FILTER_SANITIZE_STRING);
             $dbUrlProviderUrl           = filter_var($info->providerUrl, FILTER_SANITIZE_URL);
 
-            $stat->execute();
+            if ($stat->execute()){
 
-            $dbUrlId =$mysqli->insert_id;
+                $dbUrlId =$mysqli->insert_id;
 
-            $output = '';
-            $output .= '<div class="col-12 col-md-6 col-lg-4 mt-5 mx-auto mx-lg-0">';
-            $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
-            $output .= '<a href="read.php?url_id=';
-            $output .= "$dbUrlId";
-            $output .= '" >';
-            $output .= '<img class="card-img-top" src="';
-            $output .= "$dbUrlImage";
-            $output .= '" alt="url_image"></a>';
-            $output .= '<div class="card-body px-0 pb-3">';
-            $output .= '<a href="read.php?url_id=';
-            $output .= "$dbUrlId";
-            $output .= '" >';
-            $output .= '<h5 class="card-title">';
-            $output .= "$dbUrlTitle";
-            $output .= '</h5></a>';
-            $output .= '<p class="provider-name  mb-2">';
-            $output .= '<a href="';
-            $output .= "$dbUrlProviderUrl";
-            $output .= '" target="_blank">';
-            $output .= "$dbUrlProviderName";
-            $output .= '</a>';
-            $output .= '</p>';
-            $output .= '<p class="card-text">';
-            $output .= "$dbUrlDesc";
-            $output .= '</p>';
-            $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
-            $output .= "$dbUrlProviderIcon";
-            $output .= '" alt="">';
-            $output .= '<div class="fav-icon mr-2 float-right"></div>';
-            $output .= '<div class="action-btn float-left">';
-            $output .= '<div class="dropup">';
-            $output .= '<div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
-            $output .= '<i class="fas fa-ellipsis-h fa-lg"></i>';
-            $output .= '</div>';
-            $output .= '<div class="dropdown-menu">';
-            $output .= '<div class="dropdown-item px-0">';
-            $output .= '<form action="" class="favourite" method="post" data-fav="0" data-urlid="';
-            $output .= "$dbUrlId";
-            $output .= '">';
-            $output .= '<button>';
-            $output .= '<i class="far fa-star fa-lg fa-fw mx-2"></i><span class="">إضافة الى المفضلة</span>';
-            $output .= '</button></form></div>';
-            $output .= '<div class="dropdown-item px-0">';
-            $output .= '<form action="" class="archive" method="post" data-archive="0" data-urlid="';
-            $output .= "$dbUrlId";
-            $output .= '">';
-            $output .= '<button><i class="fas fa-archive fa-lg fa-fw mx-2"></i><span class="">إضافة الى الإرشيف</span></button>';
-            $output .= '</form></div>';
-            $output .= '<div class="dropdown-item px-0">';
-            $output .= '<form action="app.php" method="post">';
-            $output .= '<input type="hidden" name="urlid" value="';
-            $output .= "$dbUrlId";
-            $output .= '">';
-            $output .= '<button button type="submit" name="delete_url" onclick="return confirm(';
-            $output .= "'هل تريد الحذف؟'";
-            $output .= ')">';
-            $output .= '<i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span></button>';
-            $output .= '</form></div>';
-            $output .= '<div class="dropdown-item px-0">';
-            $output .= '<div class="add-section-toggler" data-toggle="modal" data-target="#add-url-to-section" data-urlid="';
-            $output .= "$dbUrlId";
-            $output .= '">';
-            $output .= '<i class="fas fa-th-list fa-lg fa-fw mx-2"></i><span class="">إضافة الى قائمة</span></div>';
-            $output .= '</div></div></div></div></div></div></div>';
+                $output = '';
+                $output .= '<div class="col-12 col-md-6 col-lg-4 mb-5 mx-auto mx-lg-0">';
+                $output .= '<div class="card border-top-0 border-right-0 border-left-0 mx-auto">';
+                $output .= '<a href="read.php?url_id=';
+                $output .= "$dbUrlId";
+                $output .= '" >';
+                $output .= '<img class="card-img-top" src="';
+                $output .= "$dbUrlImage";
+                $output .= '" alt="url_image"></a>';
+                $output .= '<div class="card-body px-0 pb-3">';
+                $output .= '<a href="read.php?url_id=';
+                $output .= "$dbUrlId";
+                $output .= '" >';
+                $output .= '<h5 class="card-title">';
+                $output .= "$dbUrlTitle";
+                $output .= '</h5></a>';
+                $output .= '<p class="provider-name  mb-2">';
+                $output .= '<a href="';
+                $output .= "$dbUrlProviderUrl";
+                $output .= '" target="_blank">';
+                $output .= "$dbUrlProviderName";
+                $output .= '</a>';
+                $output .= '</p>';
+                $output .= '<p class="card-text">';
+                $output .= "$dbUrlDesc";
+                $output .= '</p>';
+                $output .= '<img class="rounded-circle header-profile-img float-right"  src="';
+                $output .= "$dbUrlProviderIcon";
+                $output .= '" alt="">';
+                $output .= '<div class="fav-icon mr-2 float-right"></div>';
+                $output .= '<div class="action-btn float-left">';
+                $output .= '<div class="dropup">';
+                $output .= '<div class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">';
+                $output .= '<i class="fas fa-ellipsis-h fa-lg"></i>';
+                $output .= '</div>';
+                $output .= '<div class="dropdown-menu">';
+                $output .= '<div class="dropdown-item px-0">';
+                $output .= '<form action="" class="favourite" method="post" data-fav="0" data-urlid="';
+                $output .= "$dbUrlId";
+                $output .= '">';
+                $output .= '<button>';
+                $output .= '<i class="far fa-star fa-lg fa-fw mx-2"></i><span class="">إضافة الى المفضلة</span>';
+                $output .= '</button></form></div>';
+                $output .= '<div class="dropdown-item px-0">';
+                $output .= '<form action="" class="archive" method="post" data-archive="0" data-urlid="';
+                $output .= "$dbUrlId";
+                $output .= '">';
+                $output .= '<button><i class="fas fa-archive fa-lg fa-fw mx-2"></i><span class="">إضافة الى الإرشيف</span></button>';
+                $output .= '</form></div>';
+                $output .= '<div class="dropdown-item px-0">';
+                $output .= '<form action="app.php" method="post">';
+                $output .= '<input type="hidden" name="urlid" value="';
+                $output .= "$dbUrlId";
+                $output .= '">';
+                $output .= '<button button type="submit" name="delete_url" onclick="return confirm(';
+                $output .= "'هل تريد الحذف؟'";
+                $output .= ')">';
+                $output .= '<i class="fas fa-trash-alt fa-lg fa-fw mx-2"></i><span class="">حذف</span></button>';
+                $output .= '</form></div>';
+                $output .= '<div class="dropdown-item px-0">';
+                $output .= '<div class="add-section-toggler" data-toggle="modal" data-target="#add-url-to-section" data-urlid="';
+                $output .= "$dbUrlId";
+                $output .= '">';
+                $output .= '<i class="fas fa-th-list fa-lg fa-fw mx-2"></i><span class="">إضافة الى قائمة</span></div>';
+                $output .= '</div></div></div></div></div></div></div>';
 
-            echo $output;
+                echo $output;
+
+            }else{
+                echo '<div class="alert alert-danger alert-ajax">
+                <p class="m-0">'.'حدث خطأ'.'</p>
+              </div>';
+            }
+
+
 
         }else{
             echo '<div class="alert alert-danger alert-ajax">

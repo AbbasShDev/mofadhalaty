@@ -3,6 +3,47 @@ $('document').ready(function () {
 
     'use strict'
 
+    //scroll to section on clicking navbar link
+    $('.nav-link.scroll').on('click', function(e) {
+        e.preventDefault();
+
+        $('html, body').animate(
+            {
+                scrollTop: $('#' + $(this).data('scroll')).offset().top
+            },
+            1000
+        );
+    });
+
+    //scroll to section by url
+    if (window.location.hash) {
+        let hash = window.location.hash;
+
+        if ($(hash).length) {
+            $('html, body').animate({
+                scrollTop: $(hash).offset().top
+            }, 900, 'swing');
+        }
+    }
+
+    //scroll top btn
+    $('.scroll-up').click(function() {
+        $('html, body').animate(
+            {
+                scrollTop: 0
+            },
+            1000
+        );
+    });
+    $(window).scroll(function() {
+        let scrollUp = $('.scroll-up');
+        if ($(window).scrollTop() >= 200) {
+            scrollUp.slideDown(200);
+        } else {
+            scrollUp.slideUp(200);
+        }
+    });
+
     //toggler acttive class
 
     $('.navbar-area .navbar-toggler').on('click', function () {

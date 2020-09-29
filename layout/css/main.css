@@ -55,6 +55,26 @@ span{
 }
 /* End notification message */
 
+/* start scroll-up  */
+.scroll-up {
+    text-align: center;
+    background-color: var(--main-color);
+    position: fixed;
+    z-index: 1000;
+    bottom: 20px;
+    right: 20px;
+    color: #fff;
+    padding: 5px 4px 3px 4px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+.scroll-up i {
+    font-size: 20px;
+}
+/* end scroll-up  */
+
 /* Start header */
 .header {
     position: relative;
@@ -317,6 +337,7 @@ span{
 
 .about h1 {
     font-size: 26px;
+    color: #1b262c;
 }
 
 .about h1 span {
@@ -355,6 +376,10 @@ span{
 .contact .container textarea {
     color: #1b262c;
     font-size: 18px;
+    border: none;
+    -moz-box-shadow: 0px 0px 2px #bcbdbe;
+    -webkit-box-shadow: 0px 0px 2px #bcbdbe;
+    box-shadow: 0px 0px 2px #bcbdbe;
 }
 
 .contact .container input::placeholder,
@@ -364,6 +389,7 @@ span{
 
 .contact .container textarea {
     height: 170px;
+    resize: none;
 }
 
 .contact .container .btn {

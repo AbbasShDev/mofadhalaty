@@ -19,4 +19,8 @@
     <title><?php echo "$config[app_name] $pageTitle"?></title>
 </head>
 <body>
-
+<!-- start scroll-up -->
+<div class="scroll-up">
+    <i class="fas fa-chevron-up fa-fw"></i>
+</div>
+<!-- End scroll-up -->
