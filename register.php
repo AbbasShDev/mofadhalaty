@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $_SESSION['user_name'] = $username;
         $_SESSION['user_id'] = $mysqli->insert_id;
+        $_SESSION['user_role']  = 'user';
         $_SESSION['notify_message'] = "مرحبا $username ، نتمنا لك وقتاً ممتعاً";
 
         header('location:app.php');

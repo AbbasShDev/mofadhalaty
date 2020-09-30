@@ -367,6 +367,12 @@ select:active{
     background: #3f64b536;
     border-radius: 5px;
 }
+
+.sidebar .nav li a.dashboard {
+    color: #ffffff;
+    background: var(--darker-main-color);
+    border-radius: 5px;
+}
 /* End sidebar */
 
 /* Start navbar */

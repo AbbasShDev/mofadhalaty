@@ -1,5 +1,10 @@
 <?php
 ob_start();
+
+if (!isset($_SESSION['user_name'])){
+    header('location:index.php');
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +58,16 @@ unset($_SESSION['error_message']); ?>
         <div class="hide-sidebar">
             <i class="fas fa-chevron-right"></i>
         </div>
+
         <ul class="nav all">
+            <?php if ($_SESSION['user_role'] == 'admin'){ ?>
+            <li class="pr-3 pr-lg-0">
+                <a class="nav-link text-left my-3 dashboard" href="<?php echo $config['app_url']?>admin/login.php">
+                    <i class="fas fa-tachometer-alt fa-fw"></i>
+                    لوحة التحكم
+                </a>
+            </li>
+            <?php } ?>
             <li class="pr-3 pr-lg-0">
                 <a class="nav-link text-left my-3 <?php if ($pageTitle == "| الرئيسية") { echo 'active';}else{ echo '';}?>" href="<?php echo $config['app_url']?>app.php">
                     <i class="fas fa-home fa-fw"></i>
@@ -181,10 +195,13 @@ unset($_SESSION['error_message']); ?>
                          alt="">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
+                    <a class="dropdown-item" href="<?php echo $config['app_url']?>app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="profile.php"><i class="fas fa-cog fa-fw"></i> حسابي</a>
-                    <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
+                    <?php if ($_SESSION['user_role'] == 'admin'){ ?>
+                    <a class="dropdown-item" href="<?php echo $config['app_url']?>admin/login.php"><i class="fas fa-tachometer-alt fa-fw"></i> لوحة التحكم</a>
+                    <?php } ?>
+                    <a class="dropdown-item" href="<?php echo $config['app_url']?>profile.php"><i class="fas fa-cog fa-fw"></i> حسابي</a>
+                    <a class="dropdown-item text-danger" href="<?php echo $config['app_url']?>logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                 </div>
             </div>
             <form class="add-url nav-item ml-auto" action="">

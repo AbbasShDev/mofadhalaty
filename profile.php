@@ -66,6 +66,9 @@ unset($_SESSION['notify_message']); ?>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="app.php"><i class="fas fa-user-circle fa-fw"></i> <?php echo $_SESSION['user_name'] ?></a>
                     <div class="dropdown-divider"></div>
+                    <?php if ($_SESSION['user_role'] == 'admin'){ ?>
+                        <a class="dropdown-item" href="<?php echo $config['app_url']?>admin/login.php"><i class="fas fa-tachometer-alt fa-fw"></i> لوحة التحكم</a>
+                    <?php } ?>
                     <a class="dropdown-item" href="profile.php"><i class="fas fa-cog fa-fw"></i> حسابي</a>
                     <a class="dropdown-item text-danger" href="logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                 </div>

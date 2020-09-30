@@ -40,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                 $_SESSION['user_name']  = $user_found['user_name'];
                 $_SESSION['user_id']    = $user_found['user_id'];
-                $_SESSION['avatar'] = $user_found['user_avatar'];
+                $_SESSION['avatar']     = $user_found['user_avatar'];
+                $_SESSION['user_role']  = $user_found['user_role'];
                 $_SESSION['notify_message'] = "مرحبا $user_found[user_name] ، نتمنى لك وقتاً ممتعاً";
 
                 header('location:app.php');
