@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 require_once __DIR__.'/../config/app.php';
 require_once __DIR__.'/../config/database.php';
@@ -92,7 +93,7 @@ if (!isset($_SESSION['admin']['name'])){
         <!-- Brand Logo -->
         <a href="index.php" class="brand-link">
             <img src="<?php echo $config['app_url']?>admin/layout/images/logo-white-croped.png" alt="Logo" class="brand-image img-circle elevation-3">
-            <span class="brand-text font-weight-light">لوحة تحكم | مفضلتي</span>
+            <span class="brand-text font-weight-light">لوحة التحكم | مفضلتي</span>
         </a>
 
         <!-- Sidebar -->
@@ -147,3 +148,21 @@ if (!isset($_SESSION['admin']['name'])){
         </div>
         <!-- /.sidebar -->
     </aside>
+<?php
+/* ==== notification message ==== */
+if (isset($_SESSION['notify_message'])) {?>
+    <div class="notify-message">
+        <?php echo $_SESSION['notify_message'];?>
+    </div>
+<?php }
+    unset($_SESSION['notify_message']);
+/* ==== notification message ==== */
+/* ====   error message ==== */
+if (isset($_SESSION['error_message'])) { ?>
+    <div class="notify-message bg-danger">
+        <?php echo $_SESSION['error_message'];?>
+    </div>
+<?php }
+unset($_SESSION['error_message']);
+/* ====   error message ==== */
+?>

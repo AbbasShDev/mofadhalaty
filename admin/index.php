@@ -129,8 +129,11 @@ require_once 'includes/templates/admin-header.php'
                                   <span class="text"><?php echo $user['user_name']?></span>
                                   <!-- General tools such as edit or delete-->
                                   <div class="tools float-right">
-                                      <i class="fa fa-edit fa-fw p-0 pr-1"></i>
-                                      <i class="far fa-trash-alt fa-fw p-0 pr-3"></i>
+                                      <a href="users/edit.php?userId=<?php echo $user['user_id']?>"><button class="btn btn-sm btn-info px-2 pt-0 pb-1"><i style="font-size: 12px" class="fa fa-edit fa-fw p-0 pr-1"></i></button></a>
+                                      <form style="display: inline-block" action="" method="post" class="mx-1">
+                                          <input type="hidden" name="userId" value="<?php echo $user['user_id']?>">
+                                          <button type="submit" name="delete_user" class="btn btn-sm btn-danger px-2 pt-0 pb-1" onclick="return confirm('هل تريد الحذف؟')"><i style="font-size: 12px" class="fas fa-backspace fa-fw"></i></button>
+                                      </form>
                                   </div>
                               </li>
                                <?php endforeach;?>
@@ -138,7 +141,7 @@ require_once 'includes/templates/admin-header.php'
                       </div>
                       <!-- /.card-body -->
                       <div class="card-footer clearfix">
-                          <button type="button" class="btn btn-info float-left"><i class="fa fa-plus"></i> إضافة عضو</button>
+                          <a href="users/add_user.php"><button type="button" class="btn btn-info float-left"><i class="fa fa-plus"></i> إضافة عضو</button></a>
                       </div>
                   </div>
               </div>
@@ -206,4 +209,22 @@ require_once 'includes/templates/admin-header.php'
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <?php require_once 'includes/templates/admin-footer.php'?>
+<?php
+
+if (isset($_POST['delete_user'])){
+
+    $userId = mysqli_real_escape_string($mysqli, $_POST['userId']);
+
+    $query = "DELETE FROM users WHERE user_id=$userId";
+    $mysqli->query($query);
+
+    if ($mysqli->error){
+        echo "<script>alert('".$mysqli->error."')</script>";
+    }else{
+        $_SESSION['error_message'] = 'تم الحذف';
+        header('location:index.php');
+        die();
+    }
+
+}
+require_once 'includes/templates/admin-footer.php'?>

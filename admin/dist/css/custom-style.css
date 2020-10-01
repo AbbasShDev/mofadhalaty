@@ -4,11 +4,25 @@
 	--darker-main-color: #1e3056;
 	--light-color: #d9e6f4
 }
-
+table tr:first-child {
+	background-color: var(--darker-main-color) !important;
+	color: var(--light-color) !important;
+}
+table tr td {
+	vertical-align: middle !important;
+}
+.table td{
+	padding-top: 0.25rem !important;
+	padding-bottom: 0.25rem !important;
+}
 
 .font-head {
 	font-family:railway,cairo,Arial,sans-serif !important;
 	font-weight: 700;
+}
+
+.mybg-main {
+	background-color: var(--main-color) !important;
 }
 .ltr {
 	direction: ltr;
@@ -20,6 +34,12 @@ ul {
 
 i {
 	cursor: pointer !important;
+}
+
+a,
+a:hover {
+	text-decoration: none;
+	color: #ffffff;
 }
 
 .dropdown-item {
@@ -36,6 +56,24 @@ i {
 .border-bottom {
 	border-bottom: 1px solid #dee2e6!important;
 }
+
+
+/* Start notification messages */
+.notify-message {
+	padding: 5px;
+	border-radius: 10px;
+	background-color: #28a745;
+	color: #FFFFFF;
+	font-size: 18px;
+	width: 300px;
+	text-align: center;
+	position: fixed;
+	top: 61px;
+	left: -300px;
+	z-index: 9999;
+}
+/* End notification messages */
+
 /*------------------------------------ contacts-list ------------------------------------*/
 
 .contacts-list-img {

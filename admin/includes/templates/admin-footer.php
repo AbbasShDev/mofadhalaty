@@ -40,5 +40,24 @@
 <script src="<?php echo $config['app_url']?>admin/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo $config['app_url']?>admin/dist/js/adminlte.js"></script>
+<script>
+
+    $(document).ready(function () {
+        //showing notification message
+        $('.notify-message').each(function () {
+
+            $(this).animate({
+                    left:'10px'
+                },1000,
+                function () {
+                    $(this).delay(2000).fadeOut();
+                })
+
+
+        })
+
+    })
+</script>
 </body>
 </html>
+<?php ob_end_flush(); ?>
