@@ -22,17 +22,17 @@ require_once '../includes/templates/admin-header.php'
         <section class="content">
             <div class="container-fluid pb-5">
 
-                <a href="add_user.php"><button type="button" class="btn btn-info float-left mb-3"><i class="fa fa-plus"></i> إضافة عضو</button></a>
+                <a href="add_user.php"><button type="button" class="btn my-btn-main  float-left mb-3"><i class="fa fa-plus"></i> إضافة عضو</button></a>
 
-                <table class="table table-responsive table-bordered table-striped table-hover">
+                <table class="table table-responsive-lg table-bordered table-striped table-hover">
                     <tr>
-                        <th style="min-width: 10px !important; width: 10px">#</th>
-                        <th style="min-width: 40px !important;  width: 40px !important;">الصورة</th>
-                        <th style="min-width: 237px !important; width: 237px !important;">الاسم</th>
-                        <th style="min-width: 325px !important; width: 325px !important;">الايميل</th>
-                        <th style="min-width: 40px !important;  width: 40px !important;">دور</th>
-                        <th style="min-width: 120px !important; width: 120px !important;">تاريخ التسجيل</th>
-                        <th style="text-align: center; min-width: 120px !important; width: 120px !important;" >تعديل | حذف</th>
+                        <th style="min-width: 10px !important;">#</th>
+                        <th style="min-width: 40px !important;">الصورة</th>
+                        <th style="min-width: 237px !important;">الاسم</th>
+                        <th style="min-width: 325px !important;">الايميل</th>
+                        <th style="min-width: 40px !important;">دور</th>
+                        <th style="min-width: 120px !important;">تاريخ التسجيل</th>
+                        <th style="text-align: center; min-width: 120px !important;" >تعديل | حذف</th>
                     </tr>
                     <?php
                     $stat = $mysqli->query('SELECT * FROM users ORDER BY user_id DESC');

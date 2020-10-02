@@ -56,11 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 $messageHtml .= '</body></html>';
 
 
-                mail($email, 'Password reset link', $messageHtml, $headers);
-
-                $_SESSION['notify_message'] = 'تم ارسال رابط استعادة كلمة المرور الى بريدك الإلكتروني';
-                header('location: password_reset.php');
-                die();
+                if (mail($email, 'Password reset link', $messageHtml, $headers)){
+                    $_SESSION['notify_message'] = 'تم ارسال رابط استعادة كلمة المرور الى بريدك الإلكتروني';
+                    header('location: password_reset.php');
+                    die();
+                }else{
+                    $_SESSION['error_message'] = 'لم يتم إرسالة البريد، حدثت مشكلة';
+                    header('location: password_reset.php');
+                    die();
+                }
             }
 
         }else{

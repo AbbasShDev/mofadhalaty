@@ -24,6 +24,22 @@ table tr td {
 .mybg-main {
 	background-color: var(--main-color) !important;
 }
+
+.my-btn-main {
+	background-color: var(--main-color) !important;
+	color: var(--light-color) !important;
+}
+
+.my-btn-main:hover {
+	background-color: #335ab2 !important;
+	color: var(--light-color) !important;
+}
+
+.ck-content {
+	text-align: right !important;
+	height: 200px !important;
+}
+
 .ltr {
 	direction: ltr;
 }

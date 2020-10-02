@@ -36,7 +36,7 @@ require_once 'includes/templates/admin-header.php'
               <div class="icon">
                 <i class="fas fa-users"></i>
               </div>
-              <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
+              <a href="users/" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -90,7 +90,7 @@ require_once 'includes/templates/admin-header.php'
               <div class="icon">
                 <i class="fas fa-envelope"></i>
               </div>
-              <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
+              <a href="messages/" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -182,8 +182,11 @@ require_once 'includes/templates/admin-header.php'
                                   <!-- /.Message-info -->
                                   <img class="direct-chat-img" src="<?php echo $config['app_url']?>uploads/avatars/default.png" alt="message user image">
                                   <!-- /.Message-img -->
-                                  <div class="direct-chat-text">
+                                  <div class="direct-chat-text pl-1">
                                       <?php echo $msg['message']?>
+                                      <a href="messages/reply.php?message_id=<?php echo $msg['message_id']?>" style="color: #444 !important;">
+                                          <i class="fas fa-reply float-right mr-auto pt-2"></i>
+                                      </a>
                                   </div>
                                   <!-- /.Message-text -->
                               </div>
@@ -194,7 +197,7 @@ require_once 'includes/templates/admin-header.php'
                       </div>
                       <!-- /.card-body -->
                       <div class="card-footer">
-                          <button type="button" class="btn btn-primary float-left"><i class="far fa-envelope"></i> الرسائل</button>
+                          <a href="messages/"><button type="button" class="btn btn-primary float-left"><i class="far fa-envelope"></i> الرسائل</button></a>
 
                       </div>
                       <!-- /.card-footer-->

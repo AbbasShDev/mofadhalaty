@@ -118,7 +118,7 @@ if (!isset($_SESSION['admin']['name'])){
                             </a>
                         </li>
                         <li class="nav-item pb-3">
-                            <a href="#" class="nav-link ">
+                            <a href="<?php echo $config['app_url']?>admin/urls" class="nav-link <?php if ($pageTitle == "| الروابط"){ echo 'active'; }else{ echo ''; } ?>">
                                 <i class="nav-icon fas fa-globe"></i>
                                 <p>الروابط</p>
                             </a>
@@ -130,7 +130,7 @@ if (!isset($_SESSION['admin']['name'])){
                             </a>
                         </li>
                         <li class="nav-item pb-3">
-                            <a href="#" class="nav-link ">
+                            <a href="<?php echo $config['app_url']?>admin/messages" class="nav-link <?php if ($pageTitle == "| الرسائل"){ echo 'active'; }else{ echo ''; } ?>">
                                 <i class="nav-icon fas fa-envelope"></i>
                                 <p>الرسائل</p>
                             </a>
