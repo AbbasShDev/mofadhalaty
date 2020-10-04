@@ -4,7 +4,7 @@
 	--darker-main-color: #1e3056;
 	--light-color: #d9e6f4
 }
-table tr:first-child {
+table.my-table tr:first-child {
 	background-color: var(--darker-main-color) !important;
 	color: var(--light-color) !important;
 }
@@ -14,6 +14,10 @@ table tr td {
 .table td{
 	padding-top: 0.25rem !important;
 	padding-bottom: 0.25rem !important;
+}
+
+.overlay {
+	display: none;
 }
 
 .font-head {

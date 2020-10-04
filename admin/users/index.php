@@ -24,13 +24,14 @@ require_once '../includes/templates/admin-header.php'
 
                 <a href="add_user.php"><button type="button" class="btn my-btn-main  float-left mb-3"><i class="fa fa-plus"></i> إضافة عضو</button></a>
 
-                <table class="table table-responsive-lg table-bordered table-striped table-hover">
+                <table class="my-table table table-responsive-lg table-bordered table-striped table-hover">
                     <tr>
                         <th style="min-width: 10px !important;">#</th>
                         <th style="min-width: 40px !important;">الصورة</th>
                         <th style="min-width: 237px !important;">الاسم</th>
-                        <th style="min-width: 325px !important;">الايميل</th>
+                        <th style="min-width: 275px !important;">الايميل</th>
                         <th style="min-width: 40px !important;">دور</th>
+                        <th style="min-width: 40px !important;">الروابط</th>
                         <th style="min-width: 120px !important;">تاريخ التسجيل</th>
                         <th style="text-align: center; min-width: 120px !important;" >تعديل | حذف</th>
                     </tr>
@@ -52,6 +53,7 @@ require_once '../includes/templates/admin-header.php'
                             <td><?php echo $user['user_name']?></td>
                             <td><?php echo $user['user_email']?></td>
                             <td><?php echo $user['user_role']?></td>
+                            <td><div class="d-flex justify-content-center"><a class="text-center text-info" href="<?php echo $config['app_url']?>admin/urls/user_urls.php?userId=<?php echo $user['user_id']?>"><i class="fas fa-link"></i></a></div></td>
                             <td><?php echo $user['user_created_at']?></td>
                             <td style="">
                                 <div class="d-flex justify-content-center">
@@ -81,7 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $mysqli->query($query);
 
     if ($mysqli->error){
-        echo "<script>alert('".$mysqli->error."')</script>";
+        $_SESSION['error_message'] = $mysqli->error;
+        header('location:index.php');
+        die();
     }else{
         $_SESSION['error_message'] = 'تم الحذف';
         header('location:index.php');

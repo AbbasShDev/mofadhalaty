@@ -21,14 +21,14 @@ require_once '../includes/templates/admin-header.php'
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid pb-5">
-                <table class="table table-responsive-lg table-bordered table-striped table-hover">
+                <table class="my-table table table-responsive-lg table-bordered table-striped table-hover">
                     <tr>
                         <th style="min-width: 10px !important;">#</th>
                         <th style="min-width:95px !important;">الاسم</th>
                         <th style="min-width:166px !important;">الايميل</th>
                         <th style="min-width:394px !important;">الرسالة</th>
-                        <th style="min-width:227px !important;">تاريخ الرسالة</th>
-                        <th style="" >رد</th>
+                        <th style="min-width:187px !important;">تاريخ الرسالة</th>
+                        <th style="text-align: center;" >رد | حذف</th>
                     </tr>
                     <?php
                     $stat = $mysqli->query('SELECT * FROM messages ORDER BY message_id DESC');
@@ -43,6 +43,10 @@ require_once '../includes/templates/admin-header.php'
                             <td style="">
                                 <div class="d-flex justify-content-center">
                                     <a href="reply.php?message_id=<?php echo $message['message_id']?>"><button class="btn btn-sm btn-primary mx-1"><i class="fas fa-reply"></i></button></a>
+                                    <form style="display: inline-block" action="" method="post" class="mx-1">
+                                        <input type="hidden" name="message_id" value="<?php echo $message['message_id']?>">
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -56,15 +60,18 @@ require_once '../includes/templates/admin-header.php'
     <!-- /.content-wrapper -->
 <?php
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
-    $userId = mysqli_real_escape_string($mysqli, $_POST['userId']);
+    $messageId = mysqli_real_escape_string($mysqli, $_POST['message_id']);
 
-    $query = "DELETE FROM users WHERE user_id=$userId";
+    $query = "DELETE FROM messages WHERE message_id=$messageId";
     $mysqli->query($query);
 
     if ($mysqli->error){
-        echo "<script>alert('".$mysqli->error."')</script>";
+        $_SESSION['error_message'] = $mysqli->error;
+        header('location:index.php');
+        die();
     }else{
         $_SESSION['error_message'] = 'تم الحذف';
         header('location:index.php');
