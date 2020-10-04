@@ -72,7 +72,7 @@ require_once 'includes/templates/admin-header.php'
               <div class="icon">
                 <i class="fas fa-th-list"></i>
               </div>
-              <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
+              <a href="sections" class="small-box-footer"><i class="fa fa-arrow-circle-left"></i></a>
             </div>
           </div>
           <!-- ./col -->

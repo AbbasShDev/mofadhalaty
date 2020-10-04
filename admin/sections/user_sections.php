@@ -1,5 +1,5 @@
 <?php
-$pageTitle = "| روابط عضو";
+$pageTitle = "| قوائم عضو";
 require_once '../includes/templates/admin-header.php';
 
 if (!isset($_GET['userId']) || empty($_GET['userId']) || !is_numeric($_GET['userId'])){
@@ -7,14 +7,14 @@ if (!isset($_GET['userId']) || empty($_GET['userId']) || !is_numeric($_GET['user
     die();
 }
 
-$stat = $mysqli->prepare("SELECT urls.*, users.user_name FROM urls INNER JOIN users ON urls.user_id = users.user_id WHERE urls.user_id=? ORDER BY url_id DESC");
+$stat = $mysqli->prepare("SELECT sections.*, users.user_name FROM sections INNER JOIN users ON sections.user_id = users.user_id WHERE sections.user_id=? ORDER BY section_id DESC");
 $stat->bind_param('i', $userId);
 $userId = intval($_GET['userId']);
 $stat->execute();
 $result = $stat->get_result();
 
 if ($result->num_rows > 0){
-    $urls = $result->fetch_all(MYSQLI_ASSOC);
+    $sections = $result->fetch_all(MYSQLI_ASSOC);
 
 
 ?>
@@ -27,7 +27,7 @@ if ($result->num_rows > 0){
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">الروابط المضافة من قبل <span style="color: var(--main-color)"><?php echo $urls[0]['user_name']?></span></h1>
+                        <h1 class="m-0 text-dark">القوائم المضافة من قبل <span style="color: var(--main-color)"><?php echo $sections[0]['user_name']?></span></h1>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -41,41 +41,35 @@ if ($result->num_rows > 0){
                 <div class="card card-danger card-outline">
                     <div style="padding: .75rem !important;" class="card-header">
                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                            <input type="hidden" name="user_id" value="<? echo $urls[0]['user_id']?>">
+                            <input type="hidden" name="user_id" value="<? echo $sections[0]['user_id']?>">
                             <button type="submit" name="delete-all" class="btn btn-danger card-title" onclick="return confirm('هل تريد الحذف؟')">حذف الكل</button>
                         </form>
                     </div>
-                    <table class=" table table-responsive table-hover">
+                    <table class="table table-striped table-hover text-center mb-0">
 
                         <tr>
-                            <th style="text-align: center;" >حذف</th>
                             <th>#</th>
-                            <th style="" >النوع</th>
-                            <th style="" >الموقع</th>
-                            <th style="min-width: 95px;" >العنوان</th>
-                            <th >الرابط</th>
+                            <th>اسم المستخدم</th>
+                            <th>اسم القائمة</th>
+                            <th style="text-align: center;" >حذف</th>
                         </tr>
-                        <?php foreach ($urls as $url):?>
+                        <?php
+                        foreach ($sections as $section):?>
                             <tr>
+                                <td><? echo $section['section_id']?></td>
+                                <td><? echo $section['user_name']?></td>
+                                <td><? echo $section['section_name']?></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                                            <input type="hidden" name="url_id" value="<? echo $url['url_id']?>">
-                                            <button type="submit" name="delete-url" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
+                                            <input type="hidden" name="section_id" value="<? echo $section['section_id']?>">
+                                            <button type="submit" name="delete-section" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
                                         </form>
                                     </div>
                                 </td>
-                                <td><? echo $url['url_id']?></td>
-                                <td><? echo $url['url_type']?></td>
-                                <td style="font-size: 14px"><? echo $url['url_providerName']?></td>
-                                <td style="font-size: 12px"><? echo $url['url_title']?></td>
-                                <td><a style="text-decoration: underline;color: var(--darker-main-color); font-size: 10px" href="<? echo $url['url_name']?>" target="_blank">
-                                        <? echo $url['url_name']?>
-                                    </a>
-                                </td>
                             </tr>
                         <?php endforeach; ?>
-                    </table>
+                    </table
                 </div>
 
             </div><!-- /.container-fluid -->
@@ -86,18 +80,18 @@ if ($result->num_rows > 0){
 <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if (isset($_POST['delete-url'])){
+        if (isset($_POST['delete-section'])){
 
-            $urlId = mysqli_real_escape_string($mysqli, $_POST['url_id']);
+            $sectionId = mysqli_real_escape_string($mysqli, $_POST['section_id']);
 
-            $query = "DELETE FROM urls WHERE url_id=$urlId";
+            $query = "DELETE FROM sections WHERE section_id=$sectionId";
             $mysqli->query($query);
 
             if ($mysqli->error){
                 echo "<script>alert('".$mysqli->error."')</script>";
             }else{
                 $_SESSION['error_message'] = 'تم الحذف';
-                header("Refresh:0");
+                header('location:index.php');
                 die();
             }
 
@@ -105,7 +99,7 @@ if ($result->num_rows > 0){
 
             $userId = mysqli_real_escape_string($mysqli, $_POST['user_id']);
 
-            $query = "DELETE FROM urls WHERE user_id=$userId";
+            $query = "DELETE FROM sections WHERE user_id=$userId";
             $mysqli->query($query);
 
             if ($mysqli->error){
@@ -138,7 +132,7 @@ if ($result->num_rows > 0){
             <div class="error-page">
                 <div class="error-content text-center m-0">
                     <h1 class="headline text-danger"><i class="fas fa-ban"></i></h1>
-                    <h3 class="">لم يتم اضافة روابط من قبل هذا العضو</h3>
+                    <h3 class="">لم يتم اضافة قوائم من قبل هذا العضو</h3>
                 </div>
             </div>
         </section>

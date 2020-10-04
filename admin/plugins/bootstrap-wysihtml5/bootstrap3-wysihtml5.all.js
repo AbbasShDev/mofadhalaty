@@ -4366,7 +4366,7 @@ wysihtml5.browser = (function() {
       var buggyCommands = {
         // formatBlock fails with some tags (eg. <blockquote>)
         "formatBlock":          isIE(10, "<="),
-         // When inserting unordered or ordered lists in Firefox, Chrome or Safari, the current selection or line gets
+         // When inserting unordered or ordered sections in Firefox, Chrome or Safari, the current selection or line gets
          // converted into a list (<ul><li>...</li></ul>, <ol><li>...</li></ol>)
          // IE and Opera act a bit different here as they convert the entire content of the current block element into a list
         "insertUnorderedList":  isIE(),
@@ -5594,7 +5594,7 @@ wysihtml5.dom.getStyle = (function() {
 };;/**
  * High performant way to check whether an element with a specific tag name is in the given document
  * Optimized for being heavily executed
- * Unleashes the power of live node lists
+ * Unleashes the power of live node sections
  *
  * @param {Object} doc The document object of the context where to check
  * @param {String} tagName Upper cased tag name
@@ -5622,7 +5622,7 @@ wysihtml5.dom.hasElementWithTagName = (function() {
 ;/**
  * High performant way to check whether an element with a specific class name is in the given document
  * Optimized for being heavily executed
- * Unleashes the power of live node lists
+ * Unleashes the power of live node sections
  *
  * @param {Object} doc The document object of the context where to check
  * @param {String} tagName Upper cased tag name
@@ -5639,7 +5639,7 @@ wysihtml5.dom.hasElementWithTagName = (function() {
 
   wysihtml5.dom.hasElementWithClassName = function(doc, className) {
     // getElementsByClassName is not supported by IE<9
-    // but is sometimes mocked via library code (which then doesn't return live node lists)
+    // but is sometimes mocked via library code (which then doesn't return live node sections)
     if (!wysihtml5.browser.supportsNativeGetElementsByClassName()) {
       return !!doc.querySelector("." + className);
     }
@@ -11299,11 +11299,11 @@ wysihtml5.commands.formatCode = {
     // <ol><li>foo</li><li>bar</li></ol>
     // becomes:
     // <ul><li>foo</li><li>bar</li></ul>
-    // Also rename other lists in selection
+    // Also rename other sections in selection
     composer.selection.executeAndRestore(function() {
       var renameLists = [el].concat(getListsInSelection(otherNodeName, composer));
 
-      // All selection inner lists get renamed too
+      // All selection inner sections get renamed too
       for (var l = renameLists.length; l--;) {
         wysihtml5.dom.renameElement(renameLists[l], nodeName.toLowerCase());
       }
@@ -11333,7 +11333,7 @@ wysihtml5.commands.formatCode = {
           }),
           isEmpty, list;
 
-      // This space causes new lists to never break on enter 
+      // This space causes new sections to never break on enter
       var INVISIBLE_SPACE_REG_EXP = /\uFEFF/g;
       tempElement.innerHTML = tempElement.innerHTML.replace(INVISIBLE_SPACE_REG_EXP, "");
       

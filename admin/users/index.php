@@ -28,10 +28,11 @@ require_once '../includes/templates/admin-header.php'
                     <tr>
                         <th style="min-width: 10px !important;">#</th>
                         <th style="min-width: 40px !important;">الصورة</th>
-                        <th style="min-width: 237px !important;">الاسم</th>
+                        <th style="min-width: 185px !important;">الاسم</th>
                         <th style="min-width: 275px !important;">الايميل</th>
                         <th style="min-width: 40px !important;">دور</th>
                         <th style="min-width: 40px !important;">الروابط</th>
+                        <th style="min-width: 40px !important;">القوائم</th>
                         <th style="min-width: 120px !important;">تاريخ التسجيل</th>
                         <th style="text-align: center; min-width: 120px !important;" >تعديل | حذف</th>
                     </tr>
@@ -54,6 +55,7 @@ require_once '../includes/templates/admin-header.php'
                             <td><?php echo $user['user_email']?></td>
                             <td><?php echo $user['user_role']?></td>
                             <td><div class="d-flex justify-content-center"><a class="text-center text-info" href="<?php echo $config['app_url']?>admin/urls/user_urls.php?userId=<?php echo $user['user_id']?>"><i class="fas fa-link"></i></a></div></td>
+                            <td><div class="d-flex justify-content-center"><a class="text-center text-warning" href="<?php echo $config['app_url']?>admin/sections/user_sections.php?userId=<?php echo $user['user_id']?>"><i class="fas fa-link"></i></a></div></td>
                             <td><?php echo $user['user_created_at']?></td>
                             <td style="">
                                 <div class="d-flex justify-content-center">

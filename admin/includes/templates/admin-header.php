@@ -49,7 +49,7 @@ if (!isset($_SESSION['admin']['name'])){
     <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/dist/css/custom-style.css">
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -124,7 +124,7 @@ if (!isset($_SESSION['admin']['name'])){
                             </a>
                         </li>
                         <li class="nav-item pb-3">
-                            <a href="#" class="nav-link ">
+                            <a href="<?php echo $config['app_url']?>admin/sections" class="nav-link <?php if ($pageTitle == "| القوائم"){ echo 'active'; }else{ echo ''; } ?>">
                                 <i class="nav-icon fas fa-th-list"></i>
                                 <p>القوائم</p>
                             </a>

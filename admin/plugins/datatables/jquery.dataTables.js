@@ -8381,7 +8381,7 @@
 	 */
 	
 	// can be an array of these items, comma separated list, or an array of comma
-	// separated lists
+	// separated sections
 	
 	var __re_column_selector = /^([^:]+):(name|visIdx|visible)$/;
 	
