@@ -1,8 +1,14 @@
 <?php
+require_once 'database.php';
+
+$settings = $mysqli->query('SELECT * FROM settings')->fetch_assoc();
+
+
+
 $config = [
 
-    'app_name' => 'مفضلتي',
-    'app_url' => 'http://localhost:8080/my-favoraite-app/',
-    'admin_email' => 'admin@admin.com',
+    'app_name' => $settings['app_name'],
+    'app_url' => $settings['app_url'],
+    'admin_email' => $settings['admin_email'],
 
 ];

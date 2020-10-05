@@ -27,6 +27,9 @@ if (isset($_GET['section_id']) && !empty($_GET['section_id']) && is_numeric($_GE
         $stat->execute();
         $result = $stat->get_result();
 
+
+        if ($result->num_rows != 0){
+
         $sectionName = $result->fetch_assoc();
 
         $pageTitle = "| $sectionName[section_name]";
@@ -49,7 +52,12 @@ if (isset($_GET['section_id']) && !empty($_GET['section_id']) && is_numeric($_GE
 
         <!-- End content -->
 
-<?php    }else{
+<?php
+        }else{
+            header("location:app.php");
+            die();
+        }
+        }else{
         $urls = $result->fetch_all(MYSQLI_ASSOC);
         $sectionName = $urls[0]['section_name'];
 

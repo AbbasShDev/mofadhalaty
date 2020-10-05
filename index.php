@@ -4,22 +4,7 @@ require_once 'includes/config/database.php';
 $pageTitle = '';
 
 
-/* ==== notification message ==== */
-if (isset($_SESSION['notify_message'])) {?>
-    <div class="notify-message">
-        <?php echo $_SESSION['notify_message'];?>
-    </div>
-<?php }
-    unset($_SESSION['notify_message']);
-/* ==== notification message ==== */
-/* ====   error message ==== */
-if (isset($_SESSION['error_message'])) { ?>
-    <div class="notify-message bg-danger">
-        <?php echo $_SESSION['error_message'];?>
-    </div>
-<?php }
-unset($_SESSION['error_message']);
-/* ====   error message ==== */
+
 
 
 require_once 'includes/config/app.php';

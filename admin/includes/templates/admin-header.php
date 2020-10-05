@@ -80,7 +80,7 @@ if (!isset($_SESSION['admin']['name'])){
                     <a class="dropdown-item" href="<?php echo $config['app_url']?>app.php"><i class="fas fa-home fa-fw"></i> مفضلتي</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="<?php echo $config['app_url']?>profile.php"><i class="fas fa-cog fa-fw"></i> حسابي</a>
-                    <a class="dropdown-item" href="<?php echo $config['app_url']?>admin/"><i class="fas fa-cogs fa-fw"></i> إعدادات لوحة التحكم </a>
+                    <a class="dropdown-item" href="<?php echo $config['app_url']?>admin/settings"><i class="fas fa-cogs fa-fw"></i> إعدادات الموقع </a>
                     <a class="dropdown-item text-danger" href="<?php echo $config['app_url']?>admin/logout.php"><i class="fa fa-power-off fa-fw"></i> خروج</a>
                 </div>
             </li>
@@ -107,7 +107,7 @@ if (!isset($_SESSION['admin']['name'])){
                              with font-awesome or any other icon font library -->
                         <li class="nav-item pb-3 pt-4">
                             <a href="<?php echo $config['app_url']?>admin" class="nav-link <?php if ($pageTitle == "| الرئيسية"){ echo 'active'; }else{ echo ''; } ?>">
-                                <i class="nav-icon fa fa-th"></i>
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>الرئيسية</p>
                             </a>
                         </li>
@@ -136,7 +136,7 @@ if (!isset($_SESSION['admin']['name'])){
                             </a>
                         </li>
                         <li class="nav-item pb-3">
-                            <a href="#" class="nav-link ">
+                            <a href="<?php echo $config['app_url']?>admin/settings" class="nav-link <?php if ($pageTitle == "| الإعدادات"){ echo 'active'; }else{ echo ''; } ?>">
                                 <i class="nav-icon fas fa-cogs"></i>
                                 <p>الإعدادات</p>
                             </a>
