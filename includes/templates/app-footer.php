@@ -1,13 +1,4 @@
-<!-- Start Footer  -->
-<!--<div class="footer">-->
-<!--    <div>-->
-<!--        <a href="https://twitter.com/AbbasShDev" target="_blank"><i class="mr-2 p-1 fab fa-twitter"></i></a>-->
-<!--        <a href="https://github.com/AbbasShDev" target="_blank"><i class="mr-2 p-1 fab fa-github "></i></a>-->
-<!--        <a href="https://www.linkedin.com/in/abbas-alshaqaq-7b58221a5/" target="_blank"><i class="mr-2 p-1 fab fa-linkedin"></i></a>-->
-<!--        Coded by AbbasShDev <span>2020 ©</span>-->
-<!--    </div>-->
-<!--</div>-->
-<!-- End Footer  -->
+
 </body>
 
 <!-- jQuery js -->

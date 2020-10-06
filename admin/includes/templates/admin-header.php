@@ -30,23 +30,11 @@ if (!isset($_SESSION['admin']['name'])){
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <!-- Theme style -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/dist/css/adminlte.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/iCheck/flat/blue.css">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/morris/morris.css">
-    <!-- jvectormap -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
-    <!-- Date Picker -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/datepicker/datepicker3.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/daterangepicker/daterangepicker-bs3.css">
-    <!-- bootstrap wysihtml5 - text editor -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/layout/css/adminlte.min.css">
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" integrity="sha384-vus3nQHTD+5mpDiZ4rkEPlnkcyTP+49BhJ4wJeJunw06ZAp+wzzeBPUXr42fi8If" crossorigin="anonymous">
-    <!-- template rtl version -->
-    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/dist/css/custom-style.css">
+    <!-- custom style css -->
+    <link rel="stylesheet" href="<?php echo $config['app_url']?>admin/layout/css/custom-style.css">
 
 </head>
 <body class="hold-transition sidebar-mini sidebar-collapse">

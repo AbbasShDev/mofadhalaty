@@ -71,9 +71,4 @@ if (isset($_POST['addSection'])){
         echo $output;
         }
 
-
-
-
-
-
 }

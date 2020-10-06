@@ -64,7 +64,6 @@ $('document').ready(function () {
     })
 
     //CUSTOM upload file filed
-
     $('.profile .profile-right form  input[type="file"]').wrap('<div class="custom-file"></div>')
 
     $('.custom-file').prepend('<span>تحميل الملف (jpeg, jpg, png) </span>')
@@ -75,7 +74,7 @@ $('document').ready(function () {
         $(this).prev('span').text($(this).val().substring(12))
     })
 
-    //change log bg on small devices
+    //change logo bg on small devices
     function logoGg() {
         let logoSrc = $('.navbar-area .navbar-brand img');
         if ($(window).width() < 992){

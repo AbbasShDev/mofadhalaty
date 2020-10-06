@@ -139,11 +139,7 @@ unset($_SESSION['notify_message']); ?>
                 </div>
             </div>
 
-    <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){//export data (urls)
-
-
-
-        ?>
+    <?php if(isset($_GET['do']) && $_GET['do'] == 'export'){//export data (urls)?>
 
     <div class="col-11 col-lg-7 order-0 order-lg-1 profile-right my-5">
         <div class="container export">
@@ -281,13 +277,13 @@ unset($_SESSION['notify_message']); ?>
                 'gif' =>'image/gif'
             ];
 
-            $upload = new Uploader('uploads/avatars', $allowedTypes);
+            $upload = new Uploader('uploads/avatars', $allowedTypes, $config['root_dir']);
             $upload->file = $_FILES['avatar'];
             $errors = $upload->upload();
 
             $filePath = $upload->filePath;
             if (!count($errors) && !empty($avatar)){
-                unlink($_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR.'my-favoraite-app/'.$avatar);
+                unlink($config['root_dir'].$avatar);
                 $avatar = $filePath;
             }elseif (!count($errors) && empty($avatar)){
                 $avatar = $filePath;
