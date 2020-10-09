@@ -11,12 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $app_name              = mysqli_real_escape_string($mysqli, $_POST['app_name']);
     $app_url               = mysqli_real_escape_string($mysqli, $_POST['app_url']);
     $admin_email           = mysqli_real_escape_string($mysqli, $_POST['admin_email']);
-    $app_main_dir          = mysqli_real_escape_string($mysqli, $_POST['app_main_dir']);
 
     if (empty($app_name)){array_push($errors, 'يجب ادخال اسم الموقع');}
     if (empty($app_url)){array_push($errors, 'يجب ادخال رابط الموقع');}
     if (empty($admin_email)){array_push($errors, 'يجب ادخال إيميل الأدمن');}
-    if (empty($app_main_dir)){array_push($errors, 'يجب ادخال مسار الموقع الرئيسي');}
 
     if (!count($errors)){
         $query = "UPDATE settings SET app_name='$app_name', app_url='$app_url', admin_email='$admin_email', app_main_dir='$app_main_dir'";
@@ -71,10 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="form-group">
                                 <label for="admin_email" class="font-head">إيميل الأدمن</label>
                                     <input type="email" class="form-control" name="admin_email" id="admin_email"  value="<?php echo $settings['admin_email'] ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="app_main_dir" class="font-head">مسار الموقع الرئيسي <span style="font-size: 12px;color: #646464;"> (اضف علامة "/" بعد الإسم)</span></label>
-                                    <input type="text" class="form-control" name="app_main_dir" id="app_main_dir" dir="ltr"  value="<?php echo $settings['app_main_dir'] ?>" required>
                             </div>
                         </div>
                         <!-- /.card-body -->

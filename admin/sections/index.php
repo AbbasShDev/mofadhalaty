@@ -44,13 +44,13 @@ require_once '../includes/templates/admin-header.php'
                         $sections = $stat->fetch_all(MYSQLI_ASSOC);
                         foreach ($sections as $section):?>
                             <tr>
-                                <td><? echo $section['section_id']?></td>
-                                <td><u><a class="text-info text-" href="user_sections.php?userId=<? echo $section['user_id']?>"><? echo $section['user_name']?></a></u></td>
-                                <td><? echo $section['section_name']?></td>
+                                <td><?php echo $section['section_id']?></td>
+                                <td><u><a class="text-info text-" href="user_sections.php?userId=<?php echo $section['user_id']?>"><?php echo $section['user_name']?></a></u></td>
+                                <td><?php echo $section['section_name']?></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                                            <input type="hidden" name="section_id" value="<? echo $section['section_id']?>">
+                                            <input type="hidden" name="section_id" value="<?php echo $section['section_id']?>">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
                                         </form>
                                     </div>

@@ -41,7 +41,7 @@ if ($result->num_rows > 0){
                 <div class="card card-danger card-outline">
                     <div style="padding: .75rem !important;" class="card-header">
                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                            <input type="hidden" name="user_id" value="<? echo $sections[0]['user_id']?>">
+                            <input type="hidden" name="user_id" value="<?php echo $sections[0]['user_id']?>">
                             <button type="submit" name="delete-all" class="btn btn-danger card-title" onclick="return confirm('هل تريد الحذف؟')">حذف الكل</button>
                         </form>
                     </div>
@@ -56,13 +56,13 @@ if ($result->num_rows > 0){
                         <?php
                         foreach ($sections as $section):?>
                             <tr>
-                                <td><? echo $section['section_id']?></td>
-                                <td><? echo $section['user_name']?></td>
-                                <td><? echo $section['section_name']?></td>
+                                <td><?php echo $section['section_id']?></td>
+                                <td><?php echo $section['user_name']?></td>
+                                <td><?php echo $section['section_name']?></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                                            <input type="hidden" name="section_id" value="<? echo $section['section_id']?>">
+                                            <input type="hidden" name="section_id" value="<?php echo $section['section_id']?>">
                                             <button type="submit" name="delete-section" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
                                         </form>
                                     </div>

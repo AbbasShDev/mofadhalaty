@@ -41,7 +41,7 @@ if ($result->num_rows > 0){
                 <div class="card card-danger card-outline">
                     <div style="padding: .75rem !important;" class="card-header">
                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                            <input type="hidden" name="user_id" value="<? echo $urls[0]['user_id']?>">
+                            <input type="hidden" name="user_id" value="<?php echo $urls[0]['user_id']?>">
                             <button type="submit" name="delete-all" class="btn btn-danger card-title" onclick="return confirm('هل تريد الحذف؟')">حذف الكل</button>
                         </form>
                     </div>
@@ -60,17 +60,17 @@ if ($result->num_rows > 0){
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                                            <input type="hidden" name="url_id" value="<? echo $url['url_id']?>">
+                                            <input type="hidden" name="url_id" value="<?php echo $url['url_id']?>">
                                             <button type="submit" name="delete-url" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
                                         </form>
                                     </div>
                                 </td>
-                                <td><? echo $url['url_id']?></td>
-                                <td><? echo $url['url_type']?></td>
-                                <td style="font-size: 14px"><? echo $url['url_providerName']?></td>
-                                <td style="font-size: 12px"><? echo $url['url_title']?></td>
-                                <td><a style="text-decoration: underline;color: var(--darker-main-color); font-size: 10px" href="<? echo $url['url_name']?>" target="_blank">
-                                        <? echo $url['url_name']?>
+                                <td><?php echo $url['url_id']?></td>
+                                <td><?php echo $url['url_type']?></td>
+                                <td style="font-size: 14px"><?php echo $url['url_providerName']?></td>
+                                <td style="font-size: 12px"><?php echo $url['url_title']?></td>
+                                <td><a style="text-decoration: underline;color: var(--darker-main-color); font-size: 10px" href="<?php echo $url['url_name']?>" target="_blank">
+                                        <?php echo $url['url_name']?>
                                     </a>
                                 </td>
                             </tr>

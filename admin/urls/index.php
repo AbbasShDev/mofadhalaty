@@ -48,16 +48,16 @@ require_once '../includes/templates/admin-header.php'
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <form style="display: inline-block" action="" method="post" class="mx-1">
-                                            <input type="hidden" name="url_id" value="<? echo $url['url_id']?>">
+                                            <input type="hidden" name="url_id" value="<?php echo $url['url_id']?>">
                                             <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('هل تريد الحذف؟')"><i class="fas fa-backspace fa-fw"></i></button>
                                         </form>
                                     </div>
                                 </td>
-                                <td><? echo $url['url_id']?></td>
-                                <td><u><a class="text-info text-" href="user_urls.php?userId=<? echo $url['user_id']?>"><? echo $url['user_name']?></a></u></td>
-                                <td><? echo $url['url_title']?></td>
-                                <td><a style="    text-decoration: underline;color: var(--darker-main-color);" href="<? echo $url['url_name']?>" target="_blank">
-                                        <? echo $url['url_name']?>
+                                <td><?php echo $url['url_id']?></td>
+                                <td><u><a class="text-info text-" href="user_urls.php?userId=<?php echo $url['user_id']?>"><?php echo $url['user_name']?></a></u></td>
+                                <td><?php echo $url['url_title']?></td>
+                                <td><a style="    text-decoration: underline;color: var(--darker-main-color);" href="<?php echo $url['url_name']?>" target="_blank">
+                                        <?php echo $url['url_name']?>
                                     </a>
                                 </td>
                             </tr>

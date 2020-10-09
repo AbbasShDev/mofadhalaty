@@ -54,7 +54,7 @@ select:active{
     width: fit-content;
     position: fixed;
     top: 65px;
-    right: 250px;
+    left: 10px;
     z-index: 3;
 }
 
@@ -79,7 +79,7 @@ select:active{
     width: fit-content;
     position: fixed;
     top: 65px;
-    right: 250px;
+    left: 10px;
     z-index: 9999;
 }
 /* End notification messages */

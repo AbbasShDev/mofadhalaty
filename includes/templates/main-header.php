@@ -24,3 +24,22 @@
     <i class="fas fa-chevron-up fa-fw"></i>
 </div>
 <!-- End scroll-up -->
+
+<!-- Start messages -->
+<!-- Start notification message -->
+<?php if (isset($_SESSION['notify_message'])) {?>
+    <div class="notify-message">
+        <?php echo $_SESSION['notify_message'];?>
+    </div>
+<?php }
+unset($_SESSION['notify_message']); ?>
+<!-- End notification message -->
+<!-- Start error message -->
+<?php if (isset($_SESSION['error_message'])) {?>
+    <div class="notify-message bg-danger">
+        <?php echo $_SESSION['error_message'];?>
+    </div>
+<?php }
+unset($_SESSION['error_message']); ?>
+<!-- End error message -->
+<!-- End messages -->

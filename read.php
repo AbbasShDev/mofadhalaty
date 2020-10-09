@@ -178,7 +178,7 @@ unset($_SESSION['error_message']); ?>
             </div>
             <h5 class="mt-1 mb-4"><a href="<?php echo $url['url_name']?>" target="_blank">زيارة الصفحة</a></h5>
             <?php if (!empty($info->code)){ ?>
-            <div class="col-11 col-lg-8 <?php if ($info->providerName != 'Instagram'){ echo 'embed-responsive embed-responsive-16by9'; } ?> d-flex justify-content-center my-3 mx-auto">
+            <div class="col-11 col-lg-8 <?php if ($info->providerName == 'YouTube'){ echo 'embed-responsive embed-responsive-16by9'; } ?> d-flex justify-content-center my-3 mx-auto">
                 <?php echo $info->code ?>
             </div>
             <?php } ?>

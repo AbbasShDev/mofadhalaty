@@ -49,7 +49,7 @@ unset($_SESSION['notify_message']); ?>
 unset($_SESSION['error_message']); ?>
 <!-- End error message -->
 <div class="alert alert-danger alert-normal">
-    <p class="m-0"></p>
+    <p class="m-0">الرابط المدخل خطأ</p>
 </div>
 <!-- End messages -->
 <!-- Start sidebar -->

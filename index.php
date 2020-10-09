@@ -4,7 +4,10 @@ require_once 'includes/config/database.php';
 $pageTitle = '';
 
 
-
+if (isset($_SESSION['user_name'])){
+    header('location:app.php');
+    die();
+}
 
 
 require_once 'includes/config/app.php';
@@ -91,7 +94,6 @@ if (!$nameError && !$emailError && !$messageError){
 
 }
 
-if (!isset($_SESSION['user_name'])) {
 ?>
 
     <!-- Start header -->
@@ -197,12 +199,4 @@ if (!isset($_SESSION['user_name'])) {
         new WOW().init();
     </script>
 
-<?php
-} else {
-    header('location:app.php');
-    die();
-}
-    include_once 'includes/templates/main-footer.php';
-
-
-?>
+<?php include_once 'includes/templates/main-footer.php'; ?>
