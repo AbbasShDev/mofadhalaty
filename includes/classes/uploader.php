@@ -66,9 +66,17 @@ class Uploader {
 //            'gif' =>'image/gif'
 //        ];
 
+        $verifyimg = getimagesize($this->file['tmp_name']);
+
+        $finfoMime = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $this->file['tmp_name']);
+
         $fileType = mime_content_type($this->file['tmp_name']);
 
-        if (!in_array($fileType, $this->allowedFilesType)){
+        if (!isset($verifyimg['mime']) || !in_array($verifyimg['mime'], $this->allowedFilesType)){
+            return false;
+        }elseif (!in_array($finfoMime, $this->allowedFilesType)){
+            return false;
+        }elseif (!in_array($fileType, $this->allowedFilesType)){
             return false;
         }
 
