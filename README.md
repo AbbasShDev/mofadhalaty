@@ -36,3 +36,12 @@
 - صفحة التحكم بالقوائم المضافة، البحث في القوائم بأسم المستخدم - حذف القوائم .
 - صفحة التحكم بالرسائل، رد على الرسائل - حذف الرسائل.
 - صفحة التحكم بإعدادات الموقع ، اسم الموقع - إيميل الآدمن.
+
+
+# DON'T FORGET TO FOLLOW ME ON
+
+<ul>        
+  <li><a href="https://twitter.com/AbbasShDev" target="_blank">Twitter</a></li>
+  <li><a href="https://www.linkedin.com/in/abbas-alshaqaq/" target="_blank">Linkedin</a></li>
+</ul>
+
